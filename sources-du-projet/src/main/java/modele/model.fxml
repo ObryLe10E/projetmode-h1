@@ -72,7 +72,7 @@
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="1009.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../rsc/zoom.png" />
+                  <Image url="@../../resources/img/zoom.png" />
                </image>
             </ImageView>
             <Pane layoutX="872.0" layoutY="57.0" prefHeight="76.0" prefWidth="109.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
