@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class testZEBI2 extends Application{
+public class Appli extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
