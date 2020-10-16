@@ -2,7 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-public class MonController {
+public class ListViewController {
 	@FXML ListView <String > list;
 
 	public void initialize() {
@@ -10,5 +10,5 @@ public class MonController {
 		list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
 	}
-
+	
 }
