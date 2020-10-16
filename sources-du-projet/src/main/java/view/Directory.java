@@ -10,8 +10,8 @@ public class Directory extends Subject{
 	private List<String> listOfFiles = new ArrayList<String>(); 
 	private File path;
 
-	public Directory(String path){
-		this.path = new File(path);
+	public Directory(String f){
+		this.path = new File(f);
 		for(String s : this.path.list()) {
 			File file = new File(s);
 			if(!file.isDirectory()){

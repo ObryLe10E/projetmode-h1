@@ -18,14 +18,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="582.0" prefWidth="1007.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MonController">
+<VBox prefHeight="582.0" prefWidth="1007.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
     <MenuBar prefHeight="0.0" prefWidth="575.0" style="-fx-background-color: #3e646b;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" onAction="#afficher" text="Open…" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
@@ -61,18 +61,18 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #455152;" VBox.vgrow="ALWAYS">
       <children>
-            <ListView fx:id="list" fixedCellSize="1.0E8" layoutX="24.0" layoutY="95.0" onMouseClicked="#initialize" prefHeight="455.0" prefWidth="210.0" style="-fx-background-color: b1c0c5; -fx-background-radius: 20px;" />
-            <TextField layoutX="55.0" layoutY="51.0" promptText="Search" style="-fx-background-color: b1c0c5; -fx-background-radius: 10px;" />
+            <ListView fx:id="list" layoutX="24.0" layoutY="95.0" prefHeight="455.0" prefWidth="210.0" style="-fx-background-color: b1c0c5; -fx-background-radius: 20px;" />
+            <TextField fx:id="tf" layoutX="55.0" layoutY="51.0" promptText="Search" style="-fx-background-color: b1c0c5; -fx-background-radius: 10px;" />
             <Canvas height="498.0" layoutX="287.0" layoutY="38.0" width="510.0" />
             <Slider layoutX="852.0" layoutY="176.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
             <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="827.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/img/zoom-out.png" />
+                  <Image url="file:src/main/resources/img/zoom-out.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="1009.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/img/zoom.png" />
+                  <Image url="file:src/main/resources/img/zoom.png" />
                </image>
             </ImageView>
             <Pane layoutX="872.0" layoutY="57.0" prefHeight="76.0" prefWidth="109.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
@@ -81,7 +81,7 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                            <image>
-                              <Image url="@../../resources/img/right-arrow.png" />
+                              <Image url="file:src/main/resources/img/right-arrow.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -90,7 +90,7 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                            <image>
-                              <Image url="@../../resources/img/right-arrow.png" />
+                              <Image url="file:src/main/resources/img/right-arrow.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -99,7 +99,7 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/img/right-arrow.png" />
+                              <Image url="file:src/main/resources/img/right-arrow.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -108,14 +108,14 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                            <image>
-                              <Image url="@../../resources/img/right-arrow.png" />
+                              <Image url="file:src/main/resources/img/right-arrow.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="47.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/img/rotating-circular-arrow.png" />
+                        <Image url="file:src/main/resources/img/rotating-circular-arrow.png" />
                      </image>
                   </ImageView>
                </children>
