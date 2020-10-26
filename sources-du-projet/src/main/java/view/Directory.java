@@ -31,5 +31,4 @@ public class Directory extends Subject{
 	public List<String> getListOfFiles() {
 		return listOfFiles;
 	}
-
 }

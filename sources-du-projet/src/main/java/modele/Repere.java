@@ -1,30 +1,32 @@
 package modele;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Repere
 {
-	private PointMap pointsMap;
-	private FaceMap facesMap;
+	private Map<Integer,Point> pointsMap;
+	//private PointMap pointsMap;
+	private List<Face> facesList;
 	
-	public Repere(PointMap pointsMap, FaceMap facesMap)
+	public Repere(Map<Integer,Point> pointsMap, List<Face> facesList)
 	{
 		this.pointsMap = pointsMap;
-		this.facesMap = facesMap;
+		this.facesList = facesList;
 	}
 	
 	public Repere()
 	{
-		this(new PointMap(), new FaceMap());
+		this(new PointMap(), new ArrayList<Face>());
 	}
 
-	public PointMap getPointsMap()
+	public Map<Integer,Point> getPointsMap()
 	{
 		return pointsMap;
 	}
 
-	public FaceMap getFacesMap()
+	public List<Face> getFacesList()
 	{
-		return facesMap;
+		return facesList;
 	}
-	
-	
 }

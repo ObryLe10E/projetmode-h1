@@ -17,9 +17,6 @@ public class Reader
 	private int nbPoints = -1;
 	private int nbFaces = -1;
 
-	//private List<Point> pList;
-	//private List<Face> fList;
-
 	public Reader(File f) throws IOException
 	{
 		if(f == null) throw new NullPointerException("Fichier inexistant");
@@ -41,6 +38,20 @@ public class Reader
 	public Reader(String path) throws IOException
 	{
 		this(new File(path));
+	}
+	
+	public int getNbPoints()
+	{
+		return nbPoints;
+	}
+
+	public int getNbFaces()
+	{
+		return nbFaces;
+	}
+
+	public Repere getRepere() {
+		return this.repere;
 	}
 
 	public boolean headerCheck() throws IOException
@@ -73,7 +84,8 @@ public class Reader
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
 			//check si autant de points que de "property" dans header
-			this.repere.getPointsMap().add(new Point(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2])));
+			Point p = new Point(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]));
+			this.repere.getPointsMap().put(p.getID(),p);
 		}
 
 		for(int i = 0; i < this.nbFaces; i++)
@@ -84,27 +96,11 @@ public class Reader
 			int nbVertex = Integer.parseInt(splitted[0]);
 			if(nbVertex == Face.TAILLE && splitted.length-1 == nbVertex)
 			{
-				List<Point> list = new ArrayList<Point>();
+				List<Point> plist = new ArrayList<Point>();
 				for(int j = 0; j < nbVertex; j++)
-				{
-					list.add(this.repere.getPointsMap().getEnsemblePoints().get(Integer.parseInt(splitted[j+1])));
-				}
-				this.repere.getFacesMap().add(new Face(list));
+					plist.add(this.repere.getPointsMap().getEnsemblePoints().get(Integer.parseInt(splitted[j+1])));
+				this.repere.getFacesList().add(new Face(plist));
 			}
 		}
-	}
-	
-	public int getNbPoints()
-	{
-		return nbPoints;
-	}
-
-	public int getNbFaces()
-	{
-		return nbFaces;
-	}
-
-	public Repere getRepere() {
-		return this.repere;
 	}
 }
