@@ -45,7 +45,8 @@ public class Face {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("" + this.getID() + "[");
 		for (Point p : this.points) {
-			sb.append(p.getID() + ",");
+			if(p!=null)
+				sb.append(p.getID() + ",");
 		}
 		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
 	}

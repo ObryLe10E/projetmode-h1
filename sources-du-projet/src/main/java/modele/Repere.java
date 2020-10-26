@@ -25,4 +25,10 @@ public class Repere {
 	public List<Face> getFacesList() {
 		return facesList;
 	}
+
+	@Override
+	public String toString() {
+		return "Repere [pointsMap=" + this.pointsMap + ", facesList=" + this.facesList + "]";
+	}
+	
 }
