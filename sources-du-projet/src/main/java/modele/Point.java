@@ -49,7 +49,7 @@ public class Point {
 	}
 
 	public String toString() {
-		return this.getID() + "(" + x + "," + y + "," + z + ")JE CO MPILE C BVOB";
+		return this.getID() + "(" + x + "," + y + "," + z + ")";
 	}
 
 }
