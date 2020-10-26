@@ -7,8 +7,6 @@ public class Face {
 	private static int faceTag = 0;
 	private final int ID;
 
-	Point p = new Point();
-
 	private List<Point> points;
 	public static final int TAILLE = 4;
 
@@ -45,12 +43,12 @@ public class Face {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("" + this.getID() + "[");
 		for (Point p : this.points) {
-			if(p!=null)
+			if (p != null)
 				sb.append(p.getID() + ",");
 		}
 		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
 	}
-	
+
 	public static void resetID() {
 		Face.faceTag = 0;
 	}
