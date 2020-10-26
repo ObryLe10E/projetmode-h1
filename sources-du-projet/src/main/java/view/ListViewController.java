@@ -81,6 +81,7 @@ public class ListViewController {
     }
 
     public void renderModel() {
+        affichage.getChildren().clear();
         for (Face face : this.repere.getFacesList()) {
             List<Point> list = face.getPoints();
             List<Double> listPoints = new ArrayList<>();
