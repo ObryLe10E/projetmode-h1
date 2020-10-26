@@ -51,5 +51,9 @@ public class Point {
 	public String toString() {
 		return this.getID() + "(" + x + "," + y + "," + z + ")";
 	}
+	
+	public static void resetID() {
+		Point.pointTag = 0;
+	}
 
 }

@@ -10,6 +10,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+import modele.Face;
+import modele.Point;
 import modele.Reader;
 import modele.Repere;
 
@@ -57,11 +59,14 @@ public class ListViewController {
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(new CellFact());
+		System.out.println(repere);
 
 	}
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
 		public void onChanged(Change<? extends File> c) {
+			Point.resetID();
+			Face.resetID();
 			if (!list.getItems().isEmpty()) {
 				try {
 					// resetSliders();

@@ -50,4 +50,8 @@ public class Face {
 		}
 		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
 	}
+	
+	public static void resetID() {
+		Face.faceTag = 0;
+	}
 }
