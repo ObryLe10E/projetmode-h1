@@ -81,16 +81,17 @@ public class ListViewController {
     }
 
     public void renderModel() {
-        Polygon poly = new Polygon();
-        poly.getPoints().addAll(new Double[] { 0.0, 0.0, 2.0, 1.0, 1.0, 2.0 });
-        poly.setFill(Color.BLACK);
-        affichage.getChildren().add(poly);
-        /*
-         * for (Face face : this.repere.getFacesList()) { List<Point> list =
-         * face.getPoints(); List<Double> listPoints = new ArrayList<>(); for (Point p :
-         * list) { listPoints.add(p.getX()); listPoints.add(p.getY()); } Polygon polygon
-         * = new Polygon(); polygon.getPoints().addAll(listPoints);
-         * polygon.setFill(Color.RED); affichage.getChildren().add(polygon); }
-         */
+        for (Face face : this.repere.getFacesList()) {
+            List<Point> list = face.getPoints();
+            List<Double> listPoints = new ArrayList<>();
+            for (Point p : list) {
+                listPoints.add(p.getX());
+                listPoints.add(p.getY());
+            }
+            Polygon polygon = new Polygon();
+            polygon.getPoints().addAll(listPoints);
+            polygon.setFill(Color.RED);
+            affichage.getChildren().add(polygon);
+        }
     }
 }
