@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -12,138 +13,159 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="582.0" prefWidth="1007.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
-    <MenuBar prefHeight="0.0" prefWidth="575.0" style="-fx-background-color: #3e646b;" VBox.vgrow="NEVER">
-      <menus>
-         <Menu mnemonicParsing="false" text="File">
-            <items>
-               <MenuItem mnemonicParsing="false" text="New" />
-               <MenuItem mnemonicParsing="false" text="Open…" />
-               <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #455152;" VBox.vgrow="ALWAYS">
-      <children>
-            <ListView fx:id="list" layoutX="24.0" layoutY="95.0" prefHeight="455.0" prefWidth="210.0" style="-fx-background-color: b1c0c5; -fx-background-radius: 20px;" />
-            <TextField fx:id="tf" layoutX="55.0" layoutY="51.0" promptText="Search" style="-fx-background-color: b1c0c5; -fx-background-radius: 10px;" />
-            <Group fx:id="affichage" layoutX="350.0" layoutY="38.0" scaleZ="0.0" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="677.0" AnchorPane.topAnchor="38.0" />
-            <Slider layoutX="852.0" layoutY="176.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-            <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="827.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:src/main/resources/img/zoom-out.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="1009.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:src/main/resources/img/zoom.png" />
-               </image>
-            </ImageView>
-            <Pane layoutX="872.0" layoutY="57.0" prefHeight="76.0" prefWidth="109.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
+      <BorderPane prefHeight="899.0" prefWidth="1317.0">
+         <top>
+          <MenuBar prefHeight="0.0" prefWidth="575.0" style="-fx-background-color: #3e646b;" BorderPane.alignment="CENTER">
+            <menus>
+               <Menu mnemonicParsing="false" text="File">
+                  <items>
+                     <MenuItem mnemonicParsing="false" text="New" />
+                     <MenuItem mnemonicParsing="false" text="Open…" />
+                     <Menu mnemonicParsing="false" text="Open Recent" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Save As…" />
+                  <MenuItem mnemonicParsing="false" text="Revert" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Preferences…" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+                </items>
+              </Menu>
+              <Menu mnemonicParsing="false" text="Edit">
+                <items>
+                  <MenuItem mnemonicParsing="false" text="Undo" />
+                  <MenuItem mnemonicParsing="false" text="Redo" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Cut" />
+                  <MenuItem mnemonicParsing="false" text="Copy" />
+                  <MenuItem mnemonicParsing="false" text="Paste" />
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Select All" />
+                  <MenuItem mnemonicParsing="false" text="Unselect All" />
+                </items>
+              </Menu>
+              <Menu mnemonicParsing="false" text="Help">
+                <items>
+                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                </items>
+              </Menu>
+            </menus>
+          </MenuBar>
+         </top>
+         <center>
+            <Pane prefHeight="375.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="6.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
-                     <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                  <Separator orientation="VERTICAL" prefHeight="863.0" prefWidth="17.0" />
+                  <Group fx:id="affichage" translateX="375.0" translateY="275.0" />
+                  <Text fill="#787a94" layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View" textAlignment="CENTER" wrappingWidth="210.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="884.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="864.0" prefWidth="14.0" />
+               </children>
+            </Pane>
+         </center>
+         <left>
+            <Pane prefHeight="478.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="tf" layoutX="39.0" layoutY="56.0" promptText="Search" style="-fx-background-color: b1c0c5; -fx-background-radius: 10px;" />
+                  <Text fill="#787a94" layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of model" textAlignment="CENTER" wrappingWidth="210.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="list" layoutX="5.0" layoutY="103.0" prefHeight="710.0" prefWidth="215.0" style="-fx-background-color: b1c0c5; -fx-background-radius: 20px;" />
+               </children>
+            </Pane>
+         </left>
+         <right>
+            <Pane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <children>
+                  <Text fill="#787a94" layoutX="1.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" textAlignment="CENTER" wrappingWidth="130.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="26.0" layoutY="83.0" prefHeight="86.0" prefWidth="106.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
+                     <children>
+                        <Button layoutX="6.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="file:src/main/resources/img/right-arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="39.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-color: #3e646b #3e646b;">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                 <image>
+                                    <Image url="file:src/main/resources/img/right-arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="72.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:src/main/resources/img/right-arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="39.0" layoutY="50.0" mnemonicParsing="false" rotate="180.0" style="-fx-background-color: #3e646b;">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                 <image>
+                                    <Image url="file:src/main/resources/img/right-arrow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="47.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:src/main/resources/img/right-arrow.png" />
+                              <Image url="file:src/main/resources/img/rotating-circular-arrow.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="39.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-color: #3e646b #3e646b;">
-                     <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                           <image>
-                              <Image url="file:src/main/resources/img/right-arrow.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="72.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
-                     <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:src/main/resources/img/right-arrow.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="39.0" layoutY="50.0" mnemonicParsing="false" rotate="180.0" style="-fx-background-color: #3e646b;">
-                     <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                           <image>
-                              <Image url="file:src/main/resources/img/right-arrow.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="47.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="74.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:src/main/resources/img/rotating-circular-arrow.png" />
+                        <Image url="file:src/main/resources/img/zoom.png" />
+                     </image>
+                  </ImageView>
+                  <Slider layoutX="-9.0" layoutY="648.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider layoutX="-10.0" layoutY="575.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider layoutX="-12.0" layoutY="501.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Text layoutX="34.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
+                  <Text layoutX="38.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
+                  <Text layoutX="34.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
+                  <Slider layoutX="20.0" layoutY="290.0" prefHeight="36.0" prefWidth="123.0" rotate="90.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="73.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:src/main/resources/img/zoom-out.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Separator layoutX="314.0" orientation="VERTICAL" prefHeight="606.0" prefWidth="17.0" />
-            <Text fill="#787a94" layoutX="32.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of model" textAlignment="CENTER" wrappingWidth="210.0">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Text fill="#787a94" layoutX="437.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View" textAlignment="CENTER" wrappingWidth="210.0">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Separator layoutX="804.0" orientation="VERTICAL" prefHeight="606.0" prefWidth="17.0" />
-            <Text fill="#787a94" layoutX="863.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" textAlignment="CENTER" wrappingWidth="130.0">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Slider layoutX="852.0" layoutY="368.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-            <Slider layoutX="852.0" layoutY="285.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-            <Slider layoutX="853.0" layoutY="451.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-            <Text layoutX="853.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
-            <Text layoutX="862.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
-            <Text layoutX="862.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
-      </children>
-    </AnchorPane>
+         </right>
+      </BorderPane>
   </children>
 </VBox>
