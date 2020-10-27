@@ -67,22 +67,20 @@ public class Reader {
 	public void propertySearch() throws IOException {
 		if (!this.headerCheck())
 			return;
-
 		for (int i = 0; i < this.nbPoints; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
 			// check si autant de points que de "property" dans header
-			Point p = new Point(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]),
-					Integer.parseInt(splitted[2]));
+			Point p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),Double.parseDouble(splitted[2]));
 			this.repere.getPointsMap().put(p.getID(), p);
 		}
-
+		
 		for (int i = 0; i < this.nbFaces; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
 			// check si autant de points que de "property" dans header
 			int nbVertex = Integer.parseInt(splitted[0]);
-			if (nbVertex == Face.TAILLE && splitted.length - 1 == nbVertex) {
+			if (splitted.length - 1 == nbVertex) {
 				List<Point> plist = new ArrayList<Point>();
 				for (int j = 0; j < nbVertex; j++)
 					plist.add(this.repere.getPointsMap().get(Integer.parseInt(splitted[j + 1])));

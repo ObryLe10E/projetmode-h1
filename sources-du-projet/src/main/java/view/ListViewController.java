@@ -17,8 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import modele.Face;
 import modele.Point;
 import modele.Reader;
@@ -49,7 +47,7 @@ public class ListViewController {
 					new Reader(item.getAbsoluteFile());
 					this.setStyle(this.getStyle()+"; -fx-background-color: green");
 				}catch(Exception e) {
-						this.setStyle(this.getStyle()+"; -fx-background-color: red");
+					this.setStyle(this.getStyle()+"; -fx-background-color: red");
 				}
 				setText(item.getName());
 				setFont(new Font("Serif", 20.0)); // change la police
@@ -57,8 +55,8 @@ public class ListViewController {
 				setTextFill(Color.WHITE); // change la couleur du text dans la listview
 			}
 
-			}
 		}
+	}
 
 	@FXML
 	ListView<File> list;
@@ -106,7 +104,9 @@ public class ListViewController {
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
 			polygon.setFill(Color.RED);
+			polygon.setStrokeWidth(1.0);
+			polygon.setStroke(Color.ALICEBLUE);
 			affichage.getChildren().add(polygon);
 		}
-	}
+	}	
 }
