@@ -23,9 +23,7 @@ public class Reader {
 		try {
 			reader = new BufferedReader(new FileReader(f));
 			if (!reader.readLine().equals("ply")) {
-
 				throw new IllegalArgumentException("Mauvais format de fichier : not \"ply\"");
-				// Mettre en rouge la cellule
 				// Afficher pop up de la raison (extension ou erreur dans les lignes)
 			}
 			this.propertySearch();
