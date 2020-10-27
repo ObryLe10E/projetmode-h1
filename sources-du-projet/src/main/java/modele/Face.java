@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Face {
-	private static int faceTag = 0;
-	private final int ID;
+	// private static int faceTag = 0;
+	// private final int ID;
 
 	private List<Point> points;
 	public static final int TAILLE = 4;
 
 	public Face(List<Point> points) {
-		if (points.size() <= TAILLE) {
+		if (points.size() <= TAILLE)
 			this.points = points;
-			this.ID = faceTag;
-			faceTag++;
-		} else
-			this.ID = 0;
+		// this.ID = faceTag;
+		// faceTag++;
+		// } else
+		// this.ID = 0;
 	}
 
 	public Face() {
@@ -27,9 +27,9 @@ public class Face {
 		return points;
 	}
 
-	public int getID() {
-		return ID;
-	}
+	// public int getID() {
+	// return ID;
+	// }
 
 	public boolean addPoint(Point p) {
 		if (this.points.contains(p) && this.points.size() > TAILLE)
@@ -41,15 +41,15 @@ public class Face {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder("" + this.getID() + "[");
+		StringBuilder sb = new StringBuilder(/* "" + this.getID() + */"[");
 		for (Point p : this.points) {
 			if (p != null)
-				sb.append(p.getID() + ",");
+				sb.append(/* p.getID() + */",");
 		}
 		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
 	}
 
-	public static void resetID() {
-		Face.faceTag = 0;
-	}
+	// public static void resetID() {
+	// Face.faceTag = 0;
+	// }
 }

@@ -1,25 +1,23 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Repere {
-	private Map<Integer, Point> pointsMap;
+	private List<Point> pointsList;
 	private List<Face> facesList;
 
-	public Repere(Map<Integer, Point> pointsMap, List<Face> facesList) {
-		this.pointsMap = pointsMap;
+	public Repere(List<Point> pointsList, List<Face> facesList) {
+		this.pointsList = pointsList;
 		this.facesList = facesList;
 	}
 
 	public Repere() {
-		this(new HashMap<Integer, Point>(), new ArrayList<Face>());
+		this(new ArrayList<Point>(), new ArrayList<Face>());
 	}
 
-	public Map<Integer, Point> getPointsMap() {
-		return pointsMap;
+	public List<Point> getPointsList() {
+		return pointsList;
 	}
 
 	public List<Face> getFacesList() {
@@ -28,7 +26,13 @@ public class Repere {
 
 	@Override
 	public String toString() {
-		return "Repere [pointsMap=" + this.pointsMap + ", facesList=" + this.facesList + "]";
+		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
 	}
-	
+
+	public void translation(double ratioX, double ratioY) {
+		for (Point p : this.pointsList) {
+			p.setX(p.getX() + ratioX);
+			p.setY(p.getY() + ratioY);
+		}
+	}
 }

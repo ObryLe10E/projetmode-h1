@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
       <BorderPane prefHeight="899.0" prefWidth="1317.0">
          <top>
@@ -103,7 +103,7 @@
                   </Text>
                   <Pane layoutX="26.0" layoutY="83.0" prefHeight="86.0" prefWidth="106.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
                      <children>
-                        <Button layoutX="6.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
+                        <Button fx:id="transMinusX" layoutX="6.0" layoutY="25.0" mnemonicParsing="false" onAction="#translationMinusX" style="-fx-background-color: #3e646b;">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
@@ -112,7 +112,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="39.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-color: #3e646b #3e646b;">
+                        <Button fx:id="transPlusY" layoutX="39.0" layoutY="2.0" mnemonicParsing="false" onAction="#translationMinusY" style="-fx-background-color: #3e646b #3e646b;">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>
@@ -121,7 +121,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="72.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: #3e646b;">
+                        <Button fx:id="transPlusX" layoutX="72.0" layoutY="25.0" mnemonicParsing="false" onAction="#translationPlusX" style="-fx-background-color: #3e646b;">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -130,7 +130,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="39.0" layoutY="50.0" mnemonicParsing="false" rotate="180.0" style="-fx-background-color: #3e646b;">
+                        <Button fx:id="transMinusY" layoutX="39.0" layoutY="50.0" mnemonicParsing="false" onAction="#translationPlusY" rotate="180.0" style="-fx-background-color: #3e646b;">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>
@@ -151,9 +151,9 @@
                         <Image url="file:src/main/resources/img/zoom.png" />
                      </image>
                   </ImageView>
-                  <Slider layoutX="-9.0" layoutY="648.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider layoutX="-10.0" layoutY="575.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider layoutX="-12.0" layoutY="501.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider fx:id="sliderZ" layoutX="-9.0" layoutY="648.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider fx:id="sliderY" layoutX="-10.0" layoutY="575.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider fx:id="sliderX" layoutX="-12.0" layoutY="501.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
                   <Text layoutX="34.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
                   <Text layoutX="38.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
                   <Text layoutX="34.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />

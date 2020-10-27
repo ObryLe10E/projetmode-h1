@@ -1,8 +1,8 @@
 package modele;
 
 public class Point {
-	private static int pointTag = 0;
-	private final int ID;
+	// private static int pointTag = 0;
+	// private final int ID;
 
 	private double x;
 	private double y;
@@ -12,8 +12,8 @@ public class Point {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.ID = pointTag;
-		pointTag++;
+		// this.ID = pointTag;
+		// pointTag++;
 	}
 
 	public Point() {
@@ -44,16 +44,16 @@ public class Point {
 		this.z = z;
 	}
 
-	public int getID() {
-		return this.ID;
-	}
+	// public int getID() {
+	// return this.ID;
+	// }
 
 	public String toString() {
-		return this.getID() + "(" + x + "," + y + "," + z + ")";
+		return /* this.getID() + */"(" + x + "," + y + "," + z + ")";
 	}
-	
-	public static void resetID() {
-		Point.pointTag = 0;
-	}
+
+	// public static void resetID() {
+	// Point.pointTag = 0;
+	// }
 
 }
