@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -17,39 +16,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import modele.Face;
 import modele.Point;
 import modele.Reader;
 import modele.Repere;
 
 public class ListViewController {
-	class Cell extends ListCell<File>{
-		HBox hbox = new  HBox();
+	class Cell extends ListCell<File> {
+		HBox hbox = new HBox();
 		Button button = new Button("ok");
-		Image img = new Image("file:/C:/Users/duhem/Desktop/projetmode-h1/sources-du-projet/src/main/resources/img/icons8-file-25.png");
+		Image img = new Image(
+				"file:/C:/Users/duhem/Desktop/projetmode-h1/sources-du-projet/src/main/resources/img/icons8-file-25.png");
 		ImageView imgv = new ImageView(img);
-
-
 
 		public Cell() {
 			super();
 			hbox.getChildren().addAll(imgv);
 			this.setStyle("-fx-background-color: transparent");
 		}
+
 		public void updateItem(File item, boolean empty) {
 			super.updateItem(item, empty);
 			setText(null);
 			setGraphic(null);
 
-			if(item != null && !empty) {
+			if (item != null && !empty) {
 				this.setStyle("-fx-background-radius : 20px; -fx-border-color:ffffff; -fx-border-radius : 20px; ");
 				try {
 					new Reader(item.getAbsoluteFile());
-					this.setStyle(this.getStyle()+"; -fx-background-color: green");
-				}catch(Exception e) {
-						this.setStyle(this.getStyle()+"; -fx-background-color: red");
+					this.setStyle(this.getStyle() + "; -fx-background-color: green");
+				} catch (Exception e) {
+					this.setStyle(this.getStyle() + "; -fx-background-color: red");
 				}
 				setText(item.getName());
 				setFont(new Font("Serif", 20.0)); // change la police
@@ -57,8 +54,8 @@ public class ListViewController {
 				setTextFill(Color.WHITE); // change la couleur du text dans la listview
 			}
 
-			}
 		}
+	}
 
 	@FXML
 	ListView<File> list;
@@ -71,7 +68,7 @@ public class ListViewController {
 		list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
-		list.setCellFactory(param-> new Cell());
+		list.setCellFactory(param -> new Cell());
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
