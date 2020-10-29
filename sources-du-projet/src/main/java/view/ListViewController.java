@@ -34,10 +34,19 @@ public class ListViewController {
 	Button transMinusX;
 	@FXML
 	Button transPlusX;
+	@FXML
+	Button rotationX;
+	@FXML
+	Button rotationY;
+	@FXML
+	Button rotationZ;
+
 	private Repere repere;
 
 	private final double RATIOX = 50;
 	private final double RATIOY = 50;
+	private final double SCALING = 1.10;
+	private final double UNSCALING = 0.9;
 
 	public void initialize() {
 		affichage.setManaged(false);
@@ -46,6 +55,7 @@ public class ListViewController {
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
+		this.zoom();
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -137,4 +147,16 @@ public class ListViewController {
 		this.repere.translation(-RATIOX, 0);
 		this.renderModel();
 	}
+
+	public void zoom() {
+		affichage.setOnScroll(e -> {
+			if(e.getDeltaY() > 0) this.repere.scaling(this.SCALING);
+			else this.repere.scaling(this.UNSCALING);
+			this.renderModel();
+		});
+	}
+	
+	public void rotateX() {
+	}
+
 }

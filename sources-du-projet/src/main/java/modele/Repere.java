@@ -35,4 +35,12 @@ public class Repere {
 			p.setY(p.getY() + ratioY);
 		}
 	}
+	
+	public void scaling(double scale) {
+		for (Point p : this.pointsList) {
+			p.setX(p.getX() * scale);
+			p.setY(p.getY() * scale);
+			p.setZ(p.getZ() * scale);
+		}
+	}
 }
