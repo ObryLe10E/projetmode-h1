@@ -61,8 +61,6 @@ public class ListViewController {
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
 		public void onChanged(Change<? extends File> c) {
-			// Point.resetID();
-			// Face.resetID();
 			if (!list.getItems().isEmpty()) {
 				try {
 					// resetSliders();
@@ -150,12 +148,14 @@ public class ListViewController {
 
 	public void zoom() {
 		affichage.setOnScroll(e -> {
-			if(e.getDeltaY() > 0) this.repere.scaling(this.SCALING);
-			else this.repere.scaling(this.UNSCALING);
+			if (e.getDeltaY() > 0)
+				this.repere.scaling(this.SCALING);
+			else
+				this.repere.scaling(this.UNSCALING);
 			this.renderModel();
 		});
 	}
-	
+
 	public void rotateX() {
 	}
 
