@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import modele.Face;
 import modele.Point;
 import modele.Reader;
@@ -128,6 +130,16 @@ public class ListViewController {
 		}
 	}
 
+	public void openFile() {
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(new ExtensionFilter("ply Files","*.ply"));
+		List<File> f = fc.showOpenMultipleDialog(null);
+		for (File file : f)
+		{
+			System.out.println(file.getAbsolutePath());
+		}
+	}
+	
 	public void translationMinusY() {
 		this.repere.translation(0, -RATIOY);
 		this.renderModel();
