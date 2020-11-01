@@ -88,7 +88,7 @@ public class ListViewController {
 			}
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
-			polygon.setFill(Color.RED);
+			polygon.setFill(Color.BLACK);
 			polygon.setStrokeWidth(1.0);
 			polygon.setStroke(Color.ALICEBLUE);
 			affichage.getChildren().add(polygon);
@@ -132,10 +132,8 @@ public class ListViewController {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new ExtensionFilter("ply Files", "*.ply"));
 		List<File> f = fc.showOpenMultipleDialog(null);
+		list.getItems().clear();
 		list.getItems().addAll(f);
-		for (File file : f) {
-			System.out.println(file.getAbsolutePath());
-		}
 	}
 
 	public void translationMinusY() {
