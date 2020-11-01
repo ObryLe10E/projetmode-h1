@@ -7,9 +7,11 @@ import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -132,11 +134,13 @@ public class ListViewController {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new ExtensionFilter("ply Files","*.ply"));
 		List<File> f = fc.showOpenMultipleDialog(null);
+		list.getItems().addAll(f);
 		for (File file : f)
 		{
 			System.out.println(file.getAbsolutePath());
 		}
 	}
+	
 	
 	public void translationMinusY() {
 		this.repere.translation(0, -RATIOY);
