@@ -141,10 +141,8 @@ public class ListViewController {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new ExtensionFilter("ply Files", "*.ply"));
 		List<File> f = fc.showOpenMultipleDialog(null);
+		list.getItems().clear();
 		list.getItems().addAll(f);
-		for (File file : f) {
-			System.out.println(file.getAbsolutePath());
-		}
 	}
 
 	public void translationMinusY() {
