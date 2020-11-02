@@ -65,7 +65,7 @@ public class ListViewController {
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
-		this.zoom();
+		this.setZoom();
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -76,6 +76,7 @@ public class ListViewController {
 					try {
 						// resetSliders();
 						File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
+						System.out.println(list.getSelectionModel().getSelectedItem().getAbsoluteFile());
 						Reader reader = new Reader(path);
 						repere = reader.getRepere();
 						renderModel();
@@ -187,7 +188,7 @@ public class ListViewController {
 		this.renderModel();
 	}
 
-	public void zoom() {
+	public void setZoom() {
 		center.setOnScroll(e -> {
 			if (e.getDeltaY() > 0)
 				this.repere.scaling(this.SCALING);

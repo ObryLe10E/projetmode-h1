@@ -56,10 +56,4 @@ public class Repere {
 			facesList.set(j + 1, key);
 		}
 	}
-
-	public void printAvg() {
-		for (Face f : facesList) {
-			System.out.println("Moyenne de la face : " + f.average());
-		}
-	}
 }

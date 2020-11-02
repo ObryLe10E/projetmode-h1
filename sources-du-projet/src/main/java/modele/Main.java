@@ -11,7 +11,6 @@ public class Main {
 		System.out.println(clebard.getRepere());
 		Repere r = clebard.getRepere();
 		r.sortFaces();
-		r.printAvg();
 		// System.out.println(clebard.getRepere().getFacesList());
 	}
 }
