@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -20,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import modele.Face;
 import modele.Point;
@@ -27,6 +31,8 @@ import modele.Reader;
 import modele.Repere;
 
 public class ListViewController {
+	@FXML
+	Pane center;
 	@FXML
 	ListView<File> list;
 	@FXML
@@ -45,10 +51,6 @@ public class ListViewController {
 	Button rotationY;
 	@FXML
 	Button rotationZ;
-	@FXML
-	Pane center;
-	@FXML
-	Slider zoom;
 
 	private Repere repere;
 
@@ -65,29 +67,53 @@ public class ListViewController {
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
 		this.zoom();
-		zoom.setMax(200.0);
-		zoom.setMin(0);
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
 		public void onChanged(Change<? extends File> c) {
-			if (!list.getItems().isEmpty()) {
-				try {
-					// resetSliders();
-					File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
-					Reader reader = new Reader(path);
-					repere = reader.getRepere();
-					renderModel();
-				} catch (IOException e) {
-					e.printStackTrace();
+			try{
+				if (!list.getItems().isEmpty()) {
+					try {
+						// resetSliders();
+						File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
+						Reader reader = new Reader(path);
+						repere = reader.getRepere();
+						renderModel();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+			}catch (Exception e) {
+				if(!list.getItems().isEmpty()) {
+					Stage stageError = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(getClass().getResource("error.fxml"));
+					Parent root;
+					try {
+						root = loader.load();
+						Scene scene = new Scene(root, 600, 250);
+						ErrorController controller = loader.<ErrorController>getController();
+						controller.init(e);
+						stageError.initModality(Modality.APPLICATION_MODAL);
+						stageError.setScene(scene);
+						stageError.setResizable(false);
+						stageError.setTitle("New SubTask");
+						stageError.show();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+
 			}
 		}
 	}
 
 	public void renderModel() {
 		affichage.getChildren().clear();
+		this.repere.sortFaces();
 		for (Face face : this.repere.getFacesList()) {
 			List<Point> list = face.getPoints();
 			List<Double> listPoints = new ArrayList<>();
@@ -97,9 +123,9 @@ public class ListViewController {
 			}
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
-			polygon.setFill(Color.BLACK);
+			polygon.setFill(Color.ANTIQUEWHITE);
 			polygon.setStrokeWidth(1.0);
-			polygon.setStroke(Color.ALICEBLUE);
+			polygon.setStroke(Color.DARKGRAY);
 			affichage.getChildren().add(polygon);
 		}
 	}
@@ -173,8 +199,6 @@ public class ListViewController {
 				this.repere.scaling(this.UNSCALING);
 			this.renderModel();
 		});
-
-		
 	}
 
 	public void rotateX() {

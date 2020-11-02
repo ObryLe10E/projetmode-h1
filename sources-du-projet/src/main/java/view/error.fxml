@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ErrorController">
+    <header>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="48.0" prefWidth="480.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="51.0" prefWidth="480.0" text="Error" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="40.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+    </header>
+    <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
+         <children>
+            <Label fx:id="lab" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="480.0" text="Label" />
+         </children></AnchorPane>
+    </content>
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+</DialogPane>

@@ -37,4 +37,12 @@ public class Face {
 		}
 		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
 	}
+	
+	public double average() {
+		double avg = 0.0;
+		for(Point p : points) {
+			avg += p.getZ();
+		}
+		return avg/points.size();
+	}
 }
