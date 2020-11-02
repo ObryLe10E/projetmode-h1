@@ -1,8 +1,6 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class Repere {
@@ -47,20 +45,21 @@ public class Repere {
 	}
 
 	public void sortFaces() {
-		int n = facesList.size(); 
-		for (int i = 1; i < n; ++i) { 
-			Face key = facesList.get(i); 
-			int j = i - 1; 
+		int n = facesList.size();
+		for (int i = 1; i < n; ++i) {
+			Face key = facesList.get(i);
+			int j = i - 1;
 			while (j >= 0 && facesList.get(j).average() < key.average()) {
-				facesList.set(j+1, facesList.get(j));
-				j = j - 1; 
-			} 
-			facesList.set(j+1, key);
+				facesList.set(j + 1, facesList.get(j));
+				j = j - 1;
+			}
+			facesList.set(j + 1, key);
 		}
 	}
+
 	public void printAvg() {
-		for(Face f : facesList) {
-			System.out.println("Moyenne de la face : "+ f.average());
+		for (Face f : facesList) {
+			System.out.println("Moyenne de la face : " + f.average());
 		}
 	}
 }

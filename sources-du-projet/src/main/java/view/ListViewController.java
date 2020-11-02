@@ -11,7 +11,6 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -72,7 +71,7 @@ public class ListViewController {
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
 		public void onChanged(Change<? extends File> c) {
-			try{
+			try {
 				if (!list.getItems().isEmpty()) {
 					try {
 						// resetSliders();
@@ -84,8 +83,8 @@ public class ListViewController {
 						e.printStackTrace();
 					}
 				}
-			}catch (Exception e) {
-				if(!list.getItems().isEmpty()) {
+			} catch (Exception e) {
+				if (!list.getItems().isEmpty()) {
 					Stage stageError = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(getClass().getResource("error.fxml"));
@@ -101,12 +100,9 @@ public class ListViewController {
 						stageError.setTitle("New SubTask");
 						stageError.show();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
 				}
-
 			}
 		}
 	}

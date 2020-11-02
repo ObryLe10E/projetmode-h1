@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.WrongFileFormatException;
+
 public class Reader {
 	private BufferedReader reader;
 
@@ -16,15 +18,14 @@ public class Reader {
 	private int nbPoints = -1;
 	private int nbFaces = -1;
 
-	public Reader(File f) throws IOException {
+	public Reader(File f) throws IOException, WrongFileFormatException {
 		if (f == null)
 			throw new NullPointerException("Fichier inexistant");
 		this.repere = new Repere();
 		try {
 			reader = new BufferedReader(new FileReader(f));
 			if (!reader.readLine().equals("ply")) {
-				throw new IllegalArgumentException("Mauvais format de fichier : not \"ply\"");
-				// Afficher pop up de la raison (extension ou erreur dans les lignes)
+				throw new WrongFileFormatException("Mauvais format de fichier : not \"ply\"");
 			}
 			this.propertySearch();
 		} catch (FileNotFoundException e) {
@@ -32,7 +33,7 @@ public class Reader {
 		}
 	}
 
-	public Reader(String path) throws IOException {
+	public Reader(String path) throws IOException, WrongFileFormatException {
 		this(new File(path));
 	}
 
