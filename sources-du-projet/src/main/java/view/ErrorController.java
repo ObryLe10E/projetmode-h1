@@ -8,6 +8,8 @@ public class ErrorController {
 	Label lab;
 
 	public void init(Exception e) {
-		this.lab.setText(e.getMessage());
+		if(e.getMessage() != null)
+			this.lab.setText(e.getMessage());
+		else this.lab.setText("Il manque un message dans le catch :)");
 	}
 }
