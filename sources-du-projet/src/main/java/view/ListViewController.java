@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
@@ -42,6 +45,10 @@ public class ListViewController {
 	Button rotationY;
 	@FXML
 	Button rotationZ;
+	@FXML
+	Pane center;
+	@FXML
+	Slider zoom;
 
 	private Repere repere;
 
@@ -58,6 +65,8 @@ public class ListViewController {
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
 		this.zoom();
+		zoom.setMax(200.0);
+		zoom.setMin(0);
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -88,7 +97,7 @@ public class ListViewController {
 			}
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
-			polygon.setFill(Color.RED);
+			polygon.setFill(Color.BLACK);
 			polygon.setStrokeWidth(1.0);
 			polygon.setStroke(Color.ALICEBLUE);
 			affichage.getChildren().add(polygon);
@@ -159,13 +168,15 @@ public class ListViewController {
 	}
 
 	public void zoom() {
-		affichage.setOnScroll(e -> {
+		center.setOnScroll(e -> {
 			if (e.getDeltaY() > 0)
 				this.repere.scaling(this.SCALING);
 			else
 				this.repere.scaling(this.UNSCALING);
 			this.renderModel();
 		});
+
+		
 	}
 
 	public void rotateX() {
