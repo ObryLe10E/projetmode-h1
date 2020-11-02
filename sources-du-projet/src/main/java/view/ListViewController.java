@@ -153,7 +153,7 @@ public class ListViewController {
 					this.setStyle(this.getStyle() + "; -fx-background-color: red");
 				}
 				setText(item.getName());
-				setFont(new Font("Serif", 20.0)); // change la police
+				setFont(new Font(20.0)); // change la taille de la police
 				setGraphic(hbox);
 				setTextFill(Color.WHITE); // change la couleur du text dans la listview
 			}
