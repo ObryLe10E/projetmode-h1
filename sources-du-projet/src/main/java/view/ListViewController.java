@@ -15,8 +15,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
@@ -50,6 +52,8 @@ public class ListViewController {
 	Button rotationY;
 	@FXML
 	Button rotationZ;
+	@FXML
+	VBox vb;
 
 	private Repere repere;
 
@@ -66,6 +70,7 @@ public class ListViewController {
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
 		this.setZoom();
+		this.rotate();
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -197,8 +202,16 @@ public class ListViewController {
 			this.renderModel();
 		});
 	}
-
-	public void rotateX() {
+	public void rotate() {
+		vb.setOnKeyPressed(e->{
+			if(e.getCode().equals(KeyCode.Z))
+				this.repere.rotateZ();
+			if(e.getCode().equals(KeyCode.Y))
+				this.repere.rotateY();
+			if(e.getCode().equals(KeyCode.X))
+				this.repere.rotateX();
+			System.out.println("grgergerg");
+			this.renderModel();
+		});
 	}
-
 }

@@ -3,6 +3,8 @@ package modele;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.transform.MatrixType;
+
 public class Repere {
 	private List<Point> pointsList;
 	private List<Face> facesList;
@@ -35,6 +37,32 @@ public class Repere {
 			p.setY(p.getY() + ratioY);
 		}
 	}
+
+	public void rotateX() {
+		for(Point p : pointsList ) {
+			Double y = p.getY();
+			Double z = p.getZ();
+			p.setY(Math.cos(Math.PI/4)*y-Math.sin(Math.PI/4)*z);
+			p.setZ(Math.cos(Math.PI/4)*z+Math.sin(Math.PI/4)*y);
+		}
+	}
+	public void rotateY() {
+		for(Point p : pointsList ) {
+			Double x = p.getX();
+			Double z = p.getZ();
+			p.setX(Math.cos(Math.PI/4)*x-Math.sin(Math.PI/4)*z);
+			p.setZ(Math.cos(Math.PI/4)*z+Math.sin(Math.PI/4)*x);
+		}
+	}
+	public void rotateZ() {
+		for(Point p : pointsList ) {
+			Double x = p.getX();
+			Double y = p.getY();
+			p.setX(Math.cos(Math.PI/4)*x-Math.sin(Math.PI/4)*y);
+			p.setY(Math.cos(Math.PI/4)*y+Math.sin(Math.PI/4)*x);
+		}
+	}
+	
 
 	public void scaling(double scale) {
 		for (Point p : this.pointsList) {
