@@ -202,15 +202,15 @@ public class ListViewController {
 			this.renderModel();
 		});
 	}
+
 	public void rotate() {
-		vb.setOnKeyPressed(e->{
-			if(e.getCode().equals(KeyCode.Z))
+		vb.setOnKeyPressed(e -> {
+			if (e.getCode().equals(KeyCode.Z))
 				this.repere.rotateZ();
-			if(e.getCode().equals(KeyCode.Y))
+			if (e.getCode().equals(KeyCode.Y))
 				this.repere.rotateY();
-			if(e.getCode().equals(KeyCode.X))
+			if (e.getCode().equals(KeyCode.X))
 				this.repere.rotateX();
-			System.out.println("grgergerg");
 			this.renderModel();
 		});
 	}

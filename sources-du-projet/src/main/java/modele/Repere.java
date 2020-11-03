@@ -3,8 +3,6 @@ package modele;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.transform.MatrixType;
-
 public class Repere {
 	private List<Point> pointsList;
 	private List<Face> facesList;
@@ -39,30 +37,31 @@ public class Repere {
 	}
 
 	public void rotateX() {
-		for(Point p : pointsList ) {
+		for (Point p : pointsList) {
 			Double y = p.getY();
 			Double z = p.getZ();
-			p.setY(Math.cos(Math.PI/4)*y-Math.sin(Math.PI/4)*z);
-			p.setZ(Math.cos(Math.PI/4)*z+Math.sin(Math.PI/4)*y);
+			p.setY(Math.cos(Math.PI / 4) * y - Math.sin(Math.PI / 4) * z);
+			p.setZ(Math.cos(Math.PI / 4) * z + Math.sin(Math.PI / 4) * y);
 		}
 	}
+
 	public void rotateY() {
-		for(Point p : pointsList ) {
+		for (Point p : pointsList) {
 			Double x = p.getX();
 			Double z = p.getZ();
-			p.setX(Math.cos(Math.PI/4)*x-Math.sin(Math.PI/4)*z);
-			p.setZ(Math.cos(Math.PI/4)*z+Math.sin(Math.PI/4)*x);
+			p.setX(Math.cos(Math.PI / 4) * x - Math.sin(Math.PI / 4) * z);
+			p.setZ(Math.cos(Math.PI / 4) * z + Math.sin(Math.PI / 4) * x);
 		}
 	}
+
 	public void rotateZ() {
-		for(Point p : pointsList ) {
+		for (Point p : pointsList) {
 			Double x = p.getX();
 			Double y = p.getY();
-			p.setX(Math.cos(Math.PI/4)*x-Math.sin(Math.PI/4)*y);
-			p.setY(Math.cos(Math.PI/4)*y+Math.sin(Math.PI/4)*x);
+			p.setX(Math.cos(Math.PI / 4) * x - Math.sin(Math.PI / 4) * y);
+			p.setY(Math.cos(Math.PI / 4) * y + Math.sin(Math.PI / 4) * x);
 		}
 	}
-	
 
 	public void scaling(double scale) {
 		for (Point p : this.pointsList) {
@@ -73,21 +72,21 @@ public class Repere {
 	}
 
 	public void sortFaces() {
-		int n = facesList.size(); 
-		for (int i = 1; i < n; ++i) { 
-			Face key = facesList.get(i); 
-			int j = i - 1; 
+		int n = facesList.size();
+		for (int i = 1; i < n; ++i) {
+			Face key = facesList.get(i);
+			int j = i - 1;
 			while (j >= 0 && facesList.get(j).average() > key.average()) {
-				facesList.set(j+1, facesList.get(j));
-				j = j - 1; 
-			} 
-			facesList.set(j+1, key);
+				facesList.set(j + 1, facesList.get(j));
+				j = j - 1;
+			}
+			facesList.set(j + 1, key);
 		}
 	}
 
 	public void printAvg() {
-		for(Face f : facesList) {
-			System.out.println("Moyenne de la face : "+ f.average());
+		for (Face f : facesList) {
+			System.out.println("Moyenne de la face : " + f.average());
 		}
 	}
 }
