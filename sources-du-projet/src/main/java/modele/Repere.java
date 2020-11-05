@@ -36,30 +36,30 @@ public class Repere {
 		}
 	}
 
-	public void rotateX() {
+	public void rotateX(Double grad) {
 		for (Point p : pointsList) {
 			Double y = p.getY();
 			Double z = p.getZ();
-			p.setY(Math.cos(Math.PI / 4) * y - Math.sin(Math.PI / 4) * z);
-			p.setZ(Math.cos(Math.PI / 4) * z + Math.sin(Math.PI / 4) * y);
+			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
+			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
 		}
 	}
 
-	public void rotateY() {
+	public void rotateY(Double grad) {
 		for (Point p : pointsList) {
 			Double x = p.getX();
 			Double z = p.getZ();
-			p.setX(Math.cos(Math.PI / 4) * x - Math.sin(Math.PI / 4) * z);
-			p.setZ(Math.cos(Math.PI / 4) * z + Math.sin(Math.PI / 4) * x);
+			p.setX(Math.cos(grad) * x - Math.sin(grad) * z);
+			p.setZ(Math.cos(grad) * z + Math.sin(grad) * x);
 		}
 	}
 
-	public void rotateZ() {
+	public void rotateZ(Double grad) {
 		for (Point p : pointsList) {
 			Double x = p.getX();
 			Double y = p.getY();
-			p.setX(Math.cos(Math.PI / 4) * x - Math.sin(Math.PI / 4) * y);
-			p.setY(Math.cos(Math.PI / 4) * y + Math.sin(Math.PI / 4) * x);
+			p.setX(Math.cos(grad) * x - Math.sin(grad) * y);
+			p.setY(Math.cos(grad) * y + Math.sin(grad) * x);
 		}
 	}
 

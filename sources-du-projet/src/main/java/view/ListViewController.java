@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -54,7 +55,15 @@ public class ListViewController {
 	Button rotationZ;
 	@FXML
 	VBox vb;
-
+	@FXML
+	Slider sliderX;
+	@FXML
+	Slider sliderY;
+	@FXML
+	Slider sliderZ;
+	@FXML
+	Slider zoom;
+	
 	private Repere repere;
 
 	private final double RATIOX = 50;
@@ -69,6 +78,18 @@ public class ListViewController {
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
+		sliderX.setMax(Math.PI);
+		sliderX.setMin(-Math.PI);
+		sliderX.setValue(0);
+		sliderY.setMax(Math.PI);
+		sliderY.setMin(-Math.PI);
+		sliderY.setValue(0);
+		sliderZ.setMax(Math.PI);
+		sliderZ.setMin(-Math.PI);
+		sliderZ.setValue(0);
+		zoom.setMax(20);
+		zoom.setMin(0);
+		zoom.setValue(10);
 		this.setZoom();
 		this.rotate();
 	}
@@ -201,16 +222,36 @@ public class ListViewController {
 				this.repere.scaling(this.UNSCALING);
 			this.renderModel();
 		});
+		/*zoom.valueProperty().addListener((obs,old,n)->{
+			Double scale = (Double) n - (Double) old; 
+			if(scale < 0) {
+				this.repere.scaling(UNSCALING);
+			}
+			else this.repere.scaling(SCALING);
+			this.renderModel();
+		});*/
 	}
 
 	public void rotate() {
 		vb.setOnKeyPressed(e -> {
 			if (e.getCode().equals(KeyCode.Z))
-				this.repere.rotateZ();
+				this.repere.rotateZ(Math.PI/8);
 			if (e.getCode().equals(KeyCode.Y))
-				this.repere.rotateY();
+				this.repere.rotateY(Math.PI/8);
 			if (e.getCode().equals(KeyCode.X))
-				this.repere.rotateX();
+				this.repere.rotateX(Math.PI/8);
+			this.renderModel();
+		});
+		sliderX.valueProperty().addListener((obs,old,n)->{
+			this.repere.rotateX((Double) n - (Double) old);
+			this.renderModel();
+		});		
+		sliderY.valueProperty().addListener((obs,old,n)->{
+			this.repere.rotateY((Double) n - (Double) old);
+			this.renderModel();
+		});
+		sliderZ.valueProperty().addListener((obs,old,n)->{
+			this.repere.rotateZ((Double) n - (Double) old);
 			this.renderModel();
 		});
 	}
