@@ -11,9 +11,12 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -26,6 +29,7 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.stage.FileChooser.ExtensionFilter;
 import modele.Face;
 import modele.Point;
@@ -62,14 +66,20 @@ public class ListViewController {
 	@FXML
 	Slider sliderZ;
 	@FXML
-	Slider zoom;
-	
+	ColorPicker strokeColor;
+	@FXML
+	ColorPicker fillColor;
+	@FXML
+	ToggleButton filDeFer;
+	@FXML
+	ToggleButton afficherFiles;
+
 	private Repere repere;
 
-	private final double RATIOX = 50;
-	private final double RATIOY = 50;
-	private final double SCALING = 1.10;
-	private final double UNSCALING = 0.9;
+	private static final double RATIOX = 50;
+	private static final double RATIOY = 50;
+	private static final double SCALING = 1.10;
+	private static final double UNSCALING = 0.9;
 
 	public void initialize() {
 		affichage.setManaged(false);
@@ -87,11 +97,25 @@ public class ListViewController {
 		sliderZ.setMax(Math.PI);
 		sliderZ.setMin(-Math.PI);
 		sliderZ.setValue(0);
-		zoom.setMax(20);
-		zoom.setMin(0);
-		zoom.setValue(10);
 		this.setZoom();
 		this.rotate();
+		fillColor.setValue(Color.DARKGRAY);
+		strokeColor.setValue(Color.ANTIQUEWHITE);
+		fillColor.setOnAction(e->{
+			this.renderModel();
+		});
+		strokeColor.setOnAction(e->{
+			this.renderModel();
+		});
+		filDeFer.setOnAction(e->{
+			this.renderModel();
+		});
+		filDeFer.setTooltip(new Tooltip("Fil de fer"));
+		filDeFer.getTooltip().setShowDelay(new Duration(0));
+
+		afficherFiles.setTooltip(new Tooltip("Afficher les fils"));
+		afficherFiles.getTooltip().setShowDelay(new Duration(0));
+
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -146,12 +170,22 @@ public class ListViewController {
 			}
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
-			polygon.setFill(Color.ANTIQUEWHITE);
-			polygon.setStrokeWidth(1.0);
-			polygon.setStroke(Color.DARKGRAY);
-			affichage.getChildren().add(polygon);
+			if(this.filDeFer.isSelected()) {
+				polygon.setFill(Color.TRANSPARENT);
+			}else 
+				polygon.setFill(fillColor.getValue());
+			if(this.afficherFiles.isSelected()) {
+				polygon.setStroke(Color.TRANSPARENT);
+				polygon.setStrokeWidth(0.0);
+			}else {
+				polygon.setStroke(strokeColor.getValue());
+				polygon.setStrokeWidth(0.5);
+			}
+			affichage.getChildren().addAll(polygon);
+
 		}
 	}
+
 
 	class Cell extends ListCell<File> {
 		HBox hbox = new HBox();
@@ -217,9 +251,9 @@ public class ListViewController {
 	public void setZoom() {
 		center.setOnScroll(e -> {
 			if (e.getDeltaY() > 0)
-				this.repere.scaling(this.SCALING);
+				this.repere.scaling(ListViewController.SCALING);
 			else
-				this.repere.scaling(this.UNSCALING);
+				this.repere.scaling(ListViewController.UNSCALING);
 			this.renderModel();
 		});
 		/*zoom.valueProperty().addListener((obs,old,n)->{

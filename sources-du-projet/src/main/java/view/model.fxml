@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
       <BorderPane prefHeight="899.0" prefWidth="1317.0">
          <top>
@@ -35,14 +37,14 @@
          <center>
             <Pane fx:id="center" prefHeight="375.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <Separator orientation="VERTICAL" prefHeight="863.0" prefWidth="17.0" />
+                  <Separator orientation="VERTICAL" prefHeight="663.0" prefWidth="17.0" />
                   <Group fx:id="affichage" translateX="375.0" translateY="275.0" />
-                  <Text fill="#787a94" layoutX="364.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View" textAlignment="CENTER" wrappingWidth="210.0">
+                  <Text fill="#787a94" layoutX="324.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View" textAlignment="CENTER" wrappingWidth="210.0">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Separator layoutX="884.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="864.0" prefWidth="14.0" />
+                  <Separator layoutX="884.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="662.0" prefWidth="14.0" />
                </children>
             </Pane>
          </center>
@@ -55,7 +57,7 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="list" layoutX="5.0" layoutY="103.0" prefHeight="710.0" prefWidth="215.0" style="-fx-background-color: transparent;" />
+                  <ListView fx:id="list" layoutX="5.0" layoutY="103.0" prefHeight="539.0" prefWidth="211.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
          </left>
@@ -115,26 +117,49 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="74.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:src/main/resources/img/zoom.png" />
-                     </image>
-                  </ImageView>
-                  <Slider id="rotationZ" fx:id="sliderZ" layoutX="-9.0" layoutY="648.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider id="rotationY" fx:id="sliderY" layoutX="-10.0" layoutY="575.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider id="rotationX" fx:id="sliderX" layoutX="-12.0" layoutY="501.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Text layoutX="34.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
-                  <Text layoutX="38.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
-                  <Text layoutX="34.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
-                  <Slider fx:id="zoom" layoutX="20.0" layoutY="290.0" prefHeight="36.0" prefWidth="123.0" rotate="-90.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="73.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:src/main/resources/img/zoom-out.png" />
-                     </image>
-                  </ImageView>
+                  <Slider id="rotationZ" fx:id="sliderZ" layoutX="3.0" layoutY="395.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider id="rotationY" fx:id="sliderY" layoutX="2.0" layoutY="322.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider id="rotationX" fx:id="sliderX" layoutY="248.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Text layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
+                  <Text layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
+                  <Text layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
                </children>
             </Pane>
          </right>
+         <bottom>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator layoutY="-1.0" prefHeight="0.0" prefWidth="1293.0" />
+                  <Text fill="#787a94" layoutX="542.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options" textAlignment="CENTER" wrappingWidth="210.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the color of Fill " />
+                  <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the color of Stroke" />
+                  <ColorPicker fx:id="fillColor" layoutX="182.0" layoutY="56.0" />
+                  <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="182.0" layoutY="122.0" />
+                  <ToggleButton fx:id="filDeFer" layoutX="591.0" layoutY="88.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:src/main/resources/img/icons8-octaedro-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton fx:id="afficherFiles" layoutX="664.0" layoutY="88.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:src/main/resources/img/icons8-octaedro-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </Pane>
+         </bottom>
       </BorderPane>
   </children>
 </VBox>
