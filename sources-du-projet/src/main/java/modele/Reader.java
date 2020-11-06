@@ -7,33 +7,42 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.javadoc.ThrowsTag;
-
 import exceptions.WrongFileFormatException;
+
 /**
  * 
  * @author H1
  * 
  */
 public class Reader {
-	/**A BufferedReader to run through lines of the file */
+	/** A BufferedReader to run through lines of the file */
 	private BufferedReader reader;
-	/** That's where faces and vertex are stored
-	 *@see Repere 
+	/**
+	 * That's where faces and vertice are stored
+	 * 
+	 * @see Repere
 	 */
 	private Repere repere;
-	/** Number of points of the PLY file, searched with "contains vertex" prefix in header */
+	/**
+	 * Number of points of the PLY file, searched with "contains vertex" prefix in
+	 * header
+	 */
 	private int nbPoints = -1;
-	/** Number of faces of the PLY file, searched with "contains face" prefix in header */
+	/**
+	 * Number of faces of the PLY file, searched with "contains face" prefix in
+	 * header
+	 */
 	private int nbFaces = -1;
 	/** The author of the PLY file, searched with a "by" prefix in header */
 	private String author;
+
 	/**
 	 * Try to read a PLY file,
+	 * 
 	 * @param f : A regular file
-	 * @throws IOException if the bufferedReader {@link #reader} encounters a problem to read a line
-	 * @throws NullPointerException if the specified file does not exist
+	 * @throws IOException              if the bufferedReader {@link #reader}
+	 *                                  encounters a problem to read a line
+	 * @throws NullPointerException     if the specified file does not exist
 	 * @throws WrongFileFormatException if the specified file isn't a .ply file
 	 */
 	public Reader(File f) throws IOException, WrongFileFormatException {
@@ -50,14 +59,16 @@ public class Reader {
 			System.out.println("Fichier introuvable");
 		}
 	}
+
 	/**
 	 * 
-	 * Takes a {@link String} <b>path</b> and invoke {@link #Reader(File)} creating a new {@link File} from the specified <b>path</b>
+	 * Takes a {@link String} <b>path</b> and invoke {@link #Reader(File)} creating
+	 * a new {@link File} from the specified <b>path</b>
 	 */
 	public Reader(String path) throws IOException, WrongFileFormatException {
 		this(new File(path));
 	}
-	
+
 	public int getNbPoints() {
 		return nbPoints;
 	}
@@ -65,7 +76,7 @@ public class Reader {
 	public int getNbFaces() {
 		return nbFaces;
 	}
-	
+
 	public String getAuthor() {
 		return author;
 	}
@@ -73,20 +84,23 @@ public class Reader {
 	public Repere getRepere() {
 		return this.repere;
 	}
+
 	/**
-	 * Prerequisite for propertySearch function.
-	 * Reads the header of the associate PLY file and try to get : {@link #author} {@link #nbPoints} {@link #nbFaces}
+	 * Prerequisite for propertySearch function. Reads the header of the associate
+	 * PLY file and try to get : {@link #author} {@link #nbPoints} {@link #nbFaces}
+	 * 
 	 * @see #propertySearch()
-	 * @return <b>true</b>
-	 * If the header of the ply file contains a correct number of : 
-	 * <li>{@link #nbPoints} (vertex)</li> <li>{@link #nbFaces} (face)</li> else returns <b>false</b>
+	 * @return <b>true</b> If the header of the ply file contains a correct number
+	 *         of :
+	 *         <li>{@link #nbPoints} (vertex)</li>
+	 *         <li>{@link #nbFaces} (face)</li> else returns <b>false</b>
 	 * @throws IOException
 	 */
 	public boolean headerCheck() throws IOException {
 		for (String line = reader.readLine(); !line.equals("end_header"); line = reader.readLine()) {
-			
-			if(line.contains("by")) {
-				String [] authorTab = line.substring(line.indexOf("by")).split(" ");
+
+			if (line.contains("by")) {
+				String[] authorTab = line.substring(line.indexOf("by")).split(" ");
 				this.author = authorTab[1];
 			}
 			if (line.startsWith("element")) {
@@ -102,14 +116,17 @@ public class Reader {
 		}
 		return this.nbFaces > 0 && this.nbPoints > 0;
 	}
+
 	/**
-	 * Used in the {@link Reader} constructor 
-	 * Reads and store all vertex and faces of the PLY file inside {@link #repere}
-	 * @return <b>void</b> If the {@link #headerCheck()} function returns <b>false</b>
+	 * Used in the {@link Reader} constructor Reads and store all vertex and faces
+	 * of the PLY file inside {@link #repere}
+	 * 
+	 * @return <b>void</b> If the {@link #headerCheck()} function returns
+	 *         <b>false</b>
 	 * @see Repere
 	 * @throws IOException
 	 */
-	 // TODO Faire les checks sur le nombre de points et faces
+	// TODO Faire les checks sur le nombre de points et faces
 	public void propertySearch() throws IOException {
 		if (!this.headerCheck())
 			return;
