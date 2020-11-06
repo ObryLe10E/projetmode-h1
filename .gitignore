@@ -1,2 +1,3 @@
 sources-du-projet/target/
 sources-du-projet/target/*
+*.class

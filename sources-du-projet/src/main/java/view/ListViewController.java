@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
@@ -73,6 +74,12 @@ public class ListViewController {
 	ToggleButton filDeFer;
 	@FXML
 	ToggleButton afficherFiles;
+	@FXML
+	Label nbPointsLabel;
+	@FXML
+	Label nbFacesLabel;
+	@FXML
+	Label authorLabel;
 
 	private Repere repere;
 
@@ -125,10 +132,15 @@ public class ListViewController {
 				if (!list.getItems().isEmpty()) {
 					try {
 						// resetSliders();
+						this.resetLabel();
 						File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
 						System.out.println(list.getSelectionModel().getSelectedItem().getAbsoluteFile());
 						Reader reader = new Reader(path);
 						repere = reader.getRepere();
+						if(reader.getAuthor() == null) authorLabel.setText(authorLabel.getText() + "INCONNU");
+						else authorLabel.setText(authorLabel.getText() + reader.getAuthor());
+							nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
+							nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
 						renderModel();
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -155,6 +167,16 @@ public class ListViewController {
 					}
 				}
 			}
+		}
+		/** Clean model label fields 
+		 * @nbAuthorLabel
+		 * @nbPointsLabel
+		 * @nbFacesLabel
+		 * */
+		private void resetLabel() {
+			authorLabel.setText("Auteur :");
+			nbPointsLabel.setText("Nombre de points :");
+			nbFacesLabel.setText("Nombre de faces :");
 		}
 	}
 
