@@ -6,12 +6,11 @@ import java.util.List;
 public class Repere {
 	private List<Point> pointsList;
 	private List<Face> facesList;
-
 	public Repere(List<Point> pointsList, List<Face> facesList) {
 		this.pointsList = pointsList;
 		this.facesList = facesList;
 	}
-
+	
 	public Repere() {
 		this(new ArrayList<Point>(), new ArrayList<Face>());
 	}
@@ -27,6 +26,44 @@ public class Repere {
 	@Override
 	public String toString() {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
+	}
+	
+	
+
+	public double getCentreX() {
+		double MaxX;
+		double MinX;
+		double centreX = 0;
+		Point Q = this.pointsList.get(0);
+		MaxX = Q.getX();
+		MinX = Q.getX();
+		for (Point p : this.pointsList) {
+			if(p.getX() > MaxX) {
+				MaxX = p.getX();
+			}else if (p.getX() < MinX) {
+				MinX = p.getX();
+			}
+		}
+		centreX = (MaxX - MinX)/2;
+		return centreX;
+	}
+
+	public double getCentreY() {
+		double MaxY;
+		double MinY;
+		double centreY = 0;
+		Point Q = this.pointsList.get(0);
+		MaxY = Q.getY();
+		MinY = Q.getY();
+		for (Point p : this.pointsList) {
+			if(p.getY() > MaxY) {
+				MaxY = p.getY();
+			}else if (p.getY() < MinY) {
+				MinY = p.getY();
+			}
+		}
+		centreY = (MaxY - MinY)/2;
+		return centreY;
 	}
 
 	public void translation(double ratioX, double ratioY) {
