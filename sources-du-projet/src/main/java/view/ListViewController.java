@@ -142,9 +142,8 @@ public class ListViewController {
 						else authorLabel.setText(authorLabel.getText() + reader.getAuthor());
 							nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 							nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
-						repere.translation(-repere.getCentreX(), -repere.getCentreY()); // centrage de la figure en  ~0,0
-						//repere.translation(-(repere.getCentreX() - center.getWidth()/2), -( repere.getCentreY() - center.getHeight()/2)); // centrage de la figure en 0,0
-						repere.scaling((center.getHeight()/10)/repere.getMax());
+						repere.translation(-repere.getCentreX(), -repere.getCentreY()); // centrage de la figure approximatif
+						//repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne taille de la figure
 						System.out.println("centre X : " +repere.getCentreX()+"centre Y : "+repere.getCentreY());
 						System.out.println("centre X map: " +center.getWidth()/2+" centre Y : "+center.getHeight()/2);
 						center.setCursor(Cursor.CROSSHAIR);
