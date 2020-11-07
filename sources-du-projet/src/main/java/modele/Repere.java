@@ -58,6 +58,8 @@ public class Repere {
 		return centreX;
 	}
 
+	
+	
 	public double getCentreY() {
 		double MaxY;
 		double MinY;
