@@ -28,8 +28,18 @@ public class Repere {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
 	}
 	
-	
-
+	public double getMax() {
+		double Max = this.pointsList.get(0).getX();
+		for (Point p : this.pointsList) {
+			if(p.getX() > Max) {
+				Max = p.getX();
+			}
+			if (p.getY() > Max) {
+				Max = p.getX();
+			}
+		}
+		return Max;
+	}
 	public double getCentreX() {
 		double MaxX;
 		double MinX;

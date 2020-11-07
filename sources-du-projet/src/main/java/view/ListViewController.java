@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -122,7 +123,7 @@ public class ListViewController {
 
 		afficherFiles.setTooltip(new Tooltip("Afficher les fils"));
 		afficherFiles.getTooltip().setShowDelay(new Duration(0));
-
+		
 	}
 
 	class FileListChangeListener implements ListChangeListener<File> {
@@ -141,8 +142,11 @@ public class ListViewController {
 						else authorLabel.setText(authorLabel.getText() + reader.getAuthor());
 							nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 							nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
+						repere.translation(-repere.getCentreX(), -repere.getCentreY()); // centrage de la figure en  ~0,0
+						//repere.translation(-(repere.getCentreX() - center.getWidth()/2), -( repere.getCentreY() - center.getHeight()/2)); // centrage de la figure en 0,0
 						System.out.println("centre X : " +repere.getCentreX()+"centre Y : "+repere.getCentreY());
-						repere.translation(-repere.getCentreX(), -repere.getCentreY());
+						System.out.println("centre X map: " +center.getWidth()/2+" centre Y : "+center.getHeight()/2);
+						center.setCursor(Cursor.CROSSHAIR);
 						renderModel();
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -183,6 +187,7 @@ public class ListViewController {
 	}
 
 	public void renderModel() {
+		
 		affichage.getChildren().clear();
 		this.repere.sortFaces();
 		for (Face face : this.repere.getFacesList()) {
