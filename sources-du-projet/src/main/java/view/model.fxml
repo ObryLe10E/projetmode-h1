@@ -39,7 +39,7 @@
             <Pane fx:id="center" prefHeight="375.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
                   <Separator orientation="VERTICAL" prefHeight="663.0" prefWidth="17.0" />
-                  <Group fx:id="affichage" translateX="375.0" translateY="275.0" />
+                  <Group fx:id="affichage" autoSizeChildren="false" translateX="375.0" translateY="275.0" />
                   <Text fill="#787a94" layoutX="324.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View" textAlignment="CENTER" wrappingWidth="210.0">
                      <font>
                         <Font size="25.0" />
@@ -124,9 +124,6 @@
                   <Text layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
                   <Text layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
                   <Text layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
-                  <Label id="nbPointsLabel" fx:id="nbPointsLabel" layoutX="8.0" layoutY="531.0" prefHeight="40.0" prefWidth="140.0" text="Nombre de points :" textAlignment="JUSTIFY" textFill="WHITE" />
-                  <Label id="authorLabel" fx:id="authorLabel" layoutX="6.0" layoutY="491.0" prefHeight="40.0" prefWidth="140.0" text="Auteur :" textAlignment="JUSTIFY" textFill="WHITE" />
-                  <Label id="nbFacesLabel" fx:id="nbFacesLabel" layoutX="4.0" layoutY="571.0" prefHeight="40.0" prefWidth="140.0" text="Nombre de faces :" textAlignment="JUSTIFY" textFill="WHITE" />
                </children>
             </Pane>
          </right>
@@ -134,7 +131,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Separator layoutY="-1.0" prefHeight="0.0" prefWidth="1293.0" />
-                  <Text fill="#787a94" layoutX="542.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options" textAlignment="CENTER" wrappingWidth="210.0">
+                  <Text fill="#787a94" layoutX="216.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options" textAlignment="CENTER" wrappingWidth="210.0">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -143,7 +140,7 @@
                   <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the color of Stroke" />
                   <ColorPicker fx:id="fillColor" layoutX="182.0" layoutY="56.0" />
                   <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="182.0" layoutY="122.0" />
-                  <ToggleButton fx:id="filDeFer" layoutX="591.0" layoutY="88.0" mnemonicParsing="false">
+                  <ToggleButton fx:id="filDeFer" layoutX="455.0" layoutY="87.0" mnemonicParsing="false">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -152,7 +149,7 @@
                         </ImageView>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton fx:id="afficherFiles" layoutX="664.0" layoutY="88.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
+                  <ToggleButton fx:id="afficherFiles" layoutX="526.0" layoutY="85.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -161,6 +158,19 @@
                         </ImageView>
                      </graphic>
                   </ToggleButton>
+                  <Separator layoutX="787.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Text fill="#787a94" layoutX="792.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations about this document" textAlignment="CENTER" wrappingWidth="490.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="826.0" layoutY="60.0" prefHeight="117.0" prefWidth="422.0" style="-fx-background-color: #46627a; -fx-border-color: #000000;">
+                     <children>
+                        <Label id="nbPointsLabel" fx:id="nbPointsLabel" layoutX="14.0" layoutY="37.0" prefHeight="40.0" prefWidth="140.0" text="Nombre de points :" textAlignment="JUSTIFY" textFill="WHITE" />
+                        <Label id="authorLabel" fx:id="authorLabel" layoutX="14.0" prefHeight="40.0" prefWidth="140.0" text="Auteur :" textAlignment="JUSTIFY" textFill="WHITE" />
+                        <Label id="nbFacesLabel" fx:id="nbFacesLabel" layoutX="14.0" layoutY="77.0" prefHeight="40.0" prefWidth="140.0" text="Nombre de faces :" textAlignment="JUSTIFY" textFill="WHITE" />
+                     </children>
+                  </Pane>
                </children>
             </Pane>
          </bottom>
