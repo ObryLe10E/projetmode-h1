@@ -100,19 +100,18 @@ public class ListViewController {
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
-		sliderX.setMax(Math.PI);
-		sliderX.setMin(-Math.PI);
-		sliderX.setValue(0);
-		sliderY.setMax(Math.PI);
-		sliderY.setMin(-Math.PI);
-		sliderY.setValue(0);
-		sliderZ.setMax(Math.PI);
-		sliderZ.setMin(-Math.PI);
-		sliderZ.setValue(0);
+		this.setSliders();
 		this.setZoom();
 		this.rotate();
-		fillColor.setValue(Color.DARKGRAY);
-		strokeColor.setValue(Color.ANTIQUEWHITE);
+		this.setDefaultsColors();
+		this.setStrokeButtons();
+	}
+
+	/**
+	 * Initialise les boutons permettant de choisir d'afficer ou non les arêtes
+	 * et/ou de remplir les faces
+	 */
+	private void setStrokeButtons() {
 		fillColor.setOnAction(e -> {
 			this.renderModel();
 		});
@@ -129,6 +128,29 @@ public class ListViewController {
 	}
 
 	/**
+	 * Initialise les couleurs par défaut des arêtes et des faces du modèle
+	 */
+	private void setDefaultsColors() {
+		fillColor.setValue(Color.DARKGRAY);
+		strokeColor.setValue(Color.ANTIQUEWHITE);
+	}
+
+	/**
+	 * Initialise les sliders de rotation du modèle
+	 */
+	private void setSliders() {
+		sliderX.setMax(Math.PI);
+		sliderX.setMin(-Math.PI);
+		sliderX.setValue(0);
+		sliderY.setMax(Math.PI);
+		sliderY.setMin(-Math.PI);
+		sliderY.setValue(0);
+		sliderZ.setMax(Math.PI);
+		sliderZ.setMin(-Math.PI);
+		sliderZ.setValue(0);
+	}
+
+	/**
 	 * ChangeListener qui ouvre le fichier sur lequel on clique dans la
 	 * bibliothèque, ou une popup d'erreur s'il n'est pas valide
 	 */
@@ -141,7 +163,6 @@ public class ListViewController {
 						// resetSliders();
 						this.resetLabel();
 						File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
-						System.out.println(list.getSelectionModel().getSelectedItem().getAbsoluteFile());
 						Reader reader = new Reader(path);
 						repere = reader.getRepere();
 						if (reader.getAuthor() == null)
@@ -154,9 +175,6 @@ public class ListViewController {
 						// centrage de la figure approximatif
 						// repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne
 						// taille de la figure
-						System.out.println("centre X : " + repere.getCentreX() + "centre Y : " + repere.getCentreY());
-						System.out.println(
-								"centre X map: " + center.getWidth() / 2 + " centre Y : " + center.getHeight() / 2);
 						center.setCursor(Cursor.CROSSHAIR);
 						renderModel();
 					} catch (IOException e) {
