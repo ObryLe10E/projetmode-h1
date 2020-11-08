@@ -11,10 +11,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -47,7 +44,6 @@
          <left>
             <Pane prefHeight="478.0" prefWidth="225.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="tf" layoutX="62.0" layoutY="55.0" promptText="Search" style="-fx-background-color: b1c0c5; -fx-background-radius: 10px;" />
                   <Text fill="#787a94" layoutX="31.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bibliothèque" textAlignment="CENTER" wrappingWidth="210.0">
                      <font>
                         <Font size="25.0" />
@@ -68,49 +64,12 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Pane layoutX="26.0" layoutY="83.0" prefHeight="78.0" prefWidth="106.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
+                  <Pane layoutX="11.0" layoutY="75.0" prefHeight="87.0" prefWidth="127.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
                      <children>
-                        <Button fx:id="transMinusX" layoutX="6.0" layoutY="25.0" mnemonicParsing="false" onAction="#translationMinusX" style="-fx-background-color: #3e646b;">
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="file:src/main/resources/img/right-arrow.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="transPlusY" layoutX="39.0" layoutY="2.0" mnemonicParsing="false" onAction="#translationMinusY" style="-fx-background-color: #3e646b #3e646b;">
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                                 <image>
-                                    <Image url="file:src/main/resources/img/right-arrow.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="transPlusX" layoutX="72.0" layoutY="25.0" mnemonicParsing="false" onAction="#translationPlusX" style="-fx-background-color: #3e646b;">
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="file:src/main/resources/img/right-arrow.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="transMinusY" layoutX="39.0" layoutY="50.0" mnemonicParsing="false" onAction="#translationPlusY" rotate="180.0" style="-fx-background-color: #3e646b;">
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                                 <image>
-                                    <Image url="file:src/main/resources/img/right-arrow.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <ImageView fitHeight="31.0" fitWidth="17.0" layoutX="47.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:src/main/resources/img/rotating-circular-arrow.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="transMinusX" layoutX="2.0" layoutY="23.0" mnemonicParsing="false" onAction="#translationMinusX" prefHeight="40.0" prefWidth="30.0" style="-fx-background-color: #3e646b;" text="←" />
+                        <Button fx:id="transPlusY" layoutX="31.0" layoutY="2.0" mnemonicParsing="false" onAction="#translationMinusY" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #3e646b #3e646b;" text="↑" />
+                        <Button fx:id="transPlusX" layoutX="94.0" layoutY="23.0" mnemonicParsing="false" onAction="#translationPlusX" prefHeight="40.0" prefWidth="30.0" style="-fx-background-color: #3e646b;" text="→" />
+                        <Button fx:id="transMinusY" layoutX="31.0" layoutY="61.0" mnemonicParsing="false" onAction="#translationPlusY" prefHeight="25.0" prefWidth="65.0" rotate="180.0" style="-fx-background-color: #3e646b;" text="↓" />
                      </children>
                   </Pane>
                   <Slider id="rotationZ" fx:id="sliderZ" layoutX="3.0" layoutY="395.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
@@ -123,7 +82,7 @@
             </Pane>
          </right>
          <bottom>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="200.0" prefWidth="1293.0" BorderPane.alignment="CENTER">
                <children>
                   <Separator layoutY="-1.0" prefHeight="0.0" prefWidth="1293.0" />
                   <Text fill="#787a94" layoutX="216.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options" textAlignment="CENTER" wrappingWidth="210.0">
@@ -135,23 +94,15 @@
                   <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des fils :" />
                   <ColorPicker fx:id="fillColor" layoutX="216.0" layoutY="56.0" />
                   <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="216.0" layoutY="122.0" />
-                  <ToggleButton fx:id="filDeFer" layoutX="455.0" layoutY="87.0" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:src/main/resources/img/icons8-octaedro-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ToggleButton fx:id="filDeFer" layoutX="455.0" layoutY="85.0" mnemonicParsing="false" text="¯/">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="afficherFils" layoutX="526.0" layoutY="85.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
-                     <graphic>
-                        <ImageView fitHeight="49.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:src/main/resources/img/icons8-octaedro-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ToggleButton fx:id="afficherFils" layoutX="526.0" layoutY="85.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0" text="▰">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </ToggleButton>
                   <Separator layoutX="787.0" orientation="VERTICAL" prefHeight="200.0" />
                   <Text fill="#787a94" layoutX="792.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations à propos du modèle" textAlignment="CENTER" wrappingWidth="490.0">

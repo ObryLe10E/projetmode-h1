@@ -19,8 +19,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -40,47 +38,47 @@ import modele.Repere;
 
 public class ListViewController {
 	@FXML
-	Pane center;
+	private Pane center;
 	@FXML
-	ListView<File> list;
+	private ListView<File> list;
 	@FXML
-	Group affichage;
+	private Group affichage;
 	@FXML
-	Button transMinusY;
+	private Button transMinusY;
 	@FXML
-	Button transPlusY;
+	private Button transPlusY;
 	@FXML
-	Button transMinusX;
+	private Button transMinusX;
 	@FXML
-	Button transPlusX;
+	private Button transPlusX;
 	@FXML
-	Button rotationX;
+	private Button rotationX;
 	@FXML
-	Button rotationY;
+	private Button rotationY;
 	@FXML
-	Button rotationZ;
+	private Button rotationZ;
 	@FXML
-	VBox vb;
+	private VBox vb;
 	@FXML
-	Slider sliderX;
+	private Slider sliderX;
 	@FXML
-	Slider sliderY;
+	private Slider sliderY;
 	@FXML
-	Slider sliderZ;
+	private Slider sliderZ;
 	@FXML
-	ColorPicker strokeColor;
+	private ColorPicker strokeColor;
 	@FXML
-	ColorPicker fillColor;
+	private ColorPicker fillColor;
 	@FXML
-	ToggleButton filDeFer;
+	private ToggleButton filDeFer;
 	@FXML
-	ToggleButton afficherFils;
+	private ToggleButton afficherFils;
 	@FXML
-	Label nbPointsLabel;
+	private Label nbPointsLabel;
 	@FXML
-	Label nbFacesLabel;
+	private Label nbFacesLabel;
 	@FXML
-	Label authorLabel;
+	private Label authorLabel;
 
 	private Repere repere;
 
@@ -95,8 +93,8 @@ public class ListViewController {
 	 */
 	public void initialize() {
 		affichage.setManaged(false);
-		Directory dir = new Directory("src/main/resources/fichiers/");
-		list.getItems().addAll(dir.getListOfFiles());
+		//Directory dir = new Directory("src/main/resources/fichiers/");
+		//list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
@@ -251,17 +249,13 @@ public class ListViewController {
 	}
 
 	/**
-	 * Cellule de la liste des modèles
+	 * Cellule de la liste des modï¿½les
 	 */
 	class Cell extends ListCell<File> {
 		HBox hbox = new HBox();
-		Image img = new Image(
-				"file:/C:/Users/duhem/Desktop/projetmode-h1/sources-du-projet/src/main/resources/img/icons8-file-25.png");
-		ImageView imgv = new ImageView(img);
 
 		public Cell() {
 			super();
-			hbox.getChildren().addAll(imgv);
 			this.setStyle("-fx-background-color: transparent");
 		}
 
