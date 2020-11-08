@@ -124,7 +124,7 @@ public class Reader {
 	 * @see Repere
 	 * @throws IOException
 	 */
-	// TODO Faire les checks sur le nombre de points et faces
+	// A FAIRE les checks sur le nombre de points et faces
 	public void propertySearch() throws IOException {
 		if (!this.headerCheck())
 			return;
