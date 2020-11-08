@@ -74,7 +74,7 @@ public class ListViewController {
 	@FXML
 	ToggleButton filDeFer;
 	@FXML
-	ToggleButton afficherFiles;
+	ToggleButton afficherFils;
 	@FXML
 	Label nbPointsLabel;
 	@FXML
@@ -89,6 +89,10 @@ public class ListViewController {
 	private static final double SCALING = 1.10;
 	private static final double UNSCALING = 0.9;
 
+	/**
+	 * Initialise la fenêtre de l'application et ses fonctionnalités, à partir d'une
+	 * bibliothèque par défaut
+	 */
 	public void initialize() {
 		affichage.setManaged(false);
 		Directory dir = new Directory("src/main/resources/fichiers/");
@@ -109,23 +113,25 @@ public class ListViewController {
 		this.rotate();
 		fillColor.setValue(Color.DARKGRAY);
 		strokeColor.setValue(Color.ANTIQUEWHITE);
-		fillColor.setOnAction(e->{
+		fillColor.setOnAction(e -> {
 			this.renderModel();
 		});
-		strokeColor.setOnAction(e->{
+		strokeColor.setOnAction(e -> {
 			this.renderModel();
 		});
-		filDeFer.setOnAction(e->{
+		filDeFer.setOnAction(e -> {
 			this.renderModel();
 		});
 		filDeFer.setTooltip(new Tooltip("Fil de fer"));
 		filDeFer.getTooltip().setShowDelay(new Duration(0));
-
-		afficherFiles.setTooltip(new Tooltip("Afficher les fils"));
-		afficherFiles.getTooltip().setShowDelay(new Duration(0));
-		
+		afficherFils.setTooltip(new Tooltip("Afficher les fils"));
+		afficherFils.getTooltip().setShowDelay(new Duration(0));
 	}
 
+	/**
+	 * ChangeListener qui ouvre le fichier sur lequel on clique dans la
+	 * bibliothèque, ou une popup d'erreur s'il n'est pas valide
+	 */
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
 		public void onChanged(Change<? extends File> c) {
@@ -138,14 +144,19 @@ public class ListViewController {
 						System.out.println(list.getSelectionModel().getSelectedItem().getAbsoluteFile());
 						Reader reader = new Reader(path);
 						repere = reader.getRepere();
-						if(reader.getAuthor() == null) authorLabel.setText(authorLabel.getText() + "INCONNU");
-						else authorLabel.setText(authorLabel.getText() + reader.getAuthor());
-							nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
-							nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
-						repere.translation(-repere.getCentreX(), -repere.getCentreY()); // centrage de la figure approximatif
-						//repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne taille de la figure
-						System.out.println("centre X : " +repere.getCentreX()+"centre Y : "+repere.getCentreY());
-						System.out.println("centre X map: " +center.getWidth()/2+" centre Y : "+center.getHeight()/2);
+						if (reader.getAuthor() == null)
+							authorLabel.setText(authorLabel.getText() + "INCONNU");
+						else
+							authorLabel.setText(authorLabel.getText() + reader.getAuthor());
+						nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
+						nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
+						repere.translation(-repere.getCentreX(), -repere.getCentreY());
+						// centrage de la figure approximatif
+						// repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne
+						// taille de la figure
+						System.out.println("centre X : " + repere.getCentreX() + "centre Y : " + repere.getCentreY());
+						System.out.println(
+								"centre X map: " + center.getWidth() / 2 + " centre Y : " + center.getHeight() / 2);
 						center.setCursor(Cursor.CROSSHAIR);
 						renderModel();
 					} catch (IOException e) {
@@ -174,11 +185,14 @@ public class ListViewController {
 				}
 			}
 		}
-		/** Clean model label fields 
-		 * @nbAuthorLabel
-		 * @nbPointsLabel
-		 * @nbFacesLabel
-		 * */
+
+		/**
+		 * Réinitialise les infos du modèle
+		 * 
+		 * @nbAuthorLabel Afficher le nom de l'auteur
+		 * @nbPointsLabel Afficher le nombre de points du modèle
+		 * @nbFacesLabel Afficher le Nombre de faces du modèle
+		 */
 		private void resetLabel() {
 			authorLabel.setText("Auteur :");
 			nbPointsLabel.setText("Nombre de points :");
@@ -186,8 +200,12 @@ public class ListViewController {
 		}
 	}
 
+	/**
+	 * Réinitialise l'affichage du modèle précédent Trie les faces du modèle selon Z
+	 * décroissant Crée un Polygon pour chaque face du modèle et l'affiche avec ses
+	 * arêtes
+	 */
 	public void renderModel() {
-		
 		affichage.getChildren().clear();
 		this.repere.sortFaces();
 		for (Face face : this.repere.getFacesList()) {
@@ -199,26 +217,26 @@ public class ListViewController {
 			}
 			Polygon polygon = new Polygon();
 			polygon.getPoints().addAll(listPoints);
-			if(this.filDeFer.isSelected()) {
+			if (this.filDeFer.isSelected())
 				polygon.setFill(Color.TRANSPARENT);
-			}else 
+			else
 				polygon.setFill(fillColor.getValue());
-			if(this.afficherFiles.isSelected()) {
+			if (this.afficherFils.isSelected()) {
 				polygon.setStroke(Color.TRANSPARENT);
 				polygon.setStrokeWidth(0.0);
-			}else {
+			} else {
 				polygon.setStroke(strokeColor.getValue());
 				polygon.setStrokeWidth(0.5);
 			}
 			affichage.getChildren().addAll(polygon);
-
 		}
 	}
 
-
+	/**
+	 * Cellule de la liste des modèles
+	 */
 	class Cell extends ListCell<File> {
 		HBox hbox = new HBox();
-		Button button = new Button("ok");
 		Image img = new Image(
 				"file:/C:/Users/duhem/Desktop/projetmode-h1/sources-du-projet/src/main/resources/img/icons8-file-25.png");
 		ImageView imgv = new ImageView(img);
@@ -229,6 +247,12 @@ public class ListViewController {
 			this.setStyle("-fx-background-color: transparent");
 		}
 
+		/**
+		 * Affiche le fichier dans une cellule verte s'il est valide, rouge sinon
+		 * 
+		 * @param Fichier que la cellule doit tester et afficher
+		 * @param empty
+		 */
 		public void updateItem(File item, boolean empty) {
 			super.updateItem(item, empty);
 			setText(null);
@@ -242,13 +266,17 @@ public class ListViewController {
 					this.setStyle(this.getStyle() + "; -fx-background-color: red");
 				}
 				setText(item.getName());
-				setFont(new Font(20.0)); // change la taille de la police
+				setFont(new Font(20.0));
 				setGraphic(hbox);
-				setTextFill(Color.WHITE); // change la couleur du text dans la listview
+				setTextFill(Color.WHITE);
 			}
 		}
 	}
 
+	/**
+	 * Laisse l'utilisateur choisir le dossier de sa bibliothèque de fichiers à
+	 * ouvrir
+	 */
 	public void openFile() {
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().add(new ExtensionFilter("ply Files", "*.ply"));
@@ -257,26 +285,41 @@ public class ListViewController {
 		list.getItems().addAll(f);
 	}
 
+	/**
+	 * Déplace le modèle vers le bas
+	 */
 	public void translationMinusY() {
 		this.repere.translation(0, -RATIOY);
 		this.renderModel();
 	}
 
+	/**
+	 * Déplace le modèle vers le haut
+	 */
 	public void translationPlusY() {
 		this.repere.translation(0, RATIOY);
 		this.renderModel();
 	}
 
+	/**
+	 * Déplace le modèle vers la droite
+	 */
 	public void translationPlusX() {
 		this.repere.translation(RATIOX, 0);
 		this.renderModel();
 	}
 
+	/**
+	 * Déplace le modèle vers la gauche
+	 */
 	public void translationMinusX() {
 		this.repere.translation(-RATIOX, 0);
 		this.renderModel();
 	}
-	
+
+	/**
+	 * Initialise le zoom sur le modèle ave la molette
+	 */
 	public void setZoom() {
 		center.setOnScroll(e -> {
 			if (e.getDeltaY() > 0)
@@ -285,35 +328,35 @@ public class ListViewController {
 				this.repere.scaling(ListViewController.UNSCALING);
 			this.renderModel();
 		});
-		/*zoom.valueProperty().addListener((obs,old,n)->{
-			Double scale = (Double) n - (Double) old; 
-			if(scale < 0) {
-				this.repere.scaling(UNSCALING);
-			}
-			else this.repere.scaling(SCALING);
-			this.renderModel();
-		});*/
+		/*
+		 * zoom.valueProperty().addListener((obs,old,n)->{ Double scale = (Double) n -
+		 * (Double) old; if(scale < 0) { this.repere.scaling(UNSCALING); } else
+		 * this.repere.scaling(SCALING); this.renderModel(); });
+		 */
 	}
 
+	/**
+	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
+	 */
 	public void rotate() {
 		vb.setOnKeyPressed(e -> {
 			if (e.getCode().equals(KeyCode.Z))
-				this.repere.rotateZ(Math.PI/8);
+				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
-				this.repere.rotateY(Math.PI/8);
+				this.repere.rotateY(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.X))
-				this.repere.rotateX(Math.PI/8);
+				this.repere.rotateX(Math.PI / 8);
 			this.renderModel();
 		});
-		sliderX.valueProperty().addListener((obs,old,n)->{
+		sliderX.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateX((Double) n - (Double) old);
 			this.renderModel();
-		});		
-		sliderY.valueProperty().addListener((obs,old,n)->{
+		});
+		sliderY.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateY((Double) n - (Double) old);
 			this.renderModel();
 		});
-		sliderZ.valueProperty().addListener((obs,old,n)->{
+		sliderZ.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateZ((Double) n - (Double) old);
 			this.renderModel();
 		});

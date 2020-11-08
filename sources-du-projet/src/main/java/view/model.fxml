@@ -144,7 +144,7 @@
                         </ImageView>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton fx:id="afficherFiles" layoutX="526.0" layoutY="85.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
+                  <ToggleButton fx:id="afficherFils" layoutX="526.0" layoutY="85.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

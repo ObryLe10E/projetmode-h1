@@ -10,9 +10,7 @@ import java.util.List;
 import exceptions.WrongFileFormatException;
 
 /**
- * 
- * @author H1
- * 
+ * @author H1 : DELOBEL Jeremy, DUHEM Alexis, OBRY Thomas, BONNET Tanguy
  */
 public class Reader {
 	/** A BufferedReader to run through lines of the file */
