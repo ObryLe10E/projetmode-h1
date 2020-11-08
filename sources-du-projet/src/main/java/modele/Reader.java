@@ -49,8 +49,11 @@ public class Reader {
 		this.repere = new Repere();
 		try {
 			reader = new BufferedReader(new FileReader(f));
-			if (!reader.readLine().equals("ply")) {
-				throw new WrongFileFormatException("Mauvais format de fichier : not \"ply\"");
+			String line = reader.readLine();
+			if (line == null)
+				throw new NullPointerException("Fichier vide");
+			if (!line.equals("ply")) {
+				throw new WrongFileFormatException("Mauvais format de fichier : non \"ply\"");
 			}
 			this.propertySearch();
 		} catch (FileNotFoundException e) {
@@ -123,24 +126,32 @@ public class Reader {
 	 *         <b>false</b>
 	 * @see Repere
 	 * @throws IOException
+	 * @throws WrongFileFormatException
 	 */
-	// A FAIRE les checks sur le nombre de points et faces
-	public void propertySearch() throws IOException {
+
+	public void propertySearch() throws IOException, WrongFileFormatException {
 		if (!this.headerCheck())
 			return;
+		int idx = 0;
 		for (int i = 0; i < this.nbPoints; i++) {
+			if (idx > this.nbPoints)
+				throw new WrongFileFormatException("Trop de points donnés par rapport à ce que l'entête précise");
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
-			// check si autant de points que de "property" dans header
 			Point p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
 					Double.parseDouble(splitted[2]));
 			this.repere.getPointsList().add(p);
+			idx++;
 		}
+		if (idx < this.nbPoints)
+			throw new WrongFileFormatException("Nombre de points données insuffisants");
 
+		idx = 0;
 		for (int i = 0; i < this.nbFaces; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
-			// check si autant de points que de "property" dans header
+			if (idx > this.nbFaces)
+				throw new WrongFileFormatException("Trop de faces données par rapport à ce que l'entête précise");
 			int nbVertex = Integer.parseInt(splitted[0]);
 			if (splitted.length - 1 == nbVertex) {
 				List<Point> plist = new ArrayList<Point>();
@@ -149,5 +160,7 @@ public class Reader {
 				this.repere.getFacesList().add(new Face(plist));
 			}
 		}
+		if (idx < this.nbFaces)
+			throw new WrongFileFormatException("Nombre de faces données insuffisants");
 	}
 }
