@@ -25,12 +25,12 @@ public class Reader {
 	 * Number of points of the PLY file, searched with "contains vertex" prefix in
 	 * header
 	 */
-	private int nbPoints = -1;
+	private int nbPoints = 0;
 	/**
 	 * Number of faces of the PLY file, searched with "contains face" prefix in
 	 * header
 	 */
-	private int nbFaces = -1;
+	private int nbFaces = 0;
 	/** The author of the PLY file, searched with a "by" prefix in header */
 	private String author;
 
@@ -128,39 +128,41 @@ public class Reader {
 	 * @throws IOException
 	 * @throws WrongFileFormatException
 	 */
-
 	public void propertySearch() throws IOException, WrongFileFormatException {
 		if (!this.headerCheck())
 			return;
-		int idx = 0;
+
 		for (int i = 0; i < this.nbPoints; i++) {
-			if (idx > this.nbPoints)
-				throw new WrongFileFormatException("Trop de points donnés par rapport à ce que l'entête précise");
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
-			Point p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
-					Double.parseDouble(splitted[2]));
+			if (splitted.length < 3)
+				throw new WrongFileFormatException("Mauvais format de point donné | Point n°" + (i + 1));
+			Point p;
+			try {
+				p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
+						Double.parseDouble(splitted[2]));
+			} catch (Exception e) {
+				throw new WrongFileFormatException("Mauvais format de point donné | Point n°" + (i + 1));
+			}
 			this.repere.getPointsList().add(p);
-			idx++;
 		}
-		if (idx < this.nbPoints)
-			throw new WrongFileFormatException("Nombre de points données insuffisants");
 
-		idx = 0;
 		for (int i = 0; i < this.nbFaces; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
-			if (idx > this.nbFaces)
-				throw new WrongFileFormatException("Trop de faces données par rapport à ce que l'entête précise");
 			int nbVertex = Integer.parseInt(splitted[0]);
 			if (splitted.length - 1 == nbVertex) {
 				List<Point> plist = new ArrayList<Point>();
 				for (int j = 0; j < nbVertex; j++)
-					plist.add(this.repere.getPointsList().get(Integer.parseInt(splitted[j + 1])));
+					try {
+						plist.add(this.repere.getPointsList().get(Integer.parseInt(splitted[j + 1])));
+					} catch (Exception e) {
+						throw new WrongFileFormatException(
+								"Mauvais format de face donné | Face n°" + (i + 1) + ", Point n°" + (j + 1));
+					}
 				this.repere.getFacesList().add(new Face(plist));
-			}
+			} else
+				throw new WrongFileFormatException("Mauvais format de face donné | Face n°" + (i + 1));
 		}
-		if (idx < this.nbFaces)
-			throw new WrongFileFormatException("Nombre de faces données insuffisants");
 	}
 }

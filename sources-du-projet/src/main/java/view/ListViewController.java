@@ -177,7 +177,7 @@ public class ListViewController {
 						stageError.initModality(Modality.APPLICATION_MODAL);
 						stageError.setScene(scene);
 						stageError.setResizable(false);
-						stageError.setTitle("New SubTask");
+						stageError.setTitle("ERREUR");
 						stageError.show();
 					} catch (IOException e1) {
 						e1.printStackTrace();
