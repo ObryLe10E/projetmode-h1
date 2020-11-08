@@ -251,7 +251,7 @@ public class ListViewController {
 	}
 
 	/**
-	 * Cellule de la liste des modÃ¨les
+	 * Cellule de la liste des modèles
 	 */
 	class Cell extends ListCell<File> {
 		HBox hbox = new HBox();
@@ -287,6 +287,8 @@ public class ListViewController {
 				setFont(new Font(20.0));
 				setGraphic(hbox);
 				setTextFill(Color.WHITE);
+			}else {
+				this.setStyle("-fx-background-color: transparent");
 			}
 		}
 	}

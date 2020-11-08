@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class Face {
 	private List<Point> points;
-	// public static final int TAILLE = 4;
 
 	/**
 	 * Constructeur d'une Face à partir d'une liste de points définis

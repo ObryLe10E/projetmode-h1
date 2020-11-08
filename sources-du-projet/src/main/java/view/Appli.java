@@ -14,7 +14,7 @@ public class Appli extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("3D Generation Application");
+        stage.setTitle("PlyReader");
         stage.setResizable(false);
         stage.show();
     }
