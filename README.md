@@ -13,11 +13,13 @@ java -jar appliH1.jar
 ## Utilisation
 
 ### Choix de bibliothèque
-L'application se lance avec une bibliothèque de fichiers .ply par défaut, mais il est possible d'en ouvrir une personnelle depuis l'application. Il suffit d'ouvrir le menu et de sélectionner les fichiers voulus. Ils s'affichent alors sur la gauche de l'écran, en vert s'ils sont valides et utilisables par l'application, en rouge s'il sont d'une quelconque façon invalides à la lecture.
+Cliquer sur Fichier > Open. Sélectionner les fichiers voulus. Ils s'affichent alors sur la gauche de l'écran, en vert s'ils sont valides et utilisables par l'application, en rouge s'il sont d'une quelconque façon invalides à la lecture.
 
 ### Affichage d'un objet 3D
 Il suffit de cliquer sur le modèle voulu dans la bibliothèque, s'il erreur il y a, elle sera affichée dans une fenêtre modale à l'originale (nécessaire de la fermer avant de continuer).
 L'objet s'affiche alors au centre de l'écran.
+
+Note : L'application se lance d'ordinaire avec une bibliothèque par défaut (mise en commentaire, visible sur github), cependant l'archive Jar ne permettait pas d'inclure dans notre code des chemins, relatifs ou non. Le lancement via l'archive Jar ne permet donc pas d'inclure de bibliothèque par défaut. Il suffit de décommenter les lignes 96 et 97 de ListViewController et lancer le projet via Maven pour l'avoir.
 
 ### Manipulation d'un objet 3D
 - Il est possible de déplacer l'objet sur l'écran en utilisant les boutons ↑↓→← sur la droite de l'écran.
