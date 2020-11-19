@@ -79,6 +79,10 @@ public class ListViewController {
 	private Label nbFacesLabel;
 	@FXML
 	private Label authorLabel;
+	@FXML
+	private Button help;
+	@FXML
+	private Button info;
 
 	private Repere repere;
 
@@ -103,6 +107,12 @@ public class ListViewController {
 		this.rotate();
 		this.setDefaultsColors();
 		this.setStrokeButtons();
+		help.setOnAction(e->{
+			afficherAide();
+		});
+		info.setOnAction(e->{
+			afficherInfo();
+		});
 	}
 
 	/**
@@ -374,5 +384,35 @@ public class ListViewController {
 			this.repere.rotateZ((Double) n - (Double) old);
 			this.renderModel();
 		});
+	}
+	private void afficherAide() {
+		Stage stageHelp = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("aide.fxml"));
+		Pane root;
+		try {
+			root = loader.load();
+			Scene scene = new Scene(root);
+			HelpController controller = loader.<HelpController>getController();
+			stageHelp.setScene(scene);
+			stageHelp.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void afficherInfo() {
+		Stage stageInfo = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("info.fxml"));
+		Pane root;
+		try {
+			root = loader.load();
+			Scene scene = new Scene(root);
+			InfoController controller = loader.<InfoController>getController();
+			stageInfo.setScene(scene);
+			stageInfo.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea layoutX="19.0" layoutY="17.0" prefHeight="447.0" prefWidth="1005.0" text="## Auteurs et contributions&#10;### Groupe H1 : DUHEM Alexis, DELOBEL Jeremy, OBRY Thomas, BONNET Tanguy&#10;- Alexis : interfaces, FXML et Controllers Java&#10;- Jeremy : lecture des fichiers, gestion des erreurs, documentation Java&#10;- Thomas : lecture des fichiers, gestion des erreurs, documentation Java, tests unitaires&#10;- Tanguy : partie interactive, ouverture de fichiers, calculs matriciels centrés sur l'objet&#10;&#10;De plus, chacun a travaillé sur une partie des calculs matriciels et la manipulation des objets 3D (translations, rotations, homothéties, zooms...).&#10;&#10;Nous avons choisi de travailler en pair programming à cause de la distance : l'un travaillait directement sur le code en partageant son écran, et l'autre travaillait à partir du partage d'écran, faisait des recherches, aidait à la conception... &#10;Ce qui peut expliquer le faible nombre de commits et la contribution d'apparence faible de Jeremy et Tanguy, car dans notre cas c'était Thomas et Alexis qui partageaient leur écran, et donc qui effectuaient la plupart des commits.&#10;&#10;Cependant chacun a autant contribué à l'avancement du projet, qui a débuté assez tard, car Thomas et Alexis faisaient face à des problèmes liés à Gitlab, &#10;il nous a donc fallu tout reconfigurer sur Github, et nous avons également eu des problèmes de configuration de Maven, notamment dûs à la distance." />
+   </children>
+</Pane>
