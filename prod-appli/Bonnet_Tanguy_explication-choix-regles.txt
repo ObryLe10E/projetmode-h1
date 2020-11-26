@@ -1,0 +1,9 @@
+Empty... : je l'ai utilisé car cela nous permet de voir les méthodes qui sont inutiles
+LawOfDemeter : permet de mieux se reperer dans le codes et rajoute de l'optimisation
+ncssCount : pour que l'on soit sur de pas mettre des méthode dans les mauvaise classe vaut mieux faire des petites classes et pareil dans les méthodes
+ClassNamingConvention : et les autres permettes de rester dans les normes et toujours de mieux se reperer dans notres codes
+CompareObjectsWithEquals : une erreur car lorsque on utilise == ca sera pour comparer des références et non les objets
+
+
+CommentRequired : pas besoin car la java doc est bien présente.
+la regle pour juste 1 return dans une méthode on ne la met pas car on l'utilise une fois 
