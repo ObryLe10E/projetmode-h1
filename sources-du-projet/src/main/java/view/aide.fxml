@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright (c) 2017, Gluon and/or its affiliates.
+    All rights reserved. Use is subject to license terms.
+
+    This file is available and licensed under the following license:
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the distribution.
+   - Neither the name of Oracle Corporation and Gluon nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="462.0" prefWidth="1353.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea editable="false" layoutX="14.0" layoutY="66.0" prefHeight="321.0" prefWidth="1332.0" text="Utilisation&#10;&#10;&gt;Choix de bibliothèque&#10;Cliquer sur Fichier &gt; Open. Sélectionner les fichiers voulus. Ils s'affichent alors sur la gauche de l'écran, en vert s'ils sont valides et utilisables par l'application, en rouge s'il sont d'une quelconque façon invalides à la lecture.&#10;&#10;&gt;Note : &#10;L'application se lance d'ordinaire avec une bibliothèque par défaut (mise en commentaire, visible sur github), cependant l'archive Jar ne permettait pas d'inclure dans notre code des chemins, relatifs ou non.&#10; Le lancement via l'archive Jar ne permet donc pas d'inclure de bibliothèque par défaut. Il suffit de décommenter les lignes 96 et 97 de ListViewController et lancer le projet via Maven pour l'avoir.&#10;&#10;&gt; Affichage d'un objet 3D&#10;Il suffit de cliquer sur le modèle voulu dans la bibliothèque, s'il erreur il y a, elle sera affichée dans une fenêtre modale à l'originale (nécessaire de la fermer avant de continuer).&#10;L'objet s'affiche alors au centre de l'écran.&#10;&#10;&gt;Manipulation d'un objet 3D&#10;- Il est possible de déplacer l'objet sur l'écran en utilisant les boutons ↑↓→← sur la droite de l'écran.&#10;- Le zoom et le dézoom sur l'objet se font avec la molette de la souris.&#10;- Les rotations de l'objet peuvent se faire soit avec les sliders présents sur la droite, soit avec les touches X, Y et Z du clavier, &#10;   qui effectuent respectivement une rotation d'un angle fixe sur les axes horizontaux, verticaux et en profondeur.&#10;&#10;" />
+   </children>
+</Pane>
