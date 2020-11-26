@@ -1,0 +1,35 @@
+**La liste des 5 règles PMD qui posent actuellement problème dans mon projet Modélisation mais que je n'ai pas choisi
+
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        --> Ne semble pas important, les noms de variables tampon ne sont pas forcément importantes.
+
+    <rule ref="category/java/documentation.xml/CommentRequired">
+        --> Certaine methode ne necessite pas de commentaire car elles sont explicites.
+
+    <rule ref="category/java/codestyle.xml/OnlyOneReturn"/>
+        --> Ne me semble pas gênant pour l'éfficacité du code.
+        
+    <rule ref="category/java/documentation.xml/CommentSize">
+        --> Je pense qu'un commentaire si un commentaire est long c'est qu'il est necessaire a la comprehension du code et qu'il n'y a pas besoin de taille maximum.
+
+    <rule ref="category/java/performance.xml/AvoidInstantiatingObjectsInLoops"/>
+        --> Je pense qu'il est necessaire dans le projet de creer des nouvelles instances dans des boucles.
+
+
+
+**La liste des 5 règles PMD que j'ai choisi pour moi projet qui me semblent les plus importantes
+
+    <rule ref="category/java/design.xml/LawOfDemeter"/> 
+        --> Utile pour optimiser la hierarchie des classes et ne pas faire d'appels succésifs sur un objet et sur des classes externes
+
+    <rule ref="category/java/bestpractices.xml/MissingOverride"/> 
+        --> Utile pour ne pas oublier d'override une méthode définit plus haut das la hiérarchie des classes
+
+    <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
+        --> Utile pour ne pas oublier de syso de débugage, pas besoin de syso dans le projet.
+
+    <rule ref="category/java/bestpractices.xml/UnusedImports"/>
+        --> Optimiser et réduire l'importation de classes
+
+    <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
+        --> Détruire les variables inutiles.
