@@ -1,0 +1,29 @@
+5 règles PMD qui me semblent les plus importantes pour le projet :
+
+- LawOfDemeter : Le respect de la loi de Demeter fait parti des critères d’évaluations du projet,
+cela me semble donc logique de l'intégrer.
+
+- CommentRequired : La rédaction d'une documentation complète et précise est également demandé pour l’évaluation, de plus elle permet aux différents membres du groupe de mieux comprendre le code.
+
+- ExcessiveMethodLength : Une méthode trop long (ou trop complexe) peut entraver la compréhension du code et le rend beaucoup moins clair.
+
+- NullAssignement : Cette règle permet d’éviter le code smell et peut nous amener à créer des NullObject.
+
+- AvoidCatchingGenericException : Cette règle nous empêche de retourner des exceptions génériques ce qui nous oblige à créer les nôtres (comme demandé)
+et nous permet d’être sur que l’exception déclenchée lors d’un crash vient d’un comportement anormal du code.
+
+5 règles PMD qui posent actuellement problème dans le projet Modélisation non choisies :
+
+- UnusedImports : Étant donne que toute l’équipe code sous Eclipse et que le Warning nous ai déjà signalé, il ne me semble pas utile de la rajouter
+
+- ShortVariable : Nous travaillons sur des points, je trouve qu’il n’y pas plus explicite que x,y,z comme nom de variable pour définir les coordonnées
+
+- CommentSize : Une documentation complète me semble importante, surtout pour certaines classes de notre projet.
+
+- SystemPrintln : Eclipse possède un affichage console quand le programme tourne, on peut donc facilement vérifier qu’il existe ou non des sysout, en plus nous allons quand même garder un Main qui tourne sur terminal pendant un long moment pour tester certaines choses.
+
+- LiteralsFirstInComparaisons : L’outil de débogage d’Eclipse permet de cibler ce cas assez facilement, mais cette règle reste utile.
+
+
+
+
