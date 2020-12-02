@@ -1,9 +1,11 @@
 package view;
 
+import java.awt.font.GraphicAttribute;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -27,10 +31,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.stage.FileChooser.ExtensionFilter;
 import modele.Face;
 import modele.Point;
 import modele.Reader;
@@ -43,6 +47,8 @@ public class ListViewController {
 	private ListView<File> list;
 	@FXML
 	private Group affichage;
+	@FXML
+	private Canvas affichage2;
 	@FXML
 	private Button transMinusY;
 	@FXML
@@ -96,7 +102,7 @@ public class ListViewController {
 	 * bibliothèque par défaut
 	 */
 	public void initialize() {
-		affichage.setManaged(false);
+		affichage2.setManaged(false);
 		//Directory dir = new Directory("src/main/resources/fichiers/");
 		//list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
@@ -232,30 +238,32 @@ public class ListViewController {
 	 * arêtes
 	 */
 	public void renderModel() {
-		affichage.getChildren().clear();
 		this.repere.sortFaces();
-		for (Face face : this.repere.getFacesList()) {
-			List<Point> list = face.getPoints();
-			List<Double> listPoints = new ArrayList<>();
-			for (Point p : list) {
-				listPoints.add(p.getX());
-				listPoints.add(p.getY());
-			}
-			Polygon polygon = new Polygon();
-			polygon.getPoints().addAll(listPoints); //methode délégué addall (cleancode)
-			if (this.filDeFer.isSelected())
-				polygon.setFill(Color.TRANSPARENT);
-			else
-				polygon.setFill(fillColor.getValue());
-			if (this.afficherFils.isSelected()) {
-				polygon.setStroke(Color.TRANSPARENT);
-				polygon.setStrokeWidth(0.0);
-			} else {
-				polygon.setStroke(strokeColor.getValue());
-				polygon.setStrokeWidth(0.5);
-			}
-			affichage.getChildren().addAll(polygon);
+		redraw();
+		GraphicsContext gc = affichage2.getGraphicsContext2D();
+		if (this.filDeFer.isSelected())
+			gc.setFill(Color.TRANSPARENT);
+		else
+			gc.setFill(fillColor.getValue());
+		
+		if (this.afficherFils.isSelected()) {
+			gc.setStroke(Color.TRANSPARENT);
+			//gc.setStrokeWidth(0.0);
+		} else {
+			gc.setStroke(strokeColor.getValue());
+			//gc.setStrokeWidth(0.5);
 		}
+		for (Face face : this.repere.getFacesList()) {
+			double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
+			double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
+			
+			affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
+			affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
+		}
+	}
+	
+	public void redraw() {
+		affichage2.getGraphicsContext2D().clearRect(0, 0, affichage2.getWidth(), affichage2.getHeight());
 	}
 
 	/**
@@ -363,7 +371,7 @@ public class ListViewController {
 	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
 	 */
 	public void rotate() {
-		vb.setOnKeyReleased(e -> {
+		vb.setOnKeyPressed(e -> {
 		    System.out.println("key");
 			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
