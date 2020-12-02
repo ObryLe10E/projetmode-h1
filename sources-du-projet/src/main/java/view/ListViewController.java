@@ -242,7 +242,7 @@ public class ListViewController {
 				listPoints.add(p.getY());
 			}
 			Polygon polygon = new Polygon();
-			polygon.getPoints().addAll(listPoints);
+			polygon.getPoints().addAll(listPoints); //methode délégué addall (cleancode)
 			if (this.filDeFer.isSelected())
 				polygon.setFill(Color.TRANSPARENT);
 			else
@@ -363,8 +363,9 @@ public class ListViewController {
 	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
 	 */
 	public void rotate() {
-		vb.setOnKeyPressed(e -> {
-			if (e.getCode().equals(KeyCode.Z))
+		vb.setOnKeyReleased(e -> {
+		    System.out.println("key");
+			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
 				this.repere.rotateY(Math.PI / 8);
@@ -373,6 +374,7 @@ public class ListViewController {
 			this.renderModel();
 		});
 		sliderX.valueProperty().addListener((obs, old, n) -> {
+			System.out.println("slider");
 			this.repere.rotateX((Double) n - (Double) old);
 			this.renderModel();
 		});

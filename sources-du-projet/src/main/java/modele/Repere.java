@@ -1,6 +1,8 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -186,9 +188,11 @@ public class Repere {
 
 	/**
 	 * Trie les faces du repère selon leur coordonée Z moyenne
+	 * voir si on peut utiliser list.sort en implémentant comparable/comparator
 	 */
 	public void sortFaces() {
-		int n = facesList.size();
+		Collections.sort(facesList,new FaceComparator());
+		/*int n = facesList.size();
 		for (int i = 1; i < n; ++i) {
 			Face key = facesList.get(i);
 			int j = i - 1;
@@ -197,6 +201,6 @@ public class Repere {
 				j = j - 1;
 			}
 			facesList.set(j + 1, key);
-		}
+		}*/
 	}
 }
