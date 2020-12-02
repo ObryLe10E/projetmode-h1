@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import exceptions.WrongFileFormatException;
@@ -60,14 +61,23 @@ public class Reader {
 			System.out.println("Fichier introuvable");
 		}
 	}
-
-	/**
-	 * 
-	 * Takes a {@link String} <b>path</b> and invoke {@link #Reader(File)} creating
-	 * a new {@link File} from the specified <b>path</b>
-	 */
-	public Reader(String path) throws IOException, WrongFileFormatException {
-		this(new File(path));
+	
+	public Reader(String f) throws IOException, WrongFileFormatException {
+		if (f == null)
+			throw new WrongFileFormatException("Fichier inexistant");
+		this.repere = new Repere();
+		try {
+			reader = new BufferedReader(new StringReader(f));
+			String line = reader.readLine();
+			if (line == null)
+				throw new WrongFileFormatException("Fichier vide");
+			if (!line.equals("ply")) {
+				throw new WrongFileFormatException("Mauvais format de fichier : non \"ply\"");
+			}
+			this.propertySearch();
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichier introuvable");
+		}
 	}
 
 	public int getNbPoints() {
@@ -131,7 +141,7 @@ public class Reader {
 	public void propertySearch() throws IOException, WrongFileFormatException {
 		if (!this.headerCheck())
 			return;
-
+		
 		for (int i = 0; i < this.nbPoints; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
@@ -141,10 +151,10 @@ public class Reader {
 			try {
 				p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
 						Double.parseDouble(splitted[2]));
+				this.repere.addPoint(p);
 			} catch (Exception e) {
 				throw new WrongFileFormatException("Mauvais format de point donné | Point n°" + (i + 1));
 			}
-			this.repere.getPointsList().add(p);
 		}
 
 		for (int i = 0; i < this.nbFaces; i++) {
@@ -155,12 +165,12 @@ public class Reader {
 				List<Point> plist = new ArrayList<Point>();
 				for (int j = 0; j < nbVertex; j++)
 					try {
-						plist.add(this.repere.getPointsList().get(Integer.parseInt(splitted[j + 1])));
+						plist.add(repere.getPoint(Integer.parseInt(splitted[j + 1])));
+						this.repere.addFace(new Face(plist));
 					} catch (Exception e) {
 						throw new WrongFileFormatException(
 								"Mauvais format de face donné | Face n°" + (i + 1) + ", Point n°" + (j + 1));
 					}
-				this.repere.getFacesList().add(new Face(plist));
 			} else
 				throw new WrongFileFormatException("Mauvais format de face donné | Face n°" + (i + 1));
 		}

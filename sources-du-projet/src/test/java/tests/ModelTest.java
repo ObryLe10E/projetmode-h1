@@ -1,22 +1,33 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import modele.Face;
-import modele.Point;
-import modele.Repere;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
+
+import exceptions.WrongFileFormatException;
+import modele.Face;
+import modele.Point;
+import modele.Reader;
+import modele.Repere;
 
 class ModelTest {
 	private Point point;
 	private Face face;
 	private Repere repere;
-	// private Reader reader;
+	private Reader reader;
 
+	@SuppressWarnings("deprecation")
+	@Rule
+    public ExpectedException thrown = ExpectedException.none();
+	
 	@BeforeEach
 	public void init() {
 		this.point = new Point(3.0, 2.0, 5.0);
@@ -30,12 +41,6 @@ class ModelTest {
 		List<Face> faceList = new ArrayList<Face>();
 		faceList.add(this.face);
 		this.repere = new Repere(pointsList, faceList);
-
-		// try {
-		// this.reader = new Reader("../resources/plyTest.ply");
-		// }catch(Exception e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	@AfterEach
@@ -76,6 +81,23 @@ class ModelTest {
 		assertEquals(9.0, this.repere.getPointsList().get(0).getX());
 		assertEquals(6.0, this.repere.getPointsList().get(0).getY());
 		assertEquals(15.0, this.repere.getPointsList().get(0).getZ());
+	}
+	
+	@Test
+	public void testInitReader() {
+		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader(""));
+		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader("ply\n" + 
+				"format ascii 1.0\n" + 
+				"element vertex 2\n" + 
+				"property float x\n" + 
+				"property float y\n" + 
+				"property float z\n" + 
+				"element face 1\n" + 
+				"property list uchar int vertex_index\n" + 
+				"end_header\n" + 
+				"0 0 \n" + 
+				"0 0 100\n" + 
+				"4 0 1 0 1"));
 	}
 
 	@Test

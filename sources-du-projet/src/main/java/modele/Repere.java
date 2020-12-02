@@ -49,6 +49,36 @@ public class Repere {
 	public String toString() {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
 	}
+	
+	public boolean addPoint(Point p) {
+		if(p != null && !pointsList.contains(p)) {
+			this.pointsList.add(p);
+			return true;
+		}
+		return false;
+	}
+	
+	public Point getPoint(int idx) {
+		Point p = this.pointsList.get(idx);
+		if(p != null) 
+			return p;
+		return null;
+	}
+	
+	public boolean addFace(Face f) {
+		if(f != null && !facesList.contains(f)) {
+			this.facesList.add(f);
+			return true;
+		}
+		return false;
+	}
+	
+	public Face getFace(int idx) {
+		Face f = this.facesList.get(idx);
+		if(f != null) 
+			return f;
+		return null;
+	}
 
 	/**
 	 * Trouve le point le plus élevé sur l'axe des abscisses X
