@@ -2,7 +2,6 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -125,10 +124,7 @@ public class Repere {
 	 *               repère
 	 */
 	public void translation(double ratioX, double ratioY) {
-		for (Point p : this.pointsList) {
-			p.setX(p.getX() + ratioX);
-			p.setY(p.getY() + ratioY);
-		}
+		for (Point p : this.pointsList) p.translation(new Vecteur(ratioX,ratioY,0));
 	}
 
 	/**
@@ -138,10 +134,11 @@ public class Repere {
 	 */
 	public void rotateX(Double grad) {
 		for (Point p : pointsList) {
-			Double y = p.getY();
-			Double z = p.getZ();
-			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
-			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
+			p.rotationX(grad);
+//			Double y = p.getY();
+//			Double z = p.getZ();
+//			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
+//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
 		}
 	}
 
@@ -152,10 +149,11 @@ public class Repere {
 	 */
 	public void rotateY(Double grad) {
 		for (Point p : pointsList) {
-			Double x = p.getX();
-			Double z = p.getZ();
-			p.setX(Math.cos(grad) * x - Math.sin(grad) * z);
-			p.setZ(Math.cos(grad) * z + Math.sin(grad) * x);
+			p.rotationY(grad);
+//			Double x = p.getX();
+//			Double z = p.getZ();
+//			p.setX(Math.cos(grad) * x - Math.sin(grad) * z);
+//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * x);
 		}
 	}
 
@@ -166,10 +164,11 @@ public class Repere {
 	 */
 	public void rotateZ(Double grad) {
 		for (Point p : pointsList) {
-			Double x = p.getX();
-			Double y = p.getY();
-			p.setX(Math.cos(grad) * x - Math.sin(grad) * y);
-			p.setY(Math.cos(grad) * y + Math.sin(grad) * x);
+			p.rotationZ(grad);
+//			Double x = p.getX();
+//			Double y = p.getY();
+//			p.setX(Math.cos(grad) * x - Math.sin(grad) * y);
+//			p.setY(Math.cos(grad) * y + Math.sin(grad) * x);
 		}
 	}
 
@@ -179,11 +178,7 @@ public class Repere {
 	 * @param scale Ratio à partir duquel calculer la matrice d'homothétie
 	 */
 	public void scaling(double scale) {
-		for (Point p : this.pointsList) {
-			p.setX(p.getX() * scale);
-			p.setY(p.getY() * scale);
-			p.setZ(p.getZ() * scale);
-		}
+		for (Point p : this.pointsList) p.homothetie(scale);
 	}
 
 	/**

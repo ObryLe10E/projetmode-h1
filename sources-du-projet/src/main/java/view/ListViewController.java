@@ -1,9 +1,7 @@
 package view;
 
-import java.awt.font.GraphicAttribute;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ListChangeListener;
@@ -28,7 +26,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -36,7 +33,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modele.Face;
-import modele.Point;
 import modele.Reader;
 import modele.Repere;
 
@@ -395,6 +391,8 @@ public class ListViewController {
 			this.renderModel();
 		});
 	}
+	
+	@SuppressWarnings("unused")
 	private void afficherAide() {
 		Stage stageHelp = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -410,6 +408,8 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 	}
+	
+	@SuppressWarnings("unused")
 	private void afficherInfo() {
 		Stage stageInfo = new Stage();
 		FXMLLoader loader = new FXMLLoader();

@@ -16,6 +16,6 @@ public class VecteurTest {
 	public void produitVectorielTest() {
 		Vecteur v = new Vecteur(1, 1, 1);
 		Vecteur v2 = new Vecteur(1,2,1);
-		assertArrayEquals(new Vecteur(-1,0,1).getMatrice(),v.produitVectoriel(v2).getMatrice());
+		assertArrayEquals(new Vecteur(-1,0,1).getMatrice().getTableau(),v.produitVectoriel(v2).getMatrice().getTableau());
 	}
 }

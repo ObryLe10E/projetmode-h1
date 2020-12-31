@@ -6,7 +6,8 @@ public class Matrice {
 	public Matrice(double [][] m) {
 		this.matrice = m;
 	}
-	public double[][] getMatrice() {
+	
+	public double[][] getTableau() {
 		return this.matrice;
 	}
 	
@@ -23,8 +24,8 @@ public class Matrice {
 	}
 	
 	public Matrice multiply(Matrice m) {
-		double [][] matA = this.getMatrice();
-		double [][] matB = m.getMatrice();
+		double [][] matA = this.getTableau();
+		double [][] matB = m.getTableau();
 		int linesInA = this.getLineSize();
 		int columnsInA = this.getColumnSize();
 		int columnsInB = m.getColumnSize();
@@ -35,10 +36,47 @@ public class Matrice {
 					result[i][j] = result[i][j] + matA[i][k] * matB[k][j];
 				}
 			}
-			
 		}
 		return new Matrice(result);
 	}
 	
+	public void translation(Vecteur v) {
+		Matrice matriceTranslation = new Matrice(new double[][] { { 1, 0, 0, v.getX() }, 
+																  { 0, 1, 0, v.getY() },
+																  { 0, 0, 1, v.getZ() }, 
+																  { 0, 0, 0, 1 },});
+		this.matrice = matriceTranslation.multiply(this).getTableau();
+	}
 	
+	public void homothetie(double ratio) {
+		Matrice matriceHomothetie = new Matrice(new double[][] { { ratio, 0, 0, 0 }, 
+														   		 { 0, ratio, 0, 0 }, 
+														   		 { 0, 0, ratio, 0 },
+														   		 { 0, 0, 0, 1 },});
+		this.matrice = matriceHomothetie.multiply(this).getTableau();
+	}
+	
+	public void rotationX(double angle) {
+		Matrice matriceRotation = new Matrice(new double[][] { { 1, 0, 0, 0 }, 
+														   	   { 0, Math.cos(angle), -Math.sin(angle), 0 }, 
+														       { 0, Math.sin(angle), Math.cos(angle), 0 },
+														       { 0, 0, 0, 1 },});
+		this.matrice = matriceRotation.multiply(this).getTableau();
+	}
+	
+	public void rotationY(double angle) {
+		Matrice matriceRotation = new Matrice(new double[][] { {  Math.cos(angle), 0, -Math.sin(angle), 0 }, 
+														   	   { 0, 1, 0, 0 }, 
+														       { Math.sin(angle), 0, Math.cos(angle), 0 },
+														       { 0, 0, 0, 1 },});
+		this.matrice = matriceRotation.multiply(this).getTableau();
+	}
+	
+	public void rotationZ(double angle) {
+		Matrice matriceRotation = new Matrice(new double[][] { { Math.cos(angle), -Math.sin(angle), 0, 0 }, 
+														   	   { Math.sin(angle), Math.cos(angle), 0, 0 }, 
+														       { 0, Math.sin(angle), 1, 0 },
+														       { 0, 0, 0, 1 },});
+		this.matrice = matriceRotation.multiply(this).getTableau();
+	}
 }

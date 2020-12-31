@@ -3,15 +3,16 @@ package modele;
 public class Vecteur extends Point {
 	
 	public Vecteur() {
-		super();
+		this.matrice = new Matrice(new double[][] { { 0 }, { 0 }, { 0 }, { 0.0 } });
 	}
 	
 	public Vecteur(double x, double y, double z) {
-		super(x,y,z);
+		this.matrice = new Matrice(new double[][] { { x }, { y }, { z }, { 0.0 } });
 	}
 	
-	public Vecteur(Point a, Point b) { // Bien joué 
-		super(b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ());
+	public Vecteur(Point a, Point b) {
+		this.matrice = new Matrice(new double[][] { { b.getX() - a.getX() }, { b.getY() - a.getY() }, { b.getZ() - a.getZ() }, { 0.0 } });
+//		super(b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ());
 	}
 	
 	public Vecteur produitVectoriel(Point p) {
@@ -32,7 +33,7 @@ public class Vecteur extends Point {
 		
 	}
 	
-	public double [] getMatrice() {
-		return new double [] {this.getX(),this.getY(),this.getZ(),1};
+	public Matrice getMatrice() {
+		return new Matrice(new double[][] { { getX() }, { getY() }, { getZ() }, { 0.0 } });
 	}
 }
