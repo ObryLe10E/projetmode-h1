@@ -367,19 +367,20 @@ public class ListViewController {
 	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
 	 */
 	public void rotate() {
-		vb.setOnKeyPressed(e -> {
+
+		vb.setOnKeyPressed(e-> {
 		    System.out.println("key");
 			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
 				this.repere.rotateY(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.X))
-				this.repere.rotateX(Math.PI / 8);
+				this.repere.rotateX((Math.PI / 8));
 			this.renderModel();
 		});
 		sliderX.valueProperty().addListener((obs, old, n) -> {
 			System.out.println("slider");
-			this.repere.rotateX((Double) n - (Double) old);
+			this.repere.rotateX(((Double) n - (Double) old));
 			this.renderModel();
 		});
 		sliderY.valueProperty().addListener((obs, old, n) -> {

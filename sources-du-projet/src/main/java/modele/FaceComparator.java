@@ -6,7 +6,7 @@ public class FaceComparator implements Comparator<Face>{
 
 	@Override
 	public int compare(Face arg0, Face arg1) {
-		return Double.compare(arg0.average(), arg1.average());
+		return Double.compare(arg0.averageZ(), arg1.averageZ());
 	}
 
 }

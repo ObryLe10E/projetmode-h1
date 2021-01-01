@@ -64,7 +64,21 @@ public class Face {
 	 * 
 	 * @return Z moyen de la Face
 	 */
-	public double average() {
+	public double averageZ() {
+		double avg = 0.0;
+		for (Point p : points) {
+			avg += p.getZ();
+		}
+		return avg / points.size();
+	}
+	public double averageX() {
+		double avg = 0.0;
+		for (Point p : points) {
+			avg += p.getX();
+		}
+		return avg / points.size();
+	}
+	public double averageY() {
 		double avg = 0.0;
 		for (Point p : points) {
 			avg += p.getZ();

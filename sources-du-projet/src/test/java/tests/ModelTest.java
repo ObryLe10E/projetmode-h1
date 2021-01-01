@@ -60,7 +60,7 @@ class ModelTest {
 
 	@Test
 	public void testFaceAverageZ() {
-		assertEquals(5.0, this.face.average());
+		assertEquals(5.0, this.face.averageZ());
 	}
 
 	@Test

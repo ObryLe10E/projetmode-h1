@@ -135,6 +135,7 @@ public class Repere {
 	public void rotateX(Double grad) {
 		for (Point p : pointsList) {
 			p.rotationX(grad);
+		
 //			Double y = p.getY();
 //			Double z = p.getZ();
 //			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
@@ -178,7 +179,9 @@ public class Repere {
 	 * @param scale Ratio à partir duquel calculer la matrice d'homothétie
 	 */
 	public void scaling(double scale) {
+		this.translation(-this.getCentreX(), -this.getCentreY());
 		for (Point p : this.pointsList) p.homothetie(scale);
+		this.translation(this.getCentreX(), this.getCentreY());
 	}
 
 	/**
