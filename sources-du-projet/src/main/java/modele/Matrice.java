@@ -39,7 +39,7 @@ public class Matrice {
 		}
 		return new Matrice(result);
 	}
-	
+	 
 	public void translation(Vecteur v) {
 		Matrice matriceTranslation = new Matrice(new double[][] { { 1, 0, 0, v.getX() }, 
 																  { 0, 1, 0, v.getY() },
@@ -75,7 +75,7 @@ public class Matrice {
 	public void rotationZ(double angle) {
 		Matrice matriceRotation = new Matrice(new double[][] { { Math.cos(angle), -Math.sin(angle), 0, 0 }, 
 														   	   { Math.sin(angle), Math.cos(angle), 0, 0 }, 
-														       { 0, Math.sin(angle), 1, 0 },
+														       { 0, 0, 1, 0 },
 														       { 0, 0, 0, 1 },});
 		this.matrice = matriceRotation.multiply(this).getTableau();
 	}

@@ -10,6 +10,8 @@ import java.util.List;
 public class Repere {
 	private List<Point> pointsList;
 	private List<Face> facesList;
+	private double xOffSet =0.0;
+	private double yOffSet =0.0;
 
 	/**
 	 * Constructeur d'un repère à partir de points et de faces définis
@@ -124,15 +126,47 @@ public class Repere {
 	 *               repère
 	 */
 	public void translation(double ratioX, double ratioY) {
-		for (Point p : this.pointsList) p.translation(new Vecteur(ratioX,ratioY,0));
+		System.out.println(this.xOffSet + "    "+this.yOffSet );
+		this.xOffSet += ratioX;
+		this.yOffSet += ratioY;
+		this.translation2(ratioX, ratioY, 0);
+	}
+	public void translation2(double ratioX, double ratioY, double ratioZ) {
+		for (Point p : this.pointsList) 
+			p.translation(new Vecteur(ratioX,ratioY,ratioZ));
 	}
 
+	public double averageZ() {
+		double avg = 0.0;
+		for (Point p : this.pointsList) {
+			avg += p.getZ();
+		}
+		return avg / this.pointsList.size();
+	}
+	public double averageX() {
+		double avg = 0.0;
+		for (Point p :this.pointsList) {
+			avg += p.getX();
+		}
+		return avg / this.pointsList.size();
+	}
+	public double averageY() {
+		double avg = 0.0;
+		for (Point p : this.pointsList) {
+			avg += p.getY();
+		}
+		return avg / this.pointsList.size();
+	}
+	public void center() {
+		this.translation2(-this.averageX(), -this.averageY(), -this.averageZ()); 
+	}
 	/**
 	 * Effectue une rotation du modèle autour de l'axe des abscisses X
 	 * 
 	 * @param grad Angle autour duquel calculer la matrice de rotation
-	 */
+	 */	
 	public void rotateX(Double grad) {
+		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
 		for (Point p : pointsList) {
 			p.rotationX(grad);
 		
@@ -141,6 +175,7 @@ public class Repere {
 //			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
 //			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
 		}
+		this.translation2(this.xOffSet, this.yOffSet, 0.0);
 	}
 
 	/**
@@ -148,14 +183,22 @@ public class Repere {
 	 * 
 	 * @param grad Angle autour duquel calculer la matrice de rotation
 	 */
+	
 	public void rotateY(Double grad) {
+		System.out.println(this.xOffSet + "    "+this.yOffSet );
+		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
+
 		for (Point p : pointsList) {
 			p.rotationY(grad);
-//			Double x = p.getX();
+			
+		
+//			Double y = p.getY();
 //			Double z = p.getZ();
-//			p.setX(Math.cos(grad) * x - Math.sin(grad) * z);
-//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * x);
+//			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
+//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
 		}
+		this.translation2(this.xOffSet, this.yOffSet, 0.0);
+
 	}
 
 	/**
@@ -164,6 +207,7 @@ public class Repere {
 	 * @param grad Angle autour duquel calculer la matrice de rotation
 	 */
 	public void rotateZ(Double grad) {
+		this.translation2(-this.xOffSet,-this.yOffSet , 0.0);
 		for (Point p : pointsList) {
 			p.rotationZ(grad);
 //			Double x = p.getX();
@@ -171,6 +215,7 @@ public class Repere {
 //			p.setX(Math.cos(grad) * x - Math.sin(grad) * y);
 //			p.setY(Math.cos(grad) * y + Math.sin(grad) * x);
 		}
+		this.translation2(this.xOffSet,this.yOffSet , 0.0);
 	}
 
 	/**
@@ -179,9 +224,9 @@ public class Repere {
 	 * @param scale Ratio à partir duquel calculer la matrice d'homothétie
 	 */
 	public void scaling(double scale) {
-		this.translation(-this.getCentreX(), -this.getCentreY());
+		this.translation2(-this.xOffSet, -this.yOffSet,0);
 		for (Point p : this.pointsList) p.homothetie(scale);
-		this.translation(this.getCentreX(), this.getCentreY());
+		this.translation2(this.xOffSet, this.yOffSet,0);
 	}
 
 	/**

@@ -181,8 +181,7 @@ public class ListViewController {
 							authorLabel.setText(authorLabel.getText() + reader.getAuthor());
 						nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 						nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
-						repere.translation(-repere.getCentreX(), -repere.getCentreY());
-						// centrage de la figure approximatif
+						repere.center();						// centrage de la figure approximatif
 						// repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne
 						// taille de la figure
 						center.setCursor(Cursor.CROSSHAIR);
