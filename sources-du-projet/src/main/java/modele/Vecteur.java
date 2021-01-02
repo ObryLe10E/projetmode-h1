@@ -24,7 +24,7 @@ public class Vecteur extends Point {
 	}
 	
 	public double produitScalaire(Point p) {
-		return this.getX() * p.getX() + this.getY() * p.getY() + this.getZ() + p.getZ();
+		return this.getX() * p.getX() + this.getY() * p.getY() + this.getZ() * p.getZ();
 	}
 	
 	public double normeVectoriel() {
@@ -35,5 +35,13 @@ public class Vecteur extends Point {
 	
 	public Matrice getMatrice() {
 		return new Matrice(new double[][] { { getX() }, { getY() }, { getZ() }, { 0.0 } });
+	}
+	
+	public Vecteur diviser(double d) {
+		double x = this.getX() / d;
+		double y = this.getY() / d;
+		double z = this.getZ() / d;
+		
+		return new Vecteur(x, y, z);
 	}
 }

@@ -8,7 +8,9 @@ import java.util.List;
  */
 public class Face {
 	private List<Point> points;
-
+	private int r;
+	private int g;
+	private int b;
 	/**
 	 * Constructeur d'une Face à partir d'une liste de points définis
 	 * 
@@ -70,5 +72,34 @@ public class Face {
 			avg += p.getZ();
 		}
 		return avg / points.size();
+	}
+
+	public Vecteur getVecteurNormal() {
+
+		if (this.getPoints().size() >= 3) {
+
+			Vecteur ab = new Vecteur(this.getPoints().get(0), this.getPoints().get(1));
+			Vecteur ac = new Vecteur(this.getPoints().get(0), this.getPoints().get(2));
+
+			return ab.produitVectoriel(ac);
+		}
+		return new Vecteur();
+
+	}
+
+	private Vecteur getVecteurNormalUnitaire() {
+		Vecteur v = this.getVecteurNormal();
+		return v.diviser(v.normeVectoriel());
+	}
+
+	private double getEclairage(Vecteur l) {
+
+		return this.getVecteurNormalUnitaire().produitScalaire(l.diviser(l.normeVectoriel()));
+	}
+
+	public int getColor() {
+		Vecteur vecteurEclairage = new Vecteur(0,0,1);
+		int luminosite = (int) (this.getEclairage(vecteurEclairage) * 255);
+		return luminosite;
 	}
 }

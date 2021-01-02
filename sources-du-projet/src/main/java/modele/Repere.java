@@ -127,7 +127,6 @@ public class Repere {
 	 *               repère
 	 */
 	public void translation(double ratioX, double ratioY) {
-		System.out.println(this.xOffSet + "    "+this.yOffSet );
 		this.xOffSet += ratioX;
 		this.yOffSet += ratioY;
 		this.translation2(ratioX, ratioY, 0);
@@ -186,7 +185,6 @@ public class Repere {
 	 */
 	
 	public void rotateY(Double grad) {
-		System.out.println(this.xOffSet + "    "+this.yOffSet );
 		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
 
 		for (Point p : pointsList) {
@@ -225,7 +223,6 @@ public class Repere {
 	 * @param scale Ratio à partir duquel calculer la matrice d'homothétie
 	 */
 	public void scaling(double scale) {
-		System.out.println(scale);
 		this.translation2(-this.xOffSet, -this.yOffSet,0);
 		for (Point p : this.pointsList) p.homothetie(scale);
 		this.translation2(this.xOffSet, this.yOffSet,0);

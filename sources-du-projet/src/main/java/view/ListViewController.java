@@ -35,6 +35,7 @@ import javafx.util.Duration;
 import modele.Face;
 import modele.Reader;
 import modele.Repere;
+import modele.Vecteur;
 
 public class ListViewController {
 	@FXML
@@ -256,11 +257,13 @@ public class ListViewController {
 			//gc.setStrokeWidth(0.5);
 		}
 		for (Face face : this.repere.getFacesList()) {
+			if(face.getColor() >= 0) { 
 			double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
 			double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
-			
+			gc.setFill(Color.rgb(face.getColor(), face.getColor(), face.getColor()));
 			affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
 			affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
+		}
 		}
 	}
 	
