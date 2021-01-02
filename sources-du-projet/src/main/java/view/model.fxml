@@ -13,15 +13,13 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
       <BorderPane prefHeight="899.0" prefWidth="1317.0">
          <top>
@@ -77,9 +75,9 @@
                          </Button>
                      </children>
                   </Pane>
-                  <Slider id="rotationZ" fx:id="sliderZ" layoutX="3.0" layoutY="395.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider id="rotationY" fx:id="sliderY" layoutX="2.0" layoutY="322.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
-                  <Slider id="rotationX" fx:id="sliderX" layoutY="248.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Slider id="rotationZ" fx:id="sliderZ" layoutX="3.0" layoutY="395.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
+                  <Slider id="rotationY" fx:id="sliderY" layoutX="2.0" layoutY="322.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
+                  <Slider id="rotationX" fx:id="sliderX" layoutY="248.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
                   <Text layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
                   <Text layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
                   <Text layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
@@ -124,7 +122,7 @@
                   </Pane>
                   <Button fx:id="help" layoutX="647.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Aide" />
                   <Button fx:id="info" layoutX="647.0" layoutY="122.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="89.0" text="Informations" />
-                  <Button layoutX="426.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
+                  <Button fx:id="posInit" layoutX="426.0" layoutY="123.0" mnemonicParsing="false" onAction="#ajuster" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
                </children>
             </Pane>
          </bottom>

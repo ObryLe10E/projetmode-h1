@@ -85,7 +85,9 @@ public class ListViewController {
 	private Button help;
 	@FXML
 	private Button info;
-
+	@FXML
+	private Button posInit;
+	
 	private Repere repere;
 
 	private static final double RATIOX = 50;
@@ -170,7 +172,7 @@ public class ListViewController {
 			try {
 				if (!list.getItems().isEmpty()) {
 					try {
-						// resetSliders();
+						resetSliders();
 						this.resetLabel();
 						File path = list.getSelectionModel().getSelectedItem().getAbsoluteFile();
 						Reader reader = new Reader(path);
@@ -181,18 +183,16 @@ public class ListViewController {
 							authorLabel.setText(authorLabel.getText() + reader.getAuthor());
 						nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 						nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
-						repere.center();						// centrage de la figure approximatif
-						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2);
-						System.out.println(repere.getMax());
+						center.setCursor(Cursor.CROSSHAIR);
+						repere.center();				
+						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2); // centrage de la figure approximatif
 						while (repere.getMax() < affichage2.getWidth()-50) {
 							repere.scaling(SCALING);
 						}
 						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4) {
 							repere.scaling(UNSCALING);
 						}
-						System.out.println(repere.getMax());
-						center.setCursor(Cursor.CROSSHAIR);
-						renderModel();
+						renderModel();		
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -319,6 +319,23 @@ public class ListViewController {
 		list.getItems().addAll(f);
 	}
 
+	/**
+	 * ajuste le model a la taille de la fenetre
+	 */
+	public void ajuster() {
+		
+	}
+	
+	
+	/**
+	 * remettre les sliders a 180 (au milieu)
+	 */
+	public void resetSliders() {
+		sliderX.setValue(0);
+		sliderY.setValue(0);
+		sliderZ.setValue(0);
+	}
+	
 	/**
 	 * Déplace le modèle vers le bas
 	 */
