@@ -182,8 +182,15 @@ public class ListViewController {
 						nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 						nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
 						repere.center();						// centrage de la figure approximatif
-						// repere.scaling((center.getHeight()/10)/repere.getMax()); mise a la bonne
-						// taille de la figure
+						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2);
+						System.out.println(repere.getMax());
+						while (repere.getMax() < affichage2.getWidth()-50) {
+							repere.scaling(SCALING);
+						}
+						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4) {
+							repere.scaling(UNSCALING);
+						}
+						System.out.println(repere.getMax());
 						center.setCursor(Cursor.CROSSHAIR);
 						renderModel();
 					} catch (IOException e) {

@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class Repere {
 				max = p.getX();
 			}
 			if (p.getY() > max) {
-				max = p.getX();
+				max = p.getY();
 			}
 		}
 		return max;
@@ -224,6 +225,7 @@ public class Repere {
 	 * @param scale Ratio à partir duquel calculer la matrice d'homothétie
 	 */
 	public void scaling(double scale) {
+		System.out.println(scale);
 		this.translation2(-this.xOffSet, -this.yOffSet,0);
 		for (Point p : this.pointsList) p.homothetie(scale);
 		this.translation2(this.xOffSet, this.yOffSet,0);
