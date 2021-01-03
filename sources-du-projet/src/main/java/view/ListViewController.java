@@ -92,6 +92,11 @@ public class ListViewController {
 
 	private Repere repere;
 
+	@FXML
+	private Slider sliderLight;
+	private GraphicsContext gc;
+
+
 	private static final double RATIOX = 50;
 	private static final double RATIOY = 50;
 	private static final double SCALING = 1.10;
@@ -120,7 +125,16 @@ public class ListViewController {
 			afficherInfo();
 		});
 		this.mouseTranslate();
+		gc = affichage2.getGraphicsContext2D();
+		sliderLight.setMax(Math.PI);
+		sliderLight.setMin(-Math.PI);
+		sliderLight.valueProperty().addListener((obs,old,n)->{
+			renderOmbrage(gc, sliderLight.getValue());
+			renderModel();
+		});
+
 	}
+
 
 	/**
 	 * Initialise les boutons permettant de choisir d'afficer ou non les arêtes
@@ -277,7 +291,6 @@ public class ListViewController {
 	public void renderModel() {
 		this.repere.sortFaces();
 		redraw();
-		GraphicsContext gc = affichage2.getGraphicsContext2D();
 		if (this.filDeFer.isSelected())
 			gc.setFill(Color.TRANSPARENT);
 		else
@@ -286,7 +299,7 @@ public class ListViewController {
 			gc.setStroke(Color.TRANSPARENT);
 		else
 			gc.setStroke(strokeColor.getValue());
-		this.renderOmbrage(gc);
+		this.renderOmbrage(gc,0);
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
 			if(face.getColor(1) >= 0) { 
@@ -304,16 +317,17 @@ public class ListViewController {
 		}
 	}
 
-	public void renderOmbrage(GraphicsContext gc) {
-		final Vecteur leftLight = new Vecteur(0, 0, 1.25);
+	public void renderOmbrage(GraphicsContext gc, double grad) {
+		Vecteur light = new Vecteur(0, 0, 1.25);
+		light.rotationY(grad);
 		for (Face face : this.repere.getFacesList()) {
 			int size = face.size();
 			double ombreX [] = new double [face.getPoints().size()];
 			double ombreY [] = new double [face.getPoints().size()];
 			for (int i = 0; i < face.size() ; i++) {
 				Point point = face.get(i);
-				ombreX[i] = (point.getX()  / leftLight.normeVectoriel());
-				ombreY[i]= (point.getY() / leftLight.normeVectoriel());
+				ombreX[i] = (point.getX()  / light.normeVectoriel());
+				ombreY[i]= (point.getY() / light.normeVectoriel());
 			}
 			gc.setFill(Color.rgb(100, 100, 100));
 			gc.setStroke(Color.rgb(100, 100, 100));
