@@ -234,14 +234,16 @@ public class ListViewController {
 			nbFacesLabel.setText("Nombre de faces :");
 		}
 	}
-	
+
 	private boolean drag = false;
 	private double tmpX = 0.0;
 	private double tmpY = 0.0;
+	private double tmpZ = 0.0;
 	private void mouseTranslate() {
 		this.affichage2.setOnMousePressed(e->{
 			tmpX = e.getX();
 			tmpY = e.getY();
+			tmpZ = e.getZ();
 			drag = true;
 		});
 		this.affichage.setOnMouseReleased(e->{
@@ -249,10 +251,20 @@ public class ListViewController {
 		});
 		this.affichage2.setOnMouseDragged(e->{
 			if(drag) {
-				repere.translation(e.getX()-tmpX, e.getY()-tmpY);
-				this.renderModel();
-				tmpX=e.getX();
-				tmpY=e.getY();
+				if(e.isPrimaryButtonDown()) {
+					repere.translation(e.getX()-tmpX, e.getY()-tmpY);
+					this.renderModel();
+					tmpX=e.getX();
+					tmpY=e.getY();
+				}else {
+					repere.rotateX((e.getX()-tmpX)/100);
+					repere.rotateY((e.getY()-tmpY)/100);
+					repere.rotateZ((e.getZ()-tmpZ)/100);
+					this.renderModel();
+					tmpX = e.getX();
+					tmpY = e.getY();
+					tmpZ = e.getZ();
+				}
 			}
 		});
 	}
@@ -309,7 +321,7 @@ public class ListViewController {
 			affichage2.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
 		}
 	}
-	
+
 	public void redraw() {
 		affichage2.getGraphicsContext2D().clearRect(0, 0, affichage2.getWidth(), affichage2.getHeight());
 	}
