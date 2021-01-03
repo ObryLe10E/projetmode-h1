@@ -119,6 +119,7 @@ public class ListViewController {
 		info.setOnAction(e->{
 			afficherInfo();
 		});
+		this.mouseTranslate();
 	}
 
 	/**
@@ -235,6 +236,28 @@ public class ListViewController {
 			nbFacesLabel.setText("Nombre de faces :");
 		}
 	}
+	
+	private boolean drag = false;
+	private double tmpX = 0.0;
+	private double tmpY = 0.0;
+	private void mouseTranslate() {
+		this.affichage2.setOnMousePressed(e->{
+			tmpX = e.getX();
+			tmpY = e.getY();
+			drag = true;
+		});
+		this.affichage.setOnMouseReleased(e->{
+			drag = false;
+		});
+		this.affichage2.setOnMouseDragged(e->{
+			if(drag) {
+				repere.translation(e.getX()-tmpX, e.getY()-tmpY);
+				this.renderModel();
+				tmpX=e.getX();
+				tmpY=e.getY();
+			}
+		});
+	}
 
 	/**
 	 * Réinitialise l'affichage du modèle précédent Trie les faces du modèle selon Z
@@ -259,16 +282,15 @@ public class ListViewController {
 		}
 		this.renderOmbrage(gc);
 		for (Face face : this.repere.getFacesList()) {
-			if(face.getColor() >= 0) { 
-
+			if(face.getColor(1) >= 0) { 
 				double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
 				double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
-				gc.setFill(Color.rgb(face.getColor(), face.getColor(), face.getColor()));
+				gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
 				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
 				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
 			}
-		}
 	}
+}
 
 	public void renderOmbrage(GraphicsContext gc) {
 		final Vecteur leftLight = new Vecteur(0, 0, 1.25);
@@ -285,6 +307,8 @@ public class ListViewController {
 			gc.setStroke(Color.rgb(100, 100, 100));
 			affichage2.getGraphicsContext2D().strokePolygon(OmbreX, OmbreY, 3);
 			affichage2.getGraphicsContext2D().fillPolygon(OmbreX, OmbreY, 3);
+
+
 		}
 	}
 	public void redraw() {
