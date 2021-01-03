@@ -1,7 +1,6 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class Repere {
 	 * @return Point le plus élevé sur X
 	 */
 	public double getMax() {
-		double max = this.pointsList.get(0).getX();
+		double max = pointsList.get(0).getX();
 		for (Point p : this.pointsList) {
 			if (p.getX() > max) {
 				max = p.getX();
@@ -81,10 +80,10 @@ public class Repere {
 		double maxX;
 		double minX;
 		double centreX = 0;
-		Point Q = this.pointsList.get(0);
+		Point Q = pointsList.get(0);
 		maxX = Q.getX();
 		minX = Q.getX();
-		for (Point p : this.pointsList) {
+		for (Point p : pointsList) {
 			if (p.getX() > maxX) {
 				maxX = p.getX();
 			} else if (p.getX() < minX) {
@@ -104,10 +103,10 @@ public class Repere {
 		double MaxY;
 		double MinY;
 		double centreY = 0;
-		Point Q = this.pointsList.get(0);
+		Point Q = pointsList.get(0);
 		MaxY = Q.getY();
 		MinY = Q.getY();
-		for (Point p : this.pointsList) {
+		for (Point p : pointsList) {
 			if (p.getY() > MaxY) {
 				MaxY = p.getY();
 			} else if (p.getY() < MinY) {
@@ -131,32 +130,33 @@ public class Repere {
 		this.yOffSet += ratioY;
 		this.translation2(ratioX, ratioY, 0);
 	}
+	
 	public void translation2(double ratioX, double ratioY, double ratioZ) {
-		for (Point p : this.pointsList) 
+		for (Point p : pointsList) 
 			p.translation(new Vecteur(ratioX,ratioY,ratioZ));
 	}
 
 	public double averageZ() {
 		double avg = 0.0;
-		for (Point p : this.pointsList) {
+		for (Point p : pointsList)
 			avg += p.getZ();
-		}
-		return avg / this.pointsList.size();
+		return avg / pointsList.size();
 	}
+	
 	public double averageX() {
 		double avg = 0.0;
-		for (Point p :this.pointsList) {
+		for (Point p : pointsList)
 			avg += p.getX();
-		}
-		return avg / this.pointsList.size();
+		return avg / pointsList.size();
 	}
+	
 	public double averageY() {
 		double avg = 0.0;
-		for (Point p : this.pointsList) {
+		for (Point p : pointsList)
 			avg += p.getY();
-		}
-		return avg / this.pointsList.size();
+		return avg / pointsList.size();
 	}
+	
 	public void center() {
 		this.translation2(-this.averageX(), -this.averageY(), -this.averageZ()); 
 	}
@@ -167,14 +167,8 @@ public class Repere {
 	 */	
 	public void rotateX(Double grad) {
 		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
-		for (Point p : pointsList) {
+		for (Point p : pointsList)
 			p.rotationX(grad);
-		
-//			Double y = p.getY();
-//			Double z = p.getZ();
-//			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
-//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
-		}
 		this.translation2(this.xOffSet, this.yOffSet, 0.0);
 	}
 
@@ -186,18 +180,9 @@ public class Repere {
 	
 	public void rotateY(Double grad) {
 		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
-
-		for (Point p : pointsList) {
+		for (Point p : pointsList)
 			p.rotationY(grad);
-			
-		
-//			Double y = p.getY();
-//			Double z = p.getZ();
-//			p.setY(Math.cos(grad) * y - Math.sin(grad) * z);
-//			p.setZ(Math.cos(grad) * z + Math.sin(grad) * y);
-		}
 		this.translation2(this.xOffSet, this.yOffSet, 0.0);
-
 	}
 
 	/**
@@ -207,13 +192,8 @@ public class Repere {
 	 */
 	public void rotateZ(Double grad) {
 		this.translation2(-this.xOffSet,-this.yOffSet , 0.0);
-		for (Point p : pointsList) {
+		for (Point p : pointsList)
 			p.rotationZ(grad);
-//			Double x = p.getX();
-//			Double y = p.getY();
-//			p.setX(Math.cos(grad) * x - Math.sin(grad) * y);
-//			p.setY(Math.cos(grad) * y + Math.sin(grad) * x);
-		}
 		this.translation2(this.xOffSet,this.yOffSet , 0.0);
 	}
 
@@ -224,7 +204,8 @@ public class Repere {
 	 */
 	public void scaling(double scale) {
 		this.translation2(-this.xOffSet, -this.yOffSet,0);
-		for (Point p : this.pointsList) p.homothetie(scale);
+		for (Point p : pointsList) 
+			p.homothetie(scale);
 		this.translation2(this.xOffSet, this.yOffSet,0);
 	}
 
@@ -234,15 +215,5 @@ public class Repere {
 	 */
 	public void sortFaces() {
 		Collections.sort(facesList,new FaceComparator());
-		/*int n = facesList.size();
-		for (int i = 1; i < n; ++i) {
-			Face key = facesList.get(i);
-			int j = i - 1;
-			while (j >= 0 && facesList.get(j).average() > key.average()) {
-				facesList.set(j + 1, facesList.get(j));
-				j = j - 1;
-			}
-			facesList.set(j + 1, key);
-		}*/
 	}
 }

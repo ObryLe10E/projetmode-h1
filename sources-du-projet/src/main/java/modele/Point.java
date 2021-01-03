@@ -5,9 +5,6 @@ package modele;
  */
 public class Point {
 	protected Matrice matrice;
-//	protected double x;
-//	protected double y;
-//	protected double z;
 
 	/**
 	 * Constructeur d'un point 3D à partir de coordonnées définies
@@ -18,9 +15,6 @@ public class Point {
 	 */
 	public Point(double x, double y, double z) {
 		this.matrice = new Matrice(new double[][] { { x }, { y }, { z }, { 1.0 } });
-//		this.x = x;
-//		this.y = y;
-//		this.z = z;
 	}
 
 	/**

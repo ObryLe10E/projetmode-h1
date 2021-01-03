@@ -1,6 +1,2 @@
-package view;
-
-public class HelpController {
-	public void initialize() {
-	}
-}
+package view; public class HelpController {public void initialize() {}}
+//diego chien

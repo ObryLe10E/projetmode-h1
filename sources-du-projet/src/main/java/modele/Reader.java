@@ -57,7 +57,7 @@ public class Reader {
 			}
 			this.propertySearch();
 		} catch (FileNotFoundException e) {
-			System.out.println("Fichier introuvable");
+			throw new NullPointerException("Fichier introuvable");
 		}
 	}
 
@@ -99,21 +99,17 @@ public class Reader {
 	 */
 	public boolean headerCheck() throws IOException {
 		for (String line = reader.readLine(); !line.equals("end_header"); line = reader.readLine()) {
-
 			if (line.contains("by")) {
 				String[] authorTab = line.substring(line.indexOf("by")).split(" ");
 				this.author = authorTab[1];
 			}
 			if (line.startsWith("element")) {
 				String[] splitted = line.split(" ");
-				if (line.contains("vertex")) {
+				if (line.contains("vertex"))
 					this.nbPoints = Integer.parseInt(splitted[splitted.length - 1]);
-				}
-				if (line.contains("face")) {
+				if (line.contains("face"))
 					this.nbFaces = Integer.parseInt(splitted[splitted.length - 1]);
-				}
 			}
-
 		}
 		return this.nbFaces > 0 && this.nbPoints > 0;
 	}

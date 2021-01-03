@@ -12,14 +12,12 @@ public class Vecteur extends Point {
 	
 	public Vecteur(Point a, Point b) {
 		this.matrice = new Matrice(new double[][] { { b.getX() - a.getX() }, { b.getY() - a.getY() }, { b.getZ() - a.getZ() }, { 0.0 } });
-//		super(b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ());
 	}
 	
 	public Vecteur produitVectoriel(Point p) {
 		double x = this.getY() * p.getZ() - this.getZ() * p.getY();
 		double y = this.getZ() * p.getX() - this.getX() * p.getZ();
 		double z = this.getX() * p.getY() - this.getY() * p.getX();
-		
 		return new Vecteur(x,y,z);
 	}
 	
@@ -41,7 +39,6 @@ public class Vecteur extends Point {
 		double x = this.getX() / d;
 		double y = this.getY() / d;
 		double z = this.getZ() / d;
-		
 		return new Vecteur(x, y, z);
 	}
 }

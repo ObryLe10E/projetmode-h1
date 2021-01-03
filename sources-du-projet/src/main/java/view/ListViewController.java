@@ -103,8 +103,8 @@ public class ListViewController {
 	 */
 	public void initialize() {
 		affichage2.setManaged(false);
-		//Directory dir = new Directory("src/main/resources/fichiers/");
-		//list.getItems().addAll(dir.getListOfFiles());
+		Directory dir = new Directory("src/main/resources/fichiers/");
+		list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener());
 		list.setCellFactory(param -> new Cell());
@@ -189,12 +189,10 @@ public class ListViewController {
 						center.setCursor(Cursor.CROSSHAIR);
 						repere.center();				
 						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2); // centrage de la figure approximatif
-						while (repere.getMax() < affichage2.getWidth()-50) {
+						while (repere.getMax() < affichage2.getWidth()-50)
 							repere.scaling(SCALING);
-						}
-						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4) {
+						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4)
 							repere.scaling(UNSCALING);
-						}
 						renderModel();		
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -272,46 +270,46 @@ public class ListViewController {
 			gc.setFill(Color.TRANSPARENT);
 		else
 			gc.setFill(fillColor.getValue());
-
-		if (this.afficherFils.isSelected()) {
+		if (this.afficherFils.isSelected())
 			gc.setStroke(Color.TRANSPARENT);
-			//gc.setStrokeWidth(0.0);
-		} else {
+		else
 			gc.setStroke(strokeColor.getValue());
-			//gc.setStrokeWidth(0.5);
-		}
 		this.renderOmbrage(gc);
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
 			if(face.getColor(1) >= 0) { 
-				double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
-				double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
+				int size = face.size();
+				double[] xPoints = new double[size];
+				double[] yPoints = new double[size];
+				for (int i = 0; i < face.size() ; i++) {
+					xPoints[i] = face.get(i).getX();
+					yPoints[i] = face.get(i).getY();
+				}
 				gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
-				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
-				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
+				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
+				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
 			}
+		}
 	}
-}
 
 	public void renderOmbrage(GraphicsContext gc) {
 		final Vecteur leftLight = new Vecteur(0, 0, 1.25);
 		for (Face face : this.repere.getFacesList()) {
-			double OmbreX [] = new double [face.getPoints().size()];
-			double OmbreY [] = new double [face.getPoints().size()];
-			for (int i = 0; i < face.getPoints().size() ; i++) {
-
-				Point point = face.getPoints().get(i);
-				OmbreX [i] = (int) (point.getX()  / leftLight.normeVectoriel());
-				OmbreY [i]= (int) (point.getY() / leftLight.normeVectoriel());
+			int size = face.size();
+			double ombreX [] = new double [face.getPoints().size()];
+			double ombreY [] = new double [face.getPoints().size()];
+			for (int i = 0; i < face.size() ; i++) {
+				Point point = face.get(i);
+				ombreX[i] = (point.getX()  / leftLight.normeVectoriel());
+				ombreY[i]= (point.getY() / leftLight.normeVectoriel());
 			}
 			gc.setFill(Color.rgb(100, 100, 100));
 			gc.setStroke(Color.rgb(100, 100, 100));
-			affichage2.getGraphicsContext2D().strokePolygon(OmbreX, OmbreY, 3);
-			affichage2.getGraphicsContext2D().fillPolygon(OmbreX, OmbreY, 3);
-
-
+			affichage2.getGraphicsContext2D().strokePolygon(ombreX, ombreY, size);
+			affichage2.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
 		}
 	}
+	
 	public void redraw() {
 		affichage2.getGraphicsContext2D().clearRect(0, 0, affichage2.getWidth(), affichage2.getHeight());
 	}
@@ -427,20 +425,13 @@ public class ListViewController {
 				this.repere.scaling(ListViewController.UNSCALING);
 			this.renderModel();
 		});
-		/*
-		 * zoom.valueProperty().addListener((obs,old,n)->{ Double scale = (Double) n -
-		 * (Double) old; if(scale < 0) { this.repere.scaling(UNSCALING); } else
-		 * this.repere.scaling(SCALING); this.renderModel(); });
-		 */
 	}
 
 	/**
 	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
 	 */
 	public void rotate() {
-
 		vb.setOnKeyPressed(e-> {
-			System.out.println("key");
 			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
@@ -450,7 +441,6 @@ public class ListViewController {
 			this.renderModel();
 		});
 		sliderX.valueProperty().addListener((obs, old, n) -> {
-			System.out.println("slider");
 			this.repere.rotateX(((Double) n - (Double) old));
 			this.renderModel();
 		});

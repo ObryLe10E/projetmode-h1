@@ -33,6 +33,14 @@ public class Face {
 	public List<Point> getPoints() {
 		return points;
 	}
+	
+	public int size() {
+		return points.size();
+	}
+	
+	public Point get(int idx) {
+		return points.get(idx);
+	}
 
 	/**
 	 * Ajoute un Point à ceux de la Face
@@ -68,23 +76,18 @@ public class Face {
 	 */
 	public double averageZ() {
 		double avg = 0.0;
-		for (Point p : points) {
+		for (Point p : points)
 			avg += p.getZ();
-		}
 		return avg / points.size();
 	}
 
 	public Vecteur getVecteurNormal() {
-
-		if (this.getPoints().size() >= 3) {
-
-			Vecteur ab = new Vecteur(this.getPoints().get(0), this.getPoints().get(1));
-			Vecteur ac = new Vecteur(this.getPoints().get(0), this.getPoints().get(2));
-
+		if (points.size() >= 3) {
+			Vecteur ab = new Vecteur(points.get(0), points.get(1));
+			Vecteur ac = new Vecteur(points.get(0), points.get(2));
 			return ab.produitVectoriel(ac);
 		}
 		return new Vecteur();
-
 	}
 
 	private Vecteur getVecteurNormalUnitaire() {
@@ -93,7 +96,6 @@ public class Face {
 	}
 
 	private double getEclairage(Vecteur l) {
-
 		return this.getVecteurNormalUnitaire().produitScalaire(l.diviser(l.normeVectoriel()));
 	}
 
