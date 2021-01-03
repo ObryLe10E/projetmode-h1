@@ -33,6 +33,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modele.Face;
+import modele.Point;
 import modele.Reader;
 import modele.Repere;
 import modele.Vecteur;
@@ -88,7 +89,7 @@ public class ListViewController {
 	private Button info;
 	@FXML
 	private Button posInit;
-	
+
 	private Repere repere;
 
 	private static final double RATIOX = 50;
@@ -248,7 +249,7 @@ public class ListViewController {
 			gc.setFill(Color.TRANSPARENT);
 		else
 			gc.setFill(fillColor.getValue());
-		
+
 		if (this.afficherFils.isSelected()) {
 			gc.setStroke(Color.TRANSPARENT);
 			//gc.setStrokeWidth(0.0);
@@ -256,17 +257,36 @@ public class ListViewController {
 			gc.setStroke(strokeColor.getValue());
 			//gc.setStrokeWidth(0.5);
 		}
+		this.renderOmbrage(gc);
 		for (Face face : this.repere.getFacesList()) {
 			if(face.getColor() >= 0) { 
-			double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
-			double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
-			gc.setFill(Color.rgb(face.getColor(), face.getColor(), face.getColor()));
-			affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
-			affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
-		}
+
+				double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
+				double yPoints[] = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
+				gc.setFill(Color.rgb(face.getColor(), face.getColor(), face.getColor()));
+				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, 3);
+				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, 3);
+			}
 		}
 	}
-	
+
+	public void renderOmbrage(GraphicsContext gc) {
+		final Vecteur leftLight = new Vecteur(0, 0, 1.25);
+		for (Face face : this.repere.getFacesList()) {
+			double OmbreX [] = new double [face.getPoints().size()];
+			double OmbreY [] = new double [face.getPoints().size()];
+			for (int i = 0; i < face.getPoints().size() ; i++) {
+
+				Point point = face.getPoints().get(i);
+				OmbreX [i] = (int) (point.getX()  / leftLight.normeVectoriel());
+				OmbreY [i]= (int) (point.getY() / leftLight.normeVectoriel());
+			}
+			gc.setFill(Color.rgb(100, 100, 100));
+			gc.setStroke(Color.rgb(100, 100, 100));
+			affichage2.getGraphicsContext2D().strokePolygon(OmbreX, OmbreY, 3);
+			affichage2.getGraphicsContext2D().fillPolygon(OmbreX, OmbreY, 3);
+		}
+	}
 	public void redraw() {
 		affichage2.getGraphicsContext2D().clearRect(0, 0, affichage2.getWidth(), affichage2.getHeight());
 	}
@@ -326,10 +346,10 @@ public class ListViewController {
 	 * ajuste le model a la taille de la fenetre
 	 */
 	public void ajuster() {
-		
+
 	}
-	
-	
+
+
 	/**
 	 * remettre les sliders a 180 (au milieu)
 	 */
@@ -338,7 +358,7 @@ public class ListViewController {
 		sliderY.setValue(0);
 		sliderZ.setValue(0);
 	}
-	
+
 	/**
 	 * Déplace le modèle vers le bas
 	 */
@@ -395,7 +415,7 @@ public class ListViewController {
 	public void rotate() {
 
 		vb.setOnKeyPressed(e-> {
-		    System.out.println("key");
+			System.out.println("key");
 			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
@@ -418,7 +438,7 @@ public class ListViewController {
 			this.renderModel();
 		});
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void afficherAide() {
 		Stage stageHelp = new Stage();
@@ -435,7 +455,7 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void afficherInfo() {
 		Stage stageInfo = new Stage();
