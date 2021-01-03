@@ -281,6 +281,7 @@ public class ListViewController {
 			//gc.setStrokeWidth(0.5);
 		}
 		this.renderOmbrage(gc);
+		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
 			if(face.getColor(1) >= 0) { 
 				double xPoints[] = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
