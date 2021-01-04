@@ -296,7 +296,9 @@ public class ListViewController {
 	 */
 	public void renderModel() {
 		this.repere.sortFaces();
-		redraw();
+		redraw();		
+		this.renderOmbrage(gc,0);
+
 		if (this.filDeFer.isSelected())
 			gc.setFill(Color.TRANSPARENT);
 		else 
@@ -305,7 +307,6 @@ public class ListViewController {
 			gc.setStroke(Color.TRANSPARENT);
 		else
 			gc.setStroke(strokeColor.getValue());
-		this.renderOmbrage(gc,0);
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
 			if(face.getColor(1) >= 0) { 
@@ -341,8 +342,10 @@ public class ListViewController {
 				gc.setFill(Color.rgb(100, 100, 100));
 				affichage2.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
 			}
-			if(!afficherFils.isSelected()) {
+			if(!afficherFils.isSelected() & filDeFer.isSelected()) {
+				gc.setFill(Color.rgb(100,100,100));
 				affichage2.getGraphicsContext2D().strokePolygon(ombreX, ombreY, size);
+				affichage2.getGraphicsContext2D().setStroke(Color.rgb(100,100,100));
 			}
 
 		}
