@@ -52,6 +52,9 @@
                      </font>
                   </Text>
                   <ListView fx:id="list" layoutX="5.0" layoutY="103.0" prefHeight="542.0" prefWidth="263.0" style="-fx-background-color: transparent;" />
+                  <ToggleButton fx:id="nameButton" layoutX="31.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Name" />
+                  <ToggleButton fx:id="pointsButton" layoutX="181.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Points" />
+                  <ToggleButton fx:id="faceButton" layoutX="108.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Faces" />
                </children>
             </Pane>
          </left>
@@ -81,7 +84,7 @@
                   <Text layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
                   <Text layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
                   <Text layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
-                  <Slider fx:id="sliderLight" layoutX="73.0" layoutY="469.0" orientation="VERTICAL" />
+                  <Slider fx:id="sliderLight" layoutX="55.0" layoutY="459.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="46.0" />
                </children>
             </Pane>
          </right>

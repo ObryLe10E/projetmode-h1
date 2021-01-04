@@ -95,6 +95,12 @@ public class ListViewController {
 	@FXML
 	private Slider sliderLight;
 	private GraphicsContext gc;
+	@FXML
+	private ToggleButton nameButton;
+	@FXML
+	private ToggleButton faceButton;
+	@FXML
+	private ToggleButton pointsButton;
 
 
 	private static final double RATIOX = 50;
@@ -293,7 +299,7 @@ public class ListViewController {
 		redraw();
 		if (this.filDeFer.isSelected())
 			gc.setFill(Color.TRANSPARENT);
-		else
+		else 
 			gc.setFill(fillColor.getValue());
 		if (this.afficherFils.isSelected())
 			gc.setStroke(Color.TRANSPARENT);
@@ -311,8 +317,10 @@ public class ListViewController {
 					yPoints[i] = face.get(i).getY();
 				}
 				gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
-				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
-				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
+				if(!this.afficherFils.isSelected())
+					affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
+				if(!this.filDeFer.isSelected())
+					affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
 			}
 		}
 	}
@@ -329,10 +337,14 @@ public class ListViewController {
 				ombreX[i] = (point.getX()  / light.normeVectoriel());
 				ombreY[i]= (point.getY() / light.normeVectoriel());
 			}
-			gc.setFill(Color.rgb(100, 100, 100));
-			gc.setStroke(Color.rgb(100, 100, 100));
-			affichage2.getGraphicsContext2D().strokePolygon(ombreX, ombreY, size);
-			affichage2.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
+			if(!filDeFer.isSelected()) {
+				gc.setFill(Color.rgb(100, 100, 100));
+				affichage2.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
+			}
+			if(!afficherFils.isSelected()) {
+				affichage2.getGraphicsContext2D().strokePolygon(ombreX, ombreY, size);
+			}
+
 		}
 	}
 
@@ -512,5 +524,14 @@ public class ListViewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	private void triName() {
+
+	}
+	private void triFaceList() {
+
+	}
+	private void triPointsList() {
+
 	}
 }
