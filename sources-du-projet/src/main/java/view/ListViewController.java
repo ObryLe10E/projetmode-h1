@@ -78,6 +78,10 @@ public class ListViewController {
 	@FXML
 	private ToggleButton afficherFils;
 	@FXML
+	private ToggleButton lightButon;
+	@FXML
+	private ToggleButton ombreButon;
+	@FXML
 	private Label nbPointsLabel;
 	@FXML
 	private Label nbFacesLabel;
@@ -89,6 +93,8 @@ public class ListViewController {
 	private Button info;
 	@FXML
 	private Button posInit;
+	@FXML
+	private Button duplicate;
 
 	private Repere repere;
 
@@ -240,7 +246,6 @@ public class ListViewController {
 				}
 			}
 		}
-
 		/**
 		 * Réinitialise les infos du modèle
 		 * 
@@ -296,8 +301,10 @@ public class ListViewController {
 	 */
 	public void renderModel() {
 		this.repere.sortFaces();
-		redraw();		
-		this.renderOmbrage(gc,0);
+		redraw();	
+		if(!this.ombreButon.isSelected()) {
+			this.renderOmbrage(gc,0);
+		}
 
 		if (this.filDeFer.isSelected())
 			gc.setFill(Color.TRANSPARENT);
@@ -317,7 +324,8 @@ public class ListViewController {
 					xPoints[i] = face.get(i).getX();
 					yPoints[i] = face.get(i).getY();
 				}
-				gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
+				if(!this.lightButon.isSelected())
+					gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
 				if(!this.afficherFils.isSelected())
 					affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
 				if(!this.filDeFer.isSelected())
@@ -528,6 +536,7 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 	}
+	
 	private void triName() {
 
 	}
@@ -536,5 +545,11 @@ public class ListViewController {
 	}
 	private void triPointsList() {
 
+	}
+	private void resetPosition() {
+		
+	}
+	private void dupliquer() {
+		
 	}
 }

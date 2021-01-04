@@ -101,12 +101,12 @@
                   <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des fils :" />
                   <ColorPicker fx:id="fillColor" layoutX="216.0" layoutY="56.0" />
                   <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="216.0" layoutY="122.0" />
-                  <ToggleButton fx:id="filDeFer" layoutX="426.0" layoutY="53.0" mnemonicParsing="false" text="¯/">
+                  <ToggleButton fx:id="filDeFer" layoutX="410.0" layoutY="53.0" mnemonicParsing="false" text="¯/">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="afficherFils" layoutX="481.0" layoutY="53.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0" text="▰">
+                  <ToggleButton fx:id="afficherFils" layoutX="462.0" layoutY="53.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0" text="▰">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -126,7 +126,10 @@
                   </Pane>
                   <Button fx:id="help" layoutX="647.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Aide" />
                   <Button fx:id="info" layoutX="647.0" layoutY="122.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="89.0" text="Informations" />
-                  <Button fx:id="posInit" layoutX="426.0" layoutY="123.0" mnemonicParsing="false" onAction="#ajuster" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
+                  <Button fx:id="posInit" layoutX="413.0" layoutY="122.0" mnemonicParsing="false" onAction="#ajuster" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
+                  <ToggleButton fx:id="lightButon" layoutX="578.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="55.0" text="Light" />
+                  <ToggleButton fx:id="ombreButon" layoutX="514.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="57.0" text="Ombre" />
+                  <Button layoutX="551.0" layoutY="122.0" mnemonicParsing="false" text="Dupliquer" />
                </children>
             </Pane>
          </bottom>
