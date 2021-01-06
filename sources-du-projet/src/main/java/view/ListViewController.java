@@ -316,7 +316,7 @@ public class ListViewController {
 			gc.setStroke(strokeColor.getValue());
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
-			if(face.getColor(1) >= 0) { 
+			if(face.getColor(1, sliderLight.getValue()) >= 0) { 
 				int size = face.size();
 				double[] xPoints = new double[size];
 				double[] yPoints = new double[size];
@@ -325,7 +325,7 @@ public class ListViewController {
 					yPoints[i] = face.get(i).getY();
 				}
 				if(!this.lightButon.isSelected())
-					gc.setFill(Color.rgb(face.getColor(c.getRed()), face.getColor(c.getGreen()), face.getColor(c.getBlue())));
+					gc.setFill(Color.rgb(face.getColor(c.getRed(), sliderLight.getValue()), face.getColor(c.getGreen(),sliderLight.getValue()), face.getColor(c.getBlue(),sliderLight.getValue())));
 				if(!this.afficherFils.isSelected())
 					affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
 				if(!this.filDeFer.isSelected())

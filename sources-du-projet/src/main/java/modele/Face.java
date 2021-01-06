@@ -99,8 +99,9 @@ public class Face {
 		return this.getVecteurNormalUnitaire().produitScalaire(l.diviser(l.normeVectoriel()));
 	}
 
-	public int getColor(double rgb) {
+	public int getColor(double rgb, double grad) {
 		Vecteur vecteurEclairage = new Vecteur(0,0,1);
+		vecteurEclairage.rotationY(grad);
 		int luminosite = (int) (this.getEclairage(vecteurEclairage) * (rgb*255));
 		return luminosite;
 	}
