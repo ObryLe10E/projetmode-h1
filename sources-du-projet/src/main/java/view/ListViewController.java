@@ -138,8 +138,8 @@ public class ListViewController {
 		});
 		this.mouseTranslate();
 		gc = affichage2.getGraphicsContext2D();
-		sliderLight.setMax(Math.PI);
-		sliderLight.setMin(-Math.PI);
+		sliderLight.setMax(Math.PI/2);
+		sliderLight.setMin(-Math.PI/2);
 		sliderLight.valueProperty().addListener((obs,old,n)->{
 			renderOmbrage(gc, sliderLight.getValue());
 			renderModel();
@@ -316,21 +316,24 @@ public class ListViewController {
 			gc.setStroke(strokeColor.getValue());
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
-			if(face.getColor(1, sliderLight.getValue()) >= 0) { 
-				int size = face.size();
-				double[] xPoints = new double[size];
-				double[] yPoints = new double[size];
-				for (int i = 0; i < face.size() ; i++) {
-					xPoints[i] = face.get(i).getX();
-					yPoints[i] = face.get(i).getY();
-				}
-				if(!this.lightButon.isSelected())
-					gc.setFill(Color.rgb(face.getColor(c.getRed(), sliderLight.getValue()), face.getColor(c.getGreen(),sliderLight.getValue()), face.getColor(c.getBlue(),sliderLight.getValue())));
-				if(!this.afficherFils.isSelected())
-					affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
-				if(!this.filDeFer.isSelected())
-					affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
+			//if(face.getColor(1, sliderLight.getValue()) >= 0) { 
+			int size = face.size();
+			double[] xPoints = new double[size];
+			double[] yPoints = new double[size];
+			for (int i = 0; i < face.size() ; i++) {
+				xPoints[i] = face.get(i).getX();
+				yPoints[i] = face.get(i).getY();
 			}
+			if(!this.lightButon.isSelected())
+				if(face.getColor(1, sliderLight.getValue()) <= 0) {
+					gc.setFill(Color.BLACK);
+				}else
+					gc.setFill(Color.rgb(face.getColor(c.getRed(), sliderLight.getValue()), face.getColor(c.getGreen(),sliderLight.getValue()), face.getColor(c.getBlue(),sliderLight.getValue())));
+			if(!this.afficherFils.isSelected())
+				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
+			if(!this.filDeFer.isSelected())
+				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
+			//}
 		}
 	}
 
@@ -536,7 +539,7 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void triName() {
 
 	}
@@ -547,9 +550,9 @@ public class ListViewController {
 
 	}
 	private void resetPosition() {
-		
+
 	}
 	private void dupliquer() {
-		
+
 	}
 }
