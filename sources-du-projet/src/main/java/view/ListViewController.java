@@ -2,8 +2,18 @@ package view;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import exceptions.WrongFileFormatException;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -143,6 +153,32 @@ public class ListViewController {
 		sliderLight.valueProperty().addListener((obs,old,n)->{
 			renderOmbrage(gc, sliderLight.getValue());
 			renderModel();
+		});
+		this.faceButton.setOnAction(e->{
+			if(this.faceButton.isSelected()) {
+				this.nameButton.setSelected(false);
+				this.pointsButton.setSelected(false);
+				this.triFaceList();
+			}else {
+				Collections.reverse(this.list.getItems());
+			}
+		});
+		this.nameButton.setOnAction(e->{
+			if(this.nameButton.isSelected()) {
+				this.faceButton.setSelected(false);
+				this.pointsButton.setSelected(false);
+				this.triName();
+			}else
+				Collections.reverse(this.list.getItems());
+		});
+		this.pointsButton.setOnAction(e->{
+			if(this.pointsButton.isSelected()) {
+				this.faceButton.setSelected(false);
+				this.nameButton.setSelected(false);
+				this.triPointsList();
+			}else {
+				Collections.reverse(this.list.getItems());
+			}
 		});
 
 	}
@@ -540,13 +576,81 @@ public class ListViewController {
 		}
 	}
 
-	private void triName() {
+
+
+	private void triFaceList() {
+		HashMap<File, Integer> map = new HashMap<File, Integer>();
+		for(File f : this.list.getItems()) {
+			System.out.println(f);
+			Reader r = null;
+			try {
+				r = new Reader(f);
+				map.put(f, r.getNbFaces());
+			} catch (IOException e) {
+				map.put(f, 0);
+				e.printStackTrace();
+			} catch (WrongFileFormatException e) {
+				map.put(f, 0);
+				e.printStackTrace();
+			}
+		}
+		System.out.println("liste triée :" + triSurValeur(map));
+		TreeMap<File, Integer> map2 =triSurValeur(map);
+		this.list.getItems().clear();
+		this.list.getItems().addAll(map2.keySet());
 
 	}
-	private void triFaceList() {
 
+	private TreeMap<File,Integer> triSurValeur(HashMap<File, Integer> map) {
+
+		ValueComparator comparateur = new ValueComparator(map);
+		TreeMap<File,Integer> mapTriee = new TreeMap<File,Integer>(comparateur);
+		mapTriee.putAll(map);
+		return mapTriee;
+	}
+	class ValueComparator implements Comparator<File> {
+		Map<File, Integer> base;
+		public ValueComparator(Map<File, Integer> base) {
+			this.base = base;
+		}
+
+		public int compare(File a, File b) {
+			if (base.get(a) >= base.get(b)) {
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+	}
+	private void triName() {
+		Object [] tri = this.list.getItems().toArray();
+		Arrays.sort(tri);
+		this.list.getItems().clear();
+		for(Object o : tri) {
+			this.list.getItems().add((File) o );
+		}
 	}
 	private void triPointsList() {
+
+		HashMap<File, Integer> map = new HashMap<File, Integer>();
+		for(File f : this.list.getItems()) {
+			System.out.println(f);
+			Reader r = null;
+			try {
+				r = new Reader(f);
+				map.put(f, r.getNbPoints());
+			} catch (IOException e) {
+				map.put(f, 0);
+				e.printStackTrace();
+			} catch (WrongFileFormatException e) {
+				map.put(f, 0);
+				e.printStackTrace();
+			}
+		}
+		System.out.println("liste triée :" + triSurValeur(map));
+		TreeMap<File, Integer> map2 =triSurValeur(map);
+		this.list.getItems().clear();
+		this.list.getItems().addAll(map2.keySet());
 
 	}
 	private void resetPosition() {
