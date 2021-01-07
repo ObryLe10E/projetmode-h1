@@ -2,13 +2,10 @@ package view;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -318,8 +315,8 @@ public class ListViewController {
 					tmpX=e.getX();
 					tmpY=e.getY();
 				}else {
-					repere.rotateX((e.getX()-tmpX)/100);
-					repere.rotateY((e.getY()-tmpY)/100);
+					repere.rotateY((e.getX()-tmpX)/100);
+					repere.rotateX((e.getY()-tmpY)/100);
 					repere.rotateZ((e.getZ()-tmpZ)/100);
 					this.renderModel();
 					tmpX = e.getX();
@@ -339,7 +336,7 @@ public class ListViewController {
 		this.repere.sortFaces();
 		redraw();	
 		if(!this.ombreButon.isSelected()) {
-			this.renderOmbrage(gc,0);
+			this.renderOmbrage(gc,this.sliderLight.getValue());
 		}
 
 		if (this.filDeFer.isSelected())
@@ -352,7 +349,6 @@ public class ListViewController {
 			gc.setStroke(strokeColor.getValue());
 		Color c = fillColor.getValue();
 		for (Face face : this.repere.getFacesList()) {
-			//if(face.getColor(1, sliderLight.getValue()) >= 0) { 
 			int size = face.size();
 			double[] xPoints = new double[size];
 			double[] yPoints = new double[size];
@@ -360,11 +356,13 @@ public class ListViewController {
 				xPoints[i] = face.get(i).getX();
 				yPoints[i] = face.get(i).getY();
 			}
-			if(!this.lightButon.isSelected())
-				if(face.getColor(1, sliderLight.getValue()) <= 0) {
+			if(!this.lightButon.isSelected()) {
+				double coefLight = sliderLight.getValue();
+				if(face.getColor(1, coefLight) <= 0) {
 					gc.setFill(Color.BLACK);
 				}else
-					gc.setFill(Color.rgb(face.getColor(c.getRed(), sliderLight.getValue()), face.getColor(c.getGreen(),sliderLight.getValue()), face.getColor(c.getBlue(),sliderLight.getValue())));
+					gc.setFill(Color.rgb(face.getColor(c.getRed(), coefLight), face.getColor(c.getGreen(),coefLight), face.getColor(c.getBlue(),coefLight)));
+			}
 			if(!this.afficherFils.isSelected())
 				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
 			if(!this.filDeFer.isSelected())
@@ -380,7 +378,7 @@ public class ListViewController {
 			int size = face.size();
 			double ombreX [] = new double [face.getPoints().size()];
 			double ombreY [] = new double [face.getPoints().size()];
-			for (int i = 0; i < face.size() ; i++) {
+			for (int i = 0; i < size ; i++) {
 				Point point = face.get(i);
 				ombreX[i] = (point.getX()  / light.normeVectoriel());
 				ombreY[i]= (point.getY() / light.normeVectoriel());
