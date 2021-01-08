@@ -105,7 +105,7 @@ public class ListViewController implements Observer{
 	@FXML
 	private Button duplicate;
 
-	private Repere repere;
+	protected Repere repere;
 
 	@FXML
 	private Slider sliderLight;
@@ -669,7 +669,7 @@ public class ListViewController implements Observer{
 		try {
 			root = loader.load();
 			Scene scene = new Scene(root, 600, 250);
-			HelpController controller = loader.<HelpController>getController();
+			SecondViewController controller = loader.getController();
 			controller.initialize();
 			secondStage.setScene(scene);
 			secondStage.setResizable(false);
