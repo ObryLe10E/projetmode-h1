@@ -44,8 +44,10 @@ import modele.Point;
 import modele.Reader;
 import modele.Repere;
 import modele.Vecteur;
+import utils.Observer;
+import utils.Subject;
 
-public class ListViewController {
+public class ListViewController implements Observer{
 	@FXML
 	private Pane center;
 	@FXML
@@ -115,7 +117,6 @@ public class ListViewController {
 	@FXML
 	private ToggleButton pointsButton;
 
-
 	private static final double RATIOX = 50;
 	private static final double RATIOY = 50;
 	private static final double SCALING = 1.10;
@@ -143,6 +144,9 @@ public class ListViewController {
 		info.setOnAction(e->{
 			afficherInfo();
 		});
+		duplicate.setOnAction(e->{
+			dupliquer();
+		});
 		this.mouseTranslate();
 		gc = affichage2.getGraphicsContext2D();
 		sliderLight.setMax(Math.PI/2);
@@ -156,9 +160,8 @@ public class ListViewController {
 				this.nameButton.setSelected(false);
 				this.pointsButton.setSelected(false);
 				this.triFaceList();
-			}else {
+			}else
 				Collections.reverse(this.list.getItems());
-			}
 		});
 		this.nameButton.setOnAction(e->{
 			if(this.nameButton.isSelected()) {
@@ -173,11 +176,9 @@ public class ListViewController {
 				this.faceButton.setSelected(false);
 				this.nameButton.setSelected(false);
 				this.triPointsList();
-			}else {
+			}else
 				Collections.reverse(this.list.getItems());
-			}
 		});
-
 	}
 
 
@@ -223,6 +224,10 @@ public class ListViewController {
 		sliderZ.setMin(-Math.PI);
 		sliderZ.setValue(0);
 	}
+	
+	private void attache() {
+		repere.attach(this);
+	}
 
 	/**
 	 * ChangeListener qui ouvre le fichier sur lequel on clique dans la
@@ -246,15 +251,15 @@ public class ListViewController {
 						nbPointsLabel.setText(nbPointsLabel.getText() + reader.getNbPoints());
 						nbFacesLabel.setText(nbFacesLabel.getText() + reader.getNbFaces());
 						center.setCursor(Cursor.CROSSHAIR);
+						attache();
 						repere.center();				
 						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2); // centrage de la figure approximatif
 						while (repere.getMax() < affichage2.getWidth()-50)
 							repere.scaling(SCALING);
 						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4)
 							repere.scaling(UNSCALING);
-						renderModel();		
 					} catch (IOException e) {
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 				}
 			} catch (Exception e) {
@@ -473,7 +478,7 @@ public class ListViewController {
 	 */
 	public void translationMinusY() {
 		this.repere.translation(0, -RATIOY);
-		this.renderModel();
+//		this.renderModel();
 	}
 
 	/**
@@ -481,7 +486,7 @@ public class ListViewController {
 	 */
 	public void translationPlusY() {
 		this.repere.translation(0, RATIOY);
-		this.renderModel();
+//		this.renderModel();
 	}
 
 	/**
@@ -489,7 +494,7 @@ public class ListViewController {
 	 */
 	public void translationPlusX() {
 		this.repere.translation(RATIOX, 0);
-		this.renderModel();
+//		this.renderModel();
 	}
 
 	/**
@@ -497,7 +502,7 @@ public class ListViewController {
 	 */
 	public void translationMinusX() {
 		this.repere.translation(-RATIOX, 0);
-		this.renderModel();
+//		this.renderModel();
 	}
 
 	/**
@@ -509,7 +514,7 @@ public class ListViewController {
 				this.repere.scaling(ListViewController.SCALING);
 			else
 				this.repere.scaling(ListViewController.UNSCALING);
-			this.renderModel();
+//			this.renderModel();
 		});
 	}
 
@@ -524,19 +529,19 @@ public class ListViewController {
 				this.repere.rotateY(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.X))
 				this.repere.rotateX((Math.PI / 8));
-			this.renderModel();
+//			this.renderModel();
 		});
 		sliderX.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateX(((Double) n - (Double) old));
-			this.renderModel();
+//			this.renderModel();
 		});
 		sliderY.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateY((Double) n - (Double) old);
-			this.renderModel();
+//			this.renderModel();
 		});
 		sliderZ.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateZ((Double) n - (Double) old);
-			this.renderModel();
+//			this.renderModel();
 		});
 	}
 
@@ -592,7 +597,7 @@ public class ListViewController {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("liste triée :" + triSurValeur(map));
+		System.out.println("liste triï¿½e :" + triSurValeur(map));
 		TreeMap<File, Integer> map2 =triSurValeur(map);
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
@@ -606,6 +611,7 @@ public class ListViewController {
 		mapTriee.putAll(map);
 		return mapTriee;
 	}
+	
 	class ValueComparator implements Comparator<File> {
 		Map<File, Integer> base;
 		public ValueComparator(Map<File, Integer> base) {
@@ -620,16 +626,16 @@ public class ListViewController {
 			}
 		}
 	}
+	
 	private void triName() {
 		Object [] tri = this.list.getItems().toArray();
 		Arrays.sort(tri);
 		this.list.getItems().clear();
-		for(Object o : tri) {
+		for(Object o : tri)
 			this.list.getItems().add((File) o );
-		}
 	}
+	
 	private void triPointsList() {
-
 		HashMap<File, Integer> map = new HashMap<File, Integer>();
 		for(File f : this.list.getItems()) {
 			System.out.println(f);
@@ -637,24 +643,50 @@ public class ListViewController {
 			try {
 				r = new Reader(f);
 				map.put(f, r.getNbPoints());
-			} catch (IOException e) {
-				map.put(f, 0);
+			} catch (Exception e) {
+				map.put(f, -1);
 				e.printStackTrace();
-			} catch (WrongFileFormatException e) {
-				map.put(f, 0);
-				e.printStackTrace();
+//			} catch (WrongFileFormatException e) {
+//				map.put(f, -1);
+//				e.printStackTrace();
 			}
 		}
-		System.out.println("liste triée :" + triSurValeur(map));
+		System.out.println("liste triï¿½e :" + triSurValeur(map));
 		TreeMap<File, Integer> map2 =triSurValeur(map);
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
-
 	}
+	
 	private void resetPosition() {
 
 	}
+	
 	private void dupliquer() {
+		Stage secondStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("secondModel.fxml"));
+		Parent root;
+		try {
+			root = loader.load();
+			Scene scene = new Scene(root, 600, 250);
+			HelpController controller = loader.<HelpController>getController();
+			controller.initialize();
+			secondStage.setScene(scene);
+			secondStage.setResizable(false);
+			secondStage.setTitle("Affichage secondaire");
+			secondStage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 
+	@Override
+	public void update(Subject subj){
+		this.renderModel();
+	}
+
+	@Override
+	public void update(Subject subj, Object data){
+		this.renderModel();
 	}
 }

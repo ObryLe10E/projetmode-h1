@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
       <BorderPane prefHeight="899.0" prefWidth="1317.0">
          <top>
@@ -129,7 +129,7 @@
                   <Button fx:id="posInit" layoutX="413.0" layoutY="122.0" mnemonicParsing="false" onAction="#ajuster" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
                   <ToggleButton fx:id="lightButon" layoutX="578.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="55.0" text="Light" />
                   <ToggleButton fx:id="ombreButon" layoutX="514.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="57.0" text="Ombre" />
-                  <Button layoutX="551.0" layoutY="122.0" mnemonicParsing="false" text="Dupliquer" />
+                  <Button fx:id="duplicate" layoutX="551.0" layoutY="122.0" mnemonicParsing="false" text="Dupliquer" />
                </children>
             </Pane>
          </bottom>

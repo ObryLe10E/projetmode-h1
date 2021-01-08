@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import utils.Subject;
+
 /**
  * @author Groupe H1 : DELOBEL Jeremy, DUHEM Alexis, OBRY Thomas, BONNET Tanguy
  */
-public class Repere {
+public class Repere extends Subject{
 	private List<Point> pointsList;
 	private List<Face> facesList;
 	private double xOffSet =0.0;
@@ -129,6 +131,7 @@ public class Repere {
 		this.xOffSet += ratioX;
 		this.yOffSet += ratioY;
 		this.translation2(ratioX, ratioY, 0);
+		notifyObservers();
 	}
 	
 	public void translation2(double ratioX, double ratioY, double ratioZ) {
@@ -160,6 +163,7 @@ public class Repere {
 	public void center() {
 		this.translation2(-this.averageX(), -this.averageY(), -this.averageZ()); 
 	}
+	
 	/**
 	 * Effectue une rotation du modèle autour de l'axe des abscisses X
 	 * 
@@ -170,6 +174,7 @@ public class Repere {
 		for (Point p : pointsList)
 			p.rotationX(grad);
 		this.translation2(this.xOffSet, this.yOffSet, 0.0);
+		notifyObservers();
 	}
 
 	/**
@@ -177,12 +182,12 @@ public class Repere {
 	 * 
 	 * @param grad Angle autour duquel calculer la matrice de rotation
 	 */
-	
 	public void rotateY(Double grad) {
 		this.translation2(-this.xOffSet, -this.yOffSet, 0.0);
 		for (Point p : pointsList)
 			p.rotationY(grad);
 		this.translation2(this.xOffSet, this.yOffSet, 0.0);
+		notifyObservers();
 	}
 
 	/**
@@ -195,6 +200,7 @@ public class Repere {
 		for (Point p : pointsList)
 			p.rotationZ(grad);
 		this.translation2(this.xOffSet,this.yOffSet , 0.0);
+		notifyObservers();
 	}
 
 	/**
@@ -207,6 +213,7 @@ public class Repere {
 		for (Point p : pointsList) 
 			p.homothetie(scale);
 		this.translation2(this.xOffSet, this.yOffSet,0);
+		notifyObservers();
 	}
 
 	/**
