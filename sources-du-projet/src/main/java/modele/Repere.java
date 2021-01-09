@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.scene.paint.Color;
 import utils.Subject;
 
 /**
@@ -14,6 +15,9 @@ public class Repere extends Subject{
 	private List<Face> facesList;
 	private double xOffSet =0.0;
 	private double yOffSet =0.0;
+	public double lightAngle;
+	public Color faceColor;
+	public Color strokeColor;
 
 	/**
 	 * Constructeur d'un repère à partir de points et de faces définis
@@ -24,6 +28,8 @@ public class Repere extends Subject{
 	public Repere(List<Point> pointsList, List<Face> facesList) {
 		this.pointsList = pointsList;
 		this.facesList = facesList;
+		faceColor = Color.GRAY; strokeColor = Color.BLACK;
+		lightAngle = 0.0;
 	}
 
 	/**
@@ -53,6 +59,21 @@ public class Repere extends Subject{
 	@Override
 	public String toString() {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
+	}
+	
+	public void setLightAngle(double angle) {
+		lightAngle = angle;
+		notifyObservers();
+	}
+	
+	public void setFaceColor(Color color) {
+		this.faceColor = color;
+		notifyObservers();
+	}
+	
+	public void setStrokeColor(Color color) {
+		this.strokeColor = color;
+		notifyObservers();
 	}
 
 	/**
@@ -221,6 +242,6 @@ public class Repere extends Subject{
 	 * voir si on peut utiliser list.sort en implémentant comparable/comparator
 	 */
 	public void sortFaces() {
-		Collections.sort(facesList,new FaceComparator());
+		Collections.sort(facesList);
 	}
 }
