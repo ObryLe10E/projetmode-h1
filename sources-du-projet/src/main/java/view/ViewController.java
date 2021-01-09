@@ -134,17 +134,20 @@ public class ViewController implements Observer{
 				xPoints[i] = face.get(i).getX();
 				yPoints[i] = face.get(i).getY();
 			}
-			if(!setLight.isSelected()) {
-				double coefLight = lightRatio;
-				if(face.getColor(1, coefLight) <= 0) {
-					gc.setFill(Color.BLACK);
-				}else
-					gc.setFill(Color.rgb(face.getColor(repere.faceColor.getRed(), coefLight), face.getColor(repere.faceColor.getGreen(),coefLight), face.getColor(repere.faceColor.getBlue(),coefLight)));
+			Vecteur vnu = face.getVecteurNormal().diviser(face.getVecteurNormal().normeVectoriel());
+			if(vnu.getZ() >= 0) {
+				if(!light) {
+					double coefLight = lightRatio;
+					if(face.getColor(1, coefLight) <= 0) {
+						gc.setFill(Color.BLACK);
+					}else
+						gc.setFill(Color.rgb(face.getColor(repere.faceColor.getRed(), coefLight), face.getColor(repere.faceColor.getGreen(),coefLight), face.getColor(repere.faceColor.getBlue(),coefLight)));
+				}
+				if(stroke)
+					affichage.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
+				if(faces)
+					affichage.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
 			}
-			if(stroke)
-				affichage.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
-			if(faces)
-				affichage.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
 		}
 	}
 	
