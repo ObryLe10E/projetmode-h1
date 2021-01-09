@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Groupe H1 : DELOBEL Jeremy, DUHEM Alexis, OBRY Thomas, BONNET Tanguy
  */
-public class Face {
+public class Face implements Comparable<Face>{
 	private List<Point> points;
 	private int r;
 	private int g;
@@ -34,6 +34,31 @@ public class Face {
 		return points;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((points == null) ? 0 : points.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Face other = (Face) obj;
+		if (points == null) {
+			if (other.points != null)
+				return false;
+		} else if (!points.equals(other.points))
+			return false;
+		return true;
+	}
+
 	public int size() {
 		return points.size();
 	}
@@ -74,7 +99,7 @@ public class Face {
 	 * 
 	 * @return Z moyen de la Face
 	 */
-	public double averageZ() {
+	public Double averageZ() {
 		double avg = 0.0;
 		for (Point p : points)
 			avg += p.getZ();
@@ -105,4 +130,9 @@ public class Face {
 		int luminosite = (int) (this.getEclairage(vecteurEclairage) * (rgb*255));
 		return luminosite;
 	}
+
+	@Override
+    public int compareTo(Face other) {
+		return this.averageZ().compareTo(other.averageZ());
+    }
 }

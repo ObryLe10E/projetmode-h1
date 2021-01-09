@@ -14,6 +14,7 @@ public abstract class Subject {
         if (! attached.contains( obs)) {
             attached.add(obs);
         }
+        notifyObservers();
     }
 
     public void detach(Observer obs) {

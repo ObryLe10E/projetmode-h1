@@ -1,16 +1,28 @@
 package view;
 
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
+import modele.Repere;
+import utils.Subject;
 
-public class SecondViewController extends ListViewController {
-	@FXML
-	Canvas canvas;
-	
-	public void initialize() {
-		
+public class SecondViewController extends ViewController {
+	public void initialize(Repere repere) {
+		affichage.setManaged(false);
+		gc = affichage.getGraphicsContext2D();	
+		setComponents();
+		this.repere = repere;
 	}
-	public void attache() {
-		this.repere.attach(this);
+	
+	@Override
+	protected void setComponents() {
+		super.setComponents();
+	}
+	
+	@Override
+	public void update(Subject subj){
+		renderModel(repere.lightAngle);
+	}
+	
+	@Override
+	public void update(Subject subj, Object data){
+		renderModel(repere.lightAngle);
 	}
 }
