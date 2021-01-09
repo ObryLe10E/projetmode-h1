@@ -60,20 +60,65 @@ public class Repere extends Subject{
 	public String toString() {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
 	}
-	
+
 	public void setLightAngle(double angle) {
 		lightAngle = angle;
 		notifyObservers();
 	}
-	
+
 	public void setFaceColor(Color color) {
 		this.faceColor = color;
 		notifyObservers();
 	}
-	
+
 	public void setStrokeColor(Color color) {
 		this.strokeColor = color;
 		notifyObservers();
+	}
+
+	public void frame(double length, double height) {
+		double scl = length / (this.getMaxX() - this.getMinX());
+		double sch = height / (this.getMaxY() - this.getMinY());
+		this.scaling(((sch < scl) ? sch : scl));
+	}
+
+	private double getMinY() {
+		double min = this.getPointsList().get(0).getY();
+		double tmp;
+		for (int i = 1; i < this.getPointsList().size(); i++) {
+			tmp = this.getPointsList().get(i).getY();
+			if (tmp < min) min = tmp;
+		}
+		return min;
+	}
+	private double getMinX() {
+		double min = this.getPointsList().get(0).getX();
+		double tmp;
+		for (int i = 1; i < this.getPointsList().size(); i++) {
+			tmp = this.getPointsList().get(i).getX();
+			if (tmp < min) min = tmp;
+		}
+		return min;
+	}
+
+	private double getMaxX() {
+		double min = this.getPointsList().get(0).getX();
+		double tmp;
+		for (int i = 1; i < this.getPointsList().size(); i++) {
+			tmp = this.getPointsList().get(i).getX();
+			if (tmp > min) min = tmp;
+		}
+		return min;
+	}
+
+	private double getMaxY() {
+		double min = this.getPointsList().get(0).getY();
+		double tmp;
+		for (int i = 1; i < this.getPointsList().size(); i++) {
+			tmp = this.getPointsList().get(i).getY();
+			if (tmp > min) min = tmp;
+		}
+		return min;
 	}
 
 	/**
@@ -84,12 +129,8 @@ public class Repere extends Subject{
 	public double getMax() {
 		double max = pointsList.get(0).getX();
 		for (Point p : this.pointsList) {
-			if (p.getX() > max) {
-				max = p.getX();
-			}
-			if (p.getY() > max) {
-				max = p.getY();
-			}
+			if (p.getX() > max) max = p.getX();
+			if (p.getY() > max) max = p.getY();
 		}
 		return max;
 	}
@@ -107,11 +148,8 @@ public class Repere extends Subject{
 		maxX = Q.getX();
 		minX = Q.getX();
 		for (Point p : pointsList) {
-			if (p.getX() > maxX) {
-				maxX = p.getX();
-			} else if (p.getX() < minX) {
-				minX = p.getX();
-			}
+			if (p.getX() > maxX)maxX = p.getX();
+			else if (p.getX() < minX) minX = p.getX();
 		}
 		centreX = (maxX - minX) / 2;
 		return centreX;
@@ -130,11 +168,10 @@ public class Repere extends Subject{
 		MaxY = Q.getY();
 		MinY = Q.getY();
 		for (Point p : pointsList) {
-			if (p.getY() > MaxY) {
+			if (p.getY() > MaxY)
 				MaxY = p.getY();
-			} else if (p.getY() < MinY) {
+			else if (p.getY() < MinY) 
 				MinY = p.getY();
-			}
 		}
 		centreY = (MaxY - MinY) / 2;
 		return centreY;
@@ -154,7 +191,7 @@ public class Repere extends Subject{
 		this.translation2(ratioX, ratioY, 0);
 		notifyObservers();
 	}
-	
+
 	public void translation2(double ratioX, double ratioY, double ratioZ) {
 		for (Point p : pointsList) 
 			p.translation(new Vecteur(ratioX,ratioY,ratioZ));
@@ -166,25 +203,25 @@ public class Repere extends Subject{
 			avg += p.getZ();
 		return avg / pointsList.size();
 	}
-	
+
 	public double averageX() {
 		double avg = 0.0;
 		for (Point p : pointsList)
 			avg += p.getX();
 		return avg / pointsList.size();
 	}
-	
+
 	public double averageY() {
 		double avg = 0.0;
 		for (Point p : pointsList)
 			avg += p.getY();
 		return avg / pointsList.size();
 	}
-	
+
 	public void center() {
 		this.translation2(-this.averageX(), -this.averageY(), -this.averageZ()); 
 	}
-	
+
 	/**
 	 * Effectue une rotation du modèle autour de l'axe des abscisses X
 	 * 

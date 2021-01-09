@@ -36,13 +36,12 @@ public class FileListChangeListener implements ListChangeListener<File> {
 					controller.nbPointsLabel.setText(controller.nbPointsLabel.getText() + reader.getNbPoints());
 					controller.nbFacesLabel.setText(controller.nbFacesLabel.getText() + reader.getNbFaces());
 					controller.center.setCursor(Cursor.CROSSHAIR);
+					if(controller.daughter != null)
+						controller.daughter.detacher();
 					controller.attacher();
 					controller.repere.center();				
-					controller.repere.translation(controller.affichage.getWidth()/2, controller.affichage.getHeight()/2); // centrage de la figure approximatif
-					while (controller.repere.getMax() < controller.affichage.getWidth()-50)
-						controller.repere.scaling(MainViewController.SCALING);
-					while (controller.repere.getMax() > controller.affichage.getWidth()-controller.affichage.getWidth()/4)
-						controller.repere.scaling(MainViewController.UNSCALING);
+					controller.repere.translation(controller.affichage.getWidth()/2, controller.affichage.getHeight()/2);
+					controller.repere.frame(controller.affichage.getWidth(), controller.affichage.getHeight() / 2);
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
 				}

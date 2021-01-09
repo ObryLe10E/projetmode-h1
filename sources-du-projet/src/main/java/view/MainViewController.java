@@ -421,6 +421,7 @@ public class MainViewController extends ViewController{
 			Scene scene = new Scene(root, 600, 800);
 			SecondViewController controller = loader.getController();
 			controller.initialize(repere);
+			setDaughter(controller);
 			controller.attacher();
 			secondStage.setScene(scene);
 			secondStage.setResizable(false);

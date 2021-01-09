@@ -11,29 +11,24 @@ public abstract class Subject {
     }
 
     public void attach(Observer obs) {
-        if (! attached.contains( obs)) {
+        if (! attached.contains( obs))
             attached.add(obs);
-        }
         notifyObservers();
     }
 
     public void detach(Observer obs) {
-        if (attached.contains( obs)) {
+        if (attached.contains( obs))
             attached.remove(obs);
-        }
     }
 
     public void notifyObservers() {
-        for (Observer o : attached) {
+        for (Observer o : attached)
             o.update(this);
-        }
     }
 
 
     public void notifyObservers(Object data) {
-        for (Observer o : attached) {
+        for (Observer o : attached)
             o.update(this, data);
-        }
     }
-
 }

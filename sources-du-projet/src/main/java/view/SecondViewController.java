@@ -1,5 +1,6 @@
 package view;
 
+import javafx.stage.Stage;
 import modele.Repere;
 import utils.Subject;
 
@@ -14,6 +15,13 @@ public class SecondViewController extends ViewController {
 	@Override
 	protected void setComponents() {
 		super.setComponents();
+	}
+	
+	@Override
+	public void detacher() {
+		super.detacher();
+		Stage stage = (Stage) filsDeFer.getScene().getWindow();
+	    stage.close();
 	}
 	
 	@Override
