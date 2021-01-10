@@ -432,13 +432,13 @@ public class MainViewController extends ViewController{
 		Parent root;
 		try {
 			root = loader.load();
-			Scene scene = new Scene(root, 600, 800);
+			Scene scene = new Scene(root, 900, 700);
 			SecondViewController controller = loader.getController();
 			controller.initialize(repere);
 			setDaughter(controller);
 			controller.attacher();
 			secondStage.setScene(scene);
-			secondStage.setResizable(false);
+			secondStage.setResizable(true);
 			secondStage.setTitle("Affichage secondaire");
 			secondStage.show();
 		} catch (Exception e) {

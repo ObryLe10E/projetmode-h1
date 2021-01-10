@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SecondViewController">
+<Pane fx:id="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="931.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SecondViewController">
    <children>
-      <Canvas fx:id="affichage" height="400.0" width="480.0" />
-      <ToggleButton fx:id="filsDeFer" layoutX="521.0" layoutY="125.0" mnemonicParsing="false" text="¯/" />
-      <ToggleButton fx:id="fillFaces" layoutX="523.0" layoutY="167.0" mnemonicParsing="false" text="▰" />
-      <ToggleButton fx:id="setLight" layoutX="490.0" layoutY="250.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="88.0" text="Light" />
-      <ToggleButton fx:id="setShadow" layoutX="508.0" layoutY="212.0" mnemonicParsing="false" text="Ombre" />
+      <Canvas fx:id="affichage" height="704.0" width="782.0" />
+      <Separator layoutX="780.0" orientation="VERTICAL" prefHeight="698.0" prefWidth="0.0" />
+      <ToggleButton fx:id="filsDeFer" layoutX="845.0" layoutY="112.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6F6F6F;" text="□" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton fx:id="fillFaces" layoutX="846.0" layoutY="193.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #6F6F6F;" text="▰" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton fx:id="setLight" layoutX="841.0" layoutY="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="38.0" style="-fx-background-color: #6F6F6F;" text="💡" textFill="#fff41c" />
+      <ToggleButton fx:id="setShadow" layoutX="843.0" layoutY="348.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="33.0" style="-fx-background-color: #6F6F6F;" text="❑" textFill="WHITE" />
    </children>
 </Pane>

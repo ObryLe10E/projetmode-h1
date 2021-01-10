@@ -12,7 +12,5 @@ public class ErrorController {
 	public void init(Exception e) {
 		if (e.getMessage() != null)
 			this.lab.setText(e.getMessage());
-		else
-			this.lab.setText("Il manque un message dans le catch :)");
 	}
 }
