@@ -145,7 +145,7 @@ public class ViewController implements Observer{
 			if(!light) {
 				double coefLight = lightRatio;
 				if(face.getColor(lightIntensity, coefLight) <= 0) {
-					graphics.setFill(Color.BLACK);
+					graphics.setFill(color);
 				}else
 					graphics.setFill(Color.rgb(face.getColor(color.getRed(), coefLight), face.getColor(color.getGreen(),coefLight), face.getColor(color.getBlue(),coefLight)));
 			}
