@@ -31,6 +31,11 @@ public class Reader {
 	 * header
 	 */
 	private int nbFaces = 0;
+	/**
+	 * Un entier correspondant a la présence de couleur <br>0 si non <br>3 si oui
+	 *
+	 */
+	private int colorful = 0;
 	/** The author of the PLY file, searched with a "by" prefix in header */
 	private String author;
 	private static final String FORMAT = "ply";
@@ -38,6 +43,7 @@ public class Reader {
 	private static final String ELEMENT = "element";
 	private static final String VERTEX = "vertex";
 	private static final String FACE = "face";
+	private static final String COLOR = "blue";
 
 	/**
 	 * Try to read a PLY file,
@@ -81,26 +87,34 @@ public class Reader {
 	public int getNbPoints() {
 		return nbPoints;
 	}
-/**
- *
- * @return le nombre de faces dans le fichier
- */
+	/**
+	 *
+	 * @return le nombre de faces dans le fichier
+	 */
 	public int getNbFaces() {
 		return nbFaces;
 	}
-/**
- * 
- * @return l'auteur du fichier
- */
+	/**
+	 * 
+	 * @return l'auteur du fichier
+	 */
 	public String getAuthor() {
 		return author;
 	}
-/**
- * 
- * @return le repere du fichier
- */
+	/**
+	 * 
+	 * @return le repere du fichier
+	 */
 	public Repere getRepere() {
 		return this.repere;
+	}
+	
+	/**
+	 * 
+	 * @return true si le fichier .ply est coloré, false sinon.
+	 */
+	public boolean isColorful() {
+		return this.colorful == 3;
 	}
 
 	/**
@@ -129,6 +143,8 @@ public class Reader {
 				if (line.contains(FACE))
 					this.nbFaces = Integer.parseInt(splitted[splitted.length - 1]);
 			}
+			if(line.contains(COLOR))
+				this.colorful = 3;
 		}
 		return this.nbFaces > 0 && this.nbPoints > 0;
 	}
@@ -160,21 +176,25 @@ public class Reader {
 			}
 			this.repere.getPointsList().add(point);
 		}
-
 		for (int i = 0; i < this.nbFaces; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
 			int nbVertex = Integer.parseInt(splitted[0]);
-			if (splitted.length - 1 == nbVertex) {
+			if (splitted.length - 1 == nbVertex + colorful) {
 				List<Point> plist = new ArrayList<>();
 				for (int j = 0; j < nbVertex; j++)
 					try {
 						plist.add(this.repere.getPointsList().get(Integer.parseInt(splitted[j + 1])));
 					} catch (Exception e) {
-						throw new WrongFileFormatException(
-								"Mauvais format de face donné | Face n°" + (i + 1) + ", Point n°" + (j + 1));
+						throw new WrongFileFormatException("Mauvais format de face donné | Face n°" + (i + 1) + ", Point n°" + (j + 1));
 					}
-				this.repere.getFacesList().add(new Face(plist));
+				Face currentFace = new Face(plist);
+				List<Integer> rgb = new ArrayList<>();
+				for(int j = nbVertex;j < nbVertex + colorful; j++) {
+					rgb.add(Integer.parseInt(splitted[j+1]));
+				}
+				currentFace.setRGB(rgb);
+				this.repere.getFacesList().add(currentFace);
 			} else
 				throw new WrongFileFormatException("Mauvais format de face donné | Face n°" + (i + 1));
 		}

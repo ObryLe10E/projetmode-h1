@@ -8,9 +8,7 @@ import java.util.List;
  */
 public class Face implements Comparable<Face>{
 	private List<Point> points;
-	private int red;
-	private int green;
-	private int blue;
+	private int [] colorsRGB = new int [] {-1,-1,-1};
 	public static final int MINIMAL_SIZE = 3;
 	
 	/**
@@ -144,18 +142,18 @@ public class Face implements Comparable<Face>{
 	
 	/**
 	 * Permet de r�cuperer le coefficient de lumi�re
-	 * @param vecteurLumiere -> vecteur lumi�re
-	 * @return le coefficient de lumi�re de la face
+	 * @param vecteurLumiere -> vecteur lumière
+	 * @return le coefficient de lumière de la face
 	 */
 	private double getEclairage(Vecteur vecteurLumiere) {
 		return this.getVecteurNormalUnitaire().produitScalaire(vecteurLumiere.diviser(vecteurLumiere.normeVectorielle()));
 	}
 	
 	/**
-	 * Permet de r�cuperer la couleur de la face en fonction de la lumi�re et de la position du vecteur lumi�re
+	 * Permet de r�cuperer la couleur de la face en fonction de la lumi�re et de la position du vecteur lumière
 	 * @param rgb couleur initiale
 	 * @param grad angle de rotation du vecteur eclairage
-	 * @return la couleur apr�s transformation
+	 * @return la couleur après transformation
 	 */
 	public int getColor(double rgb, double grad) {
 		Vecteur vecteurLumiere = new Vecteur(0,0,1);
@@ -167,5 +165,32 @@ public class Face implements Comparable<Face>{
 	@Override
 	public int compareTo(Face other) {
 		return this.averageZ().compareTo(other.averageZ());
+	}
+	
+	/**
+	 * 
+	 * @return un tableau de 3 cases contenant la teinte des couleurs de 0 à 255 (RGB)
+	 */
+	public int [] getRGB() {
+		return this.colorsRGB;
+	}
+	
+	/** Associe les couleurs RGB de chaque façe a partir d'une liste de 3 entiers (RGB) <br>
+	 *  utilisé dans le Reader 
+	 * @param rgb
+	 */
+	public void setRGB(List<Integer> rgb) {
+		if(rgb.size() != 3) return; 
+		for (int i = 0; i < colorsRGB.length; i++) {
+			this.colorsRGB[i] = rgb.get(i);
+		}
+	}
+	/**
+	 * Si l'une des valeurs de <i>colorsRBG</i> vaut -1 alors la face n'est pas coloré
+	 * @return <b>true</b> si la face est coloré <br>
+	 * 		   <b>false</b> sinon
+	 */
+	public boolean isColorful() {
+		return !(this.colorsRGB[0] == -1);
 	}
 }
