@@ -33,7 +33,7 @@ public class Face implements Comparable<Face>{
 	public List<Point> getPoints() {
 		return points;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,11 +58,18 @@ public class Face implements Comparable<Face>{
 			return false;
 		return true;
 	}
-
+	/**
+	 * Permet de récupérer le nombre de points, la taille de la face.
+	 * @return Le nombre d'éléments dans la liste points -> Taille de la face
+	 */
 	public int size() {
 		return points.size();
 	}
-	
+	/**
+	 * Permet de récupérer un point a un indice donné
+	 * @param idx -> indice auquel on récupere le point dans la liste
+	 * @return un Point
+	 */
 	public Point get(int idx) {
 		return points.get(idx);
 	}
@@ -105,7 +112,10 @@ public class Face implements Comparable<Face>{
 			avg += p.getZ();
 		return avg / points.size();
 	}
-
+	/**
+	 * Permet de récuperer le vecteur normal
+	 * @return vecteur normal de la face
+	 */
 	public Vecteur getVecteurNormal() {
 		if (points.size() >= 3) {
 			Vecteur ab = new Vecteur(points.get(0), points.get(1));
@@ -114,16 +124,30 @@ public class Face implements Comparable<Face>{
 		}
 		return new Vecteur();
 	}
-
+	/**
+	 * Permet de récuperer le vecteur normal unitaire
+	 * @return vnu de la face
+	 */
 	private Vecteur getVecteurNormalUnitaire() {
 		Vecteur v = this.getVecteurNormal();
 		return v.diviser(v.normeVectoriel());
 	}
+	/**
+	 * Permet de récuperer le coefficient de lumiére
+	 * @param l -> vecteur lumiére
+	 * @return le coefficient de lumiére de la face
+	 */
+
 
 	private double getEclairage(Vecteur l) {
 		return this.getVecteurNormalUnitaire().produitScalaire(l.diviser(l.normeVectoriel()));
 	}
-
+	/**
+	 * Permet de récuperer la couleur de la face en fonction de la lumiére et de la position du vecteur lumiére
+	 * @param rgb couleur initiale
+	 * @param grad angle de rotation du vecteur eclairage
+	 * @return la couleur aprés transformation
+	 */
 	public int getColor(double rgb, double grad) {
 		Vecteur vecteurEclairage = new Vecteur(0,0,1);
 		vecteurEclairage.rotationY(grad);
@@ -132,7 +156,7 @@ public class Face implements Comparable<Face>{
 	}
 
 	@Override
-    public int compareTo(Face other) {
+	public int compareTo(Face other) {
 		return this.averageZ().compareTo(other.averageZ());
-    }
+	}
 }

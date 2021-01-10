@@ -78,27 +78,48 @@ public class Point {
 	public String toString() {
 		return matrice.toString();
 	}
-	
+	/**
+	 * Recupérer le point sous forme de matrice
+	 * @return Une matrice correspondant au point
+	 */
 	public Matrice getMatrice() {
 		return new Matrice(new double[][] { { getX() }, { getY() }, { getZ() }, { 1.0 } });
 	}
-	
+	/**
+	 * Translate un point a partir d'un vecteur v
+	 * @param v -> vecteur de translation
+	 */
 	public void translation(Vecteur v) {
 		matrice.translation(v);
 	}
-	
+	/**
+	 * Permet l'homothetie d'un point a partir d'un ratio
+	 * @param ratio
+	 */
 	public void homothetie(double ratio) {
 		matrice.homothetie(ratio);
 	}
-	
+	/**
+	 * Permet la rotation du point sur l'axe X
+	 * @param angle en gradian
+	 */
 	public void rotationX(double angle) {
 		matrice.rotationX(angle);
 	}
-	
+
+	/**
+	 * Permet la rotation du point sur l'axe Y
+	 * @param angle en gradian
+	 */
 	public void rotationY(double angle) {
 		matrice.rotationY(angle);
 	}
-	
+
+	/**
+	 * Permet la rotation du point sur l'axe Z
+	 * @param angle en gradian
+	 */
+
 	public void rotationZ(double angle) {
 		matrice.rotationZ(angle);
 	}

@@ -69,19 +69,31 @@ public class Reader {
 	public Reader(String path) throws IOException, WrongFileFormatException {
 		this(new File(path));
 	}
-
+	/**
+	 * 
+	 * @return le nombre de points dans le fichier
+	 */
 	public int getNbPoints() {
 		return nbPoints;
 	}
-
+/**
+ *
+ * @return le nombre de faces dans le fichier
+ */
 	public int getNbFaces() {
 		return nbFaces;
 	}
-
+/**
+ * 
+ * @return l'auteur du fichier
+ */
 	public String getAuthor() {
 		return author;
 	}
-
+/**
+ * 
+ * @return le repere du fichier
+ */
 	public Repere getRepere() {
 		return this.repere;
 	}
