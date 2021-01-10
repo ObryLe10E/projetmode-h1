@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.DecimalFormat;
+
 import org.junit.jupiter.api.Test;
 
 import modele.Matrice;
@@ -56,23 +58,114 @@ public class MatriceTest {
     }
     @Test
     public void rotationXtest() {
-        /*double grad = (Math.PI/2);
-        double [][] res = {{0,3},{1,4},{5,2},{1,1}};
-        double [][] mat = {{0,3},{1,4},{2,5},{1,1}};
+    	double[][] res = new double[4][4];
+
+        res[0][0] =  1;
+        res[0][1] =  0;
+        res[0][2] =  0;
+        res[0][3] =  0;
+
+        res[1][0] =  0;
+        res[1][1] =  -0.45;
+        res[1][2] =  -0.89;
+        res[1][3] =  0;
+
+        res[2][0] =  0;
+        res[2][1] =  0.89;
+        res[2][2] =  -0.45;
+        res[2][3] =  0;
+
+        res[3][0] =  0;
+        res[3][1] =  0;
+        res[3][2] =  0;
+        res[3][3] =  1;
+        double [][] mat = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        Matrice test = new Matrice(mat);
         Matrice rs = new Matrice(res);
-        Matrice ma = new Matrice(mat);
-        System.out.println(ma);
-        ma.rotationX(grad);
-        System.out.println(ma);
-        assertTrue(rs.equals(ma));*/
+        test.rotationX(90);
+        DecimalFormat df = new DecimalFormat("0.00");
+        test.getMatrice()[1][1] = Double.parseDouble(df.format(test.getMatrice()[1][1]).replace(',','.'));
+        test.getMatrice()[1][2] = Double.parseDouble(df.format(test.getMatrice()[1][2]).replace(',','.'));
+        test.getMatrice()[1][3] = Double.parseDouble(df.format(test.getMatrice()[1][3]).replace(',','.'));
+        test.getMatrice()[2][1] = Double.parseDouble(df.format(test.getMatrice()[2][1]).replace(',','.'));
+        test.getMatrice()[2][2] = Double.parseDouble(df.format(test.getMatrice()[2][2]).replace(',','.'));
+        test.getMatrice()[2][3] = Double.parseDouble(df.format(test.getMatrice()[2][3]).replace(',','.'));
+        
+        assertEquals(rs,test);
     }
 
     @Test
     public void rotationYtest() {
+    	double[][] res = new double[4][4];
+        res[0][0] = -0.45;
+        res[0][1] = 0;
+        res[0][2] =  -0.89;
+        res[0][3] =  0;
+
+        res[1][0] =  0;
+        res[1][1] =  1;
+        res[1][2] =  0;
+        res[1][3] =  0;
+
+        res[2][0] =  0.89;
+        res[2][1] =  0;
+        res[2][2] =  -0.45;
+        res[2][3] =  0;
+
+        res[3][0] =  0;
+        res[3][1] =  0;
+        res[3][2] =  0;
+        res[3][3] =  1;
+        double [][] mat = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        Matrice test = new Matrice(mat);
+        Matrice rs = new Matrice(res);
+        test.rotationY(90);
+        DecimalFormat df = new DecimalFormat("0.00");
+        test.getMatrice()[0][0] = Double.parseDouble(df.format(test.getMatrice()[0][0]).replace(',','.'));
+        test.getMatrice()[0][2] = Double.parseDouble(df.format(test.getMatrice()[0][2]).replace(',','.'));
+        test.getMatrice()[0][3] = Double.parseDouble(df.format(test.getMatrice()[0][3]).replace(',','.'));
+        test.getMatrice()[2][0] = Double.parseDouble(df.format(test.getMatrice()[2][0]).replace(',','.'));
+        test.getMatrice()[2][2] = Double.parseDouble(df.format(test.getMatrice()[2][2]).replace(',','.'));
+        test.getMatrice()[2][3] = Double.parseDouble(df.format(test.getMatrice()[2][3]).replace(',','.'));
+        
+        assertEquals(rs,test);
     }
 
     @Test
     public void rotationZtest() {
+     	double[][] res = new double[4][4];
+        res[0][0] =  -0.45;
+        res[0][1] =  -0.89;
+        res[0][2] =  0;
+        res[0][3] =  0;
+
+        res[1][0] =  0.89;
+        res[1][1] =  -0.45;
+        res[1][2] =  0;
+        res[1][3] =  0;
+
+        res[2][0] =  0;
+        res[2][1] =  0;
+        res[2][2] =  1;
+        res[2][3] =  0;
+
+        res[3][0] =  0;
+        res[3][1] =  0;
+        res[3][2] =  0;
+        res[3][3] =  1;
+        double [][] mat = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        Matrice test = new Matrice(mat);
+        Matrice rs = new Matrice(res);
+        test.rotationZ(90);
+        DecimalFormat df = new DecimalFormat("0.00");
+        test.getMatrice()[0][0] = Double.parseDouble(df.format(test.getMatrice()[0][0]).replace(',','.'));
+        test.getMatrice()[0][1] = Double.parseDouble(df.format(test.getMatrice()[0][1]).replace(',','.'));
+        test.getMatrice()[0][3] = Double.parseDouble(df.format(test.getMatrice()[0][3]).replace(',','.'));
+        test.getMatrice()[1][0] = Double.parseDouble(df.format(test.getMatrice()[1][0]).replace(',','.'));
+        test.getMatrice()[1][1] = Double.parseDouble(df.format(test.getMatrice()[1][1]).replace(',','.'));
+        test.getMatrice()[1][3] = Double.parseDouble(df.format(test.getMatrice()[1][3]).replace(',','.'));
+        
+        assertEquals(rs,test);
     }
 
     @Test

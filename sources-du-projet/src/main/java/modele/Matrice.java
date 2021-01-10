@@ -31,7 +31,14 @@ public class Matrice {
 	public void setMatrice(double[][] matrice) {
 		this.matrice = matrice;
 	}
-	
+	/**
+	 * Permet de récuprer une matrice
+	 * @return double[][] 
+	 */
+	public double[][] getMatrice() {
+		return matrice;
+	}
+
 	/**
 	 * Recuperer la taille des lignes de la matrice
 	 * @return la taille des lignes
