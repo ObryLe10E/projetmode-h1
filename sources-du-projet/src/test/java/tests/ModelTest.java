@@ -78,8 +78,8 @@ class ModelTest {
 
 	@Test
 	public void testInitReader() {
-		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader(""));
-		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader("ply\n" + 
+		assertThrows(NullPointerException.class, () -> this.reader = new Reader(""));
+		assertThrows(NullPointerException.class, () -> this.reader = new Reader("ply\n" + 
 				"format ascii 1.0\n" + 
 				"element vertex 2\n" + 
 				"property float x\n" + 

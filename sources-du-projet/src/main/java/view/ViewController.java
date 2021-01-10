@@ -145,7 +145,7 @@ public class ViewController implements Observer{
 			if(!light) {
 				double coefLight = lightRatio;
 				if(face.getColor(lightIntensity, coefLight) <= 0) {
-					graphics.setFill(color);
+					graphics.setFill(Color.BLACK);
 				}else
 					graphics.setFill(Color.rgb(face.getColor(color.getRed(), coefLight), face.getColor(color.getGreen(),coefLight), face.getColor(color.getBlue(),coefLight)));
 			}
@@ -157,7 +157,7 @@ public class ViewController implements Observer{
 	}
 
 	public void renderOmbrage(GraphicsContext graphics, double grad) {
-		Vecteur light = new Vecteur(0, 0, 1.25);
+		Vecteur light = new Vecteur(0, 0, 1.5);
 		light.rotationY(grad);
 		for (Face face : this.repere.getFacesList()) {
 			int size = face.size();
