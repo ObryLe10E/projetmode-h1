@@ -1,11 +1,15 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import exceptions.WrongFileFormatException;
 import modele.Face;
 import modele.Point;
+import modele.Reader;
 import modele.Repere;
 
 import java.util.ArrayList;
@@ -15,7 +19,7 @@ class ModelTest {
 	private Point point;
 	private Face face;
 	private Repere repere;
-	// private Reader reader;
+	private Reader reader;
 
 	@BeforeEach
 	public void init() {
@@ -30,12 +34,6 @@ class ModelTest {
 		List<Face> faceList = new ArrayList<>();
 		faceList.add(this.face);
 		this.repere = new Repere(pointsList, faceList);
-
-		// try {
-		// this.reader = new Reader("../resources/plyTest.ply");
-		// }catch(Exception e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	@AfterEach
@@ -79,7 +77,19 @@ class ModelTest {
 	}
 
 	@Test
-	public void faceSorting() {
-
+	public void testInitReader() {
+		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader(""));
+		assertThrows(WrongFileFormatException.class, () -> this.reader = new Reader("ply\n" + 
+				"format ascii 1.0\n" + 
+				"element vertex 2\n" + 
+				"property float x\n" + 
+				"property float y\n" + 
+				"property float z\n" + 
+				"element face 1\n" + 
+				"property list uchar int vertex_index\n" + 
+				"end_header\n" + 
+				"0 0 \n" + 
+				"0 0 100\n" + 
+				"4 0 1 0 1"));
 	}
 }
