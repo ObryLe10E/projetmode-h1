@@ -302,7 +302,7 @@ public class MainViewController extends ViewController{
 	 * Initialise le zoom sur le modèle ave la molette
 	 */
 	public void setZoom() {
-		center.setOnScroll(e -> {
+		affichage.setOnScroll(e -> {
 			if (e.getDeltaY() > 0)
 				this.repere.scaling(MainViewController.SCALING);
 			else

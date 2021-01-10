@@ -33,9 +33,9 @@ public class Cell extends ListCell<File> {
 			this.setStyle("-fx-background-radius : 20px; -fx-border-color:ffffff; -fx-border-radius : 20px; ");
 			try {
 				new Reader(item.getAbsoluteFile());
-				this.setStyle(this.getStyle() + "; -fx-background-color: green");
+				this.setStyle(this.getStyle() + "; -fx-background-color: #6F6F6F");
 			} catch (Exception e) {
-				this.setStyle(this.getStyle() + "; -fx-background-color: red");
+				this.setStyle(this.getStyle() + "; -fx-background-color: #9B5D43");
 			}
 			setText(item.getName());
 			setFont(new Font(20.0));
