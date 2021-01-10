@@ -90,8 +90,8 @@ public class MainViewController extends ViewController{
 	 */
 	public void initialize() {
 		affichage.setManaged(false);
-		Directory dir = new Directory("src/main/resources/fichiers/");
-		list.getItems().addAll(dir.getListOfFiles());
+		//Directory dir = new Directory("src/main/resources/fichiers/");
+		//list.getItems().addAll(dir.getListOfFiles());
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener(this));
 		list.setCellFactory(param -> new Cell());
