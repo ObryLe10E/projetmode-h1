@@ -2,7 +2,6 @@ package view;
 
 import java.io.File;
 import java.io.IOException;
-
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -20,7 +19,7 @@ public class FileListChangeListener implements ListChangeListener<File> {
 	}
 	
 	@Override
-	public void onChanged(Change<? extends File> c) {
+	public void onChanged(Change<? extends File> change) {
 		try {
 			if (!controller.list.getItems().isEmpty()) {
 				try {
@@ -43,7 +42,7 @@ public class FileListChangeListener implements ListChangeListener<File> {
 					controller.repere.translation(controller.affichage.getWidth()/2, controller.affichage.getHeight()/2);
 					controller.repere.frame(controller.affichage.getWidth(), controller.affichage.getHeight() / 2);
 				} catch (IOException e) {
-					System.out.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		} catch (Exception e) {

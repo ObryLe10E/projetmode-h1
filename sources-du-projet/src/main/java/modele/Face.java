@@ -8,9 +8,11 @@ import java.util.List;
  */
 public class Face implements Comparable<Face>{
 	private List<Point> points;
-	private int r;
-	private int g;
-	private int b;
+	private int red;
+	private int green;
+	private int blue;
+	public static final int MINIMAL_SIZE = 3;
+	
 	/**
 	 * Constructeur d'une Face Ã  partir d'une liste de points dÃ©finis
 	 * 
@@ -42,6 +44,9 @@ public class Face implements Comparable<Face>{
 		return result;
 	}
 
+	/**
+	 * DÃ©termine si deux matrices sont Ã©gales, soit si tous leurs coefficients sont Ã©gaux
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,16 +63,18 @@ public class Face implements Comparable<Face>{
 			return false;
 		return true;
 	}
+	
 	/**
-	 * Permet de récupérer le nombre de points, la taille de la face.
-	 * @return Le nombre d'éléments dans la liste points -> Taille de la face
+	 * Permet de rï¿½cupï¿½rer le nombre de points, la taille de la face.
+	 * @return Le nombre d'ï¿½lï¿½ments dans la liste points -> Taille de la face
 	 */
 	public int size() {
 		return points.size();
 	}
+	
 	/**
-	 * Permet de récupérer un point a un indice donné
-	 * @param idx -> indice auquel on récupere le point dans la liste
+	 * Permet de rï¿½cupï¿½rer un point a un indice donnï¿½
+	 * @param idx -> indice auquel on rï¿½cupere le point dans la liste
 	 * @return un Point
 	 */
 	public Point get(int idx) {
@@ -77,14 +84,14 @@ public class Face implements Comparable<Face>{
 	/**
 	 * Ajoute un Point Ã  ceux de la Face
 	 * 
-	 * @param p Point Ã  ajouter Ã  la Face
+	 * @param point Point Ã  ajouter Ã  la Face
 	 * @return Vrai si le Point a Ã©tÃ© ajoutÃ©, faux sinon
 	 */
-	public boolean addPoint(Point p) {
-		if (this.points.contains(p) /* && this.points.size() > TAILLE */)
+	public boolean addPoint(Point point) {
+		if (this.points.contains(point) /* && this.points.size() > TAILLE */)
 			return false;
 		else {
-			this.points.add(p);
+			this.points.add(point);
 			return true;
 		}
 	}
@@ -93,12 +100,12 @@ public class Face implements Comparable<Face>{
 	 * Renvoie la Face sous forme de chaÃ®ne de caractÃ¨res : Face[x,y,z]
 	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder("[");
+		StringBuilder builder = new StringBuilder("[");
 		for (Point p : this.points) {
 			if (p != null)
-				sb.append(",");
+				builder.append(",");
 		}
-		return sb.toString().substring(0, sb.toString().length() - 1) + "]";
+		return builder.toString().substring(0, builder.toString().length() - 1) + "]";
 	}
 
 	/**
@@ -112,46 +119,48 @@ public class Face implements Comparable<Face>{
 			avg += p.getZ();
 		return avg / points.size();
 	}
+	
 	/**
-	 * Permet de récuperer le vecteur normal
+	 * Permet de rï¿½cuperer le vecteur normal
 	 * @return vecteur normal de la face
 	 */
 	public Vecteur getVecteurNormal() {
-		if (points.size() >= 3) {
-			Vecteur ab = new Vecteur(points.get(0), points.get(1));
-			Vecteur ac = new Vecteur(points.get(0), points.get(2));
-			return ab.produitVectoriel(ac);
+		if (points.size() >= MINIMAL_SIZE) {
+			Vecteur vecteurAB = new Vecteur(points.get(0), points.get(1));
+			Vecteur vecteurAC = new Vecteur(points.get(0), points.get(2));
+			return vecteurAB.produitVectoriel(vecteurAC);
 		}
 		return new Vecteur();
 	}
+	
 	/**
-	 * Permet de récuperer le vecteur normal unitaire
+	 * Permet de rï¿½cuperer le vecteur normal unitaire
 	 * @return vnu de la face
 	 */
 	private Vecteur getVecteurNormalUnitaire() {
-		Vecteur v = this.getVecteurNormal();
-		return v.diviser(v.normeVectoriel());
+		Vecteur vecteur = this.getVecteurNormal();
+		return vecteur.diviser(vecteur.normeVectorielle());
 	}
+	
 	/**
-	 * Permet de récuperer le coefficient de lumiére
-	 * @param l -> vecteur lumiére
-	 * @return le coefficient de lumiére de la face
+	 * Permet de rï¿½cuperer le coefficient de lumiï¿½re
+	 * @param vecteurLumiere -> vecteur lumiï¿½re
+	 * @return le coefficient de lumiï¿½re de la face
 	 */
-
-
-	private double getEclairage(Vecteur l) {
-		return this.getVecteurNormalUnitaire().produitScalaire(l.diviser(l.normeVectoriel()));
+	private double getEclairage(Vecteur vecteurLumiere) {
+		return this.getVecteurNormalUnitaire().produitScalaire(vecteurLumiere.diviser(vecteurLumiere.normeVectorielle()));
 	}
+	
 	/**
-	 * Permet de récuperer la couleur de la face en fonction de la lumiére et de la position du vecteur lumiére
+	 * Permet de rï¿½cuperer la couleur de la face en fonction de la lumiï¿½re et de la position du vecteur lumiï¿½re
 	 * @param rgb couleur initiale
 	 * @param grad angle de rotation du vecteur eclairage
-	 * @return la couleur aprés transformation
+	 * @return la couleur aprï¿½s transformation
 	 */
 	public int getColor(double rgb, double grad) {
-		Vecteur vecteurEclairage = new Vecteur(0,0,1);
-		vecteurEclairage.rotationY(grad);
-		int luminosite = (int) (this.getEclairage(vecteurEclairage) * (rgb*255));
+		Vecteur vecteurLumiere = new Vecteur(0,0,1);
+		vecteurLumiere.rotationY(grad);
+		int luminosite = (int) (this.getEclairage(vecteurLumiere) * (rgb*255));
 		return luminosite;
 	}
 

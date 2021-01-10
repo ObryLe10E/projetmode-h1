@@ -9,12 +9,12 @@ public class Point {
 	/**
 	 * Constructeur d'un point 3D à partir de coordonnées définies
 	 * 
-	 * @param x Coordonnée homogène X du point à construire
-	 * @param y Coordonnée homogène Y du point à construire
-	 * @param z Coordonnée homogène Z du point à construire
+	 * @param pointX Coordonnée homogène X du point à construire
+	 * @param pointY Coordonnée homogène Y du point à construire
+	 * @param pointZ Coordonnée homogène Z du point à construire
 	 */
-	public Point(double x, double y, double z) {
-		this.matrice = new Matrice(new double[][] { { x }, { y }, { z }, { 1.0 } });
+	public Point(double pointX, double pointY, double pointZ) {
+		this.matrice = new Matrice(new double[][] { { pointX }, { pointY }, { pointZ }, { 1.0 } });
 	}
 
 	/**
@@ -34,10 +34,10 @@ public class Point {
 	/**
 	 * Modifie la coordonnée x du point
 	 * 
-	 * @param x Nouvelle coordonnée x à appliquer au point
+	 * @param pointX Nouvelle coordonnée x à appliquer au point
 	 */
-	public void setX(double x) {
-		matrice.getTableau()[0][0] = x;
+	public void setX(double pointX) {
+		matrice.getTableau()[0][0] = pointX;
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class Point {
 	 * 
 	 * @param x Nouvelle coordonnée y à appliquer au point
 	 */
-	public void setY(double y) {
-		matrice.getTableau()[1][0] = y;
+	public void setY(double pointY) {
+		matrice.getTableau()[1][0] = pointY;
 	}
 
 	/**
@@ -68,8 +68,8 @@ public class Point {
 	 * 
 	 * @param x Nouvelle coordonnée z à appliquer au point
 	 */
-	public void setZ(double z) {
-		matrice.getTableau()[2][0] = z;
+	public void setZ(double pointZ) {
+		matrice.getTableau()[2][0] = pointZ;
 	}
 
 	/**
@@ -78,20 +78,23 @@ public class Point {
 	public String toString() {
 		return matrice.toString();
 	}
+	
 	/**
-	 * Recup�rer le point sous forme de matrice
+	 * Recup�rer le point sous forme de matrice
 	 * @return Une matrice correspondant au point
 	 */
 	public Matrice getMatrice() {
 		return new Matrice(new double[][] { { getX() }, { getY() }, { getZ() }, { 1.0 } });
 	}
+	
 	/**
 	 * Translate un point a partir d'un vecteur v
-	 * @param v -> vecteur de translation
+	 * @param vecteur -> vecteur de translation
 	 */
-	public void translation(Vecteur v) {
-		matrice.translation(v);
+	public void translation(Vecteur vecteur) {
+		matrice.translation(vecteur);
 	}
+	
 	/**
 	 * Permet l'homothetie d'un point a partir d'un ratio
 	 * @param ratio
@@ -99,6 +102,7 @@ public class Point {
 	public void homothetie(double ratio) {
 		matrice.homothetie(ratio);
 	}
+	
 	/**
 	 * Permet la rotation du point sur l'axe X
 	 * @param angle en gradian
@@ -119,7 +123,6 @@ public class Point {
 	 * Permet la rotation du point sur l'axe Z
 	 * @param angle en gradian
 	 */
-
 	public void rotationZ(double angle) {
 		matrice.rotationZ(angle);
 	}

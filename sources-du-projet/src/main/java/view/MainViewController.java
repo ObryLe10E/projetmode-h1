@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
-import exceptions.WrongFileFormatException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,7 +44,7 @@ public class MainViewController extends ViewController{
 	@FXML
 	private Button transPlusX;
 	@FXML
-	private VBox vb;
+	private VBox box;
 	@FXML
 	private Slider sliderX;
 	@FXML
@@ -66,8 +65,6 @@ public class MainViewController extends ViewController{
 	private Button help;
 	@FXML
 	private Button info;
-//	@FXML
-//	private Button posInit;
 	@FXML
 	private Button duplicate;
 	@FXML
@@ -98,7 +95,7 @@ public class MainViewController extends ViewController{
 		list.refresh();
 		list.getSelectionModel().getSelectedItems().addListener(new FileListChangeListener(this));
 		list.setCellFactory(param -> new Cell());
-		gc = affichage.getGraphicsContext2D();	
+		graphics = affichage.getGraphicsContext2D();	
 		this.setComponents();
 	}
 	
@@ -257,11 +254,11 @@ public class MainViewController extends ViewController{
 	 * ouvrir
 	 */
 	public void openFile() {
-		FileChooser fc = new FileChooser();
-		fc.getExtensionFilters().add(new ExtensionFilter("ply Files", "*.ply"));
-		List<File> f = fc.showOpenMultipleDialog(null);
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("ply Files", "*.ply"));
+		List<File> fileList = fileChooser.showOpenMultipleDialog(null);
 		list.getItems().clear();
-		list.getItems().addAll(f);
+		list.getItems().addAll(fileList);
 	}
 
 	/**
@@ -316,7 +313,7 @@ public class MainViewController extends ViewController{
 	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
 	 */
 	public void setRotation() {
-		vb.setOnKeyPressed(e-> {
+		box.setOnKeyPressed(e-> {
 			if (e.getCode().equals(KeyCode.Z)) 
 				this.repere.rotateZ(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.Y))
@@ -371,22 +368,15 @@ public class MainViewController extends ViewController{
 	}
 
 	private void triFaceList() {
-		HashMap<File, Integer> map = new HashMap<File, Integer>();
+		HashMap<File, Integer> map = new HashMap<>();
 		for(File f : this.list.getItems()) {
-			System.out.println(f);
-			Reader r = null;
 			try {
-				r = new Reader(f);
-				map.put(f, r.getNbFaces());
-			} catch (IOException e) {
+				Reader reader = new Reader(f);
+				map.put(f, reader.getNbFaces());
+			} catch (Exception e) {
 				map.put(f, 0);
-				e.printStackTrace();
-			} catch (WrongFileFormatException e) {
-				map.put(f, 0);
-				e.printStackTrace();
 			}
 		}
-		System.out.println("liste tri�e :" + triSurValeur(map));
 		TreeMap<File, Integer> map2 =triSurValeur(map);
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
@@ -394,7 +384,7 @@ public class MainViewController extends ViewController{
 
 	private TreeMap<File,Integer> triSurValeur(HashMap<File, Integer> map) {
 		ValueComparator comparateur = new ValueComparator(map);
-		TreeMap<File,Integer> mapTriee = new TreeMap<File,Integer>(comparateur);
+		TreeMap<File,Integer> mapTriee = new TreeMap<>(comparateur);
 		mapTriee.putAll(map);
 		return mapTriee;
 	}
@@ -408,16 +398,13 @@ public class MainViewController extends ViewController{
 	}
 	
 	private void triPointsList() {
-		HashMap<File, Integer> map = new HashMap<File, Integer>();
+		HashMap<File, Integer> map = new HashMap<>();
 		for(File f : this.list.getItems()) {
-			System.out.println(f);
-			Reader r = null;
 			try {
-				r = new Reader(f);
-				map.put(f, r.getNbPoints());
+				Reader reader = new Reader(f);
+				map.put(f, reader.getNbPoints());
 			} catch (Exception e) {
 				map.put(f, -1);
-				e.printStackTrace();
 			}
 		}
 		TreeMap<File, Integer> map2 =triSurValeur(map);

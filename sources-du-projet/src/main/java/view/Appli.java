@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Appli extends Application {
     @Override
-    public void start(Stage stage) throws Exception {
+	public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("model.fxml"));
         Parent root = loader.load();

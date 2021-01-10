@@ -7,7 +7,7 @@ import utils.Subject;
 public class SecondViewController extends ViewController {
 	public void initialize(Repere repere) {
 		affichage.setManaged(false);
-		gc = affichage.getGraphicsContext2D();	
+		graphics = affichage.getGraphicsContext2D();	
 		setComponents();
 		this.repere = repere;
 	}

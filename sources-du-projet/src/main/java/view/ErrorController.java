@@ -9,8 +9,9 @@ import javafx.scene.control.Label;
 public class ErrorController {
 	@FXML
 	Label lab;
-	public void init(Exception e) {
-		if (e.getMessage() != null)
-			this.lab.setText(e.getMessage());
+	public void init(Exception exception) {
+		if (exception.getMessage() != null)
+			this.lab.setText(exception.getMessage());
+		else exception.printStackTrace();
 	}
 }

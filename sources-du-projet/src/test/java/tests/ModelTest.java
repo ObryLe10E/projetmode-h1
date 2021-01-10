@@ -21,13 +21,13 @@ class ModelTest {
 	public void init() {
 		this.point = new Point(3.0, 2.0, 5.0);
 
-		List<Point> pointsList = new ArrayList<Point>();
+		List<Point> pointsList = new ArrayList<>();
 		pointsList.add(this.point);
 		pointsList.add(new Point(4.0, 1.0, 6.0));
 		pointsList.add(new Point(1.0, 1.0, 4.0));
 		this.face = new Face(pointsList);
 
-		List<Face> faceList = new ArrayList<Face>();
+		List<Face> faceList = new ArrayList<>();
 		faceList.add(this.face);
 		this.repere = new Repere(pointsList, faceList);
 

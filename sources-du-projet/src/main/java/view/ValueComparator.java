@@ -10,8 +10,8 @@ class ValueComparator implements Comparator<File> {
 		this.base = base;
 	}
 
-	public int compare(File a, File b) {
-		if (base.get(a) >= base.get(b)) return -1;
+	public int compare(File fichier, File other) {
+		if (base.get(fichier) >= base.get(other)) return -1;
 		else return 1;
 	}
 }

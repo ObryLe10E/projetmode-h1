@@ -11,49 +11,55 @@ public class Vecteur extends Point {
 		this.matrice = new Matrice(new double[][] { { 0 }, { 0 }, { 0 }, { 0.0 } });
 	}
 	/**
-	 * Constructeur d'un vecteur a partir de trois coordonées
-	 * @param x
-	 * @param y
-	 * @param z
+	 * Constructeur d'un vecteur a partir de trois coordonï¿½es
+	 * @param pointX
+	 * @param pointY
+	 * @param pointZ
 	 */
-	public Vecteur(double x, double y, double z) {
-		this.matrice = new Matrice(new double[][] { { x }, { y }, { z }, { 0.0 } });
+	public Vecteur(double pointX, double pointY, double pointZ) {
+		this.matrice = new Matrice(new double[][] { { pointX }, { pointY }, { pointZ }, { 0.0 } });
 	}
 	/**
 	 * Construteur d'un vecteur a partir de deux points
-	 * @param a
-	 * @param b
+	 * @param pointA
+	 * @param pointB
 	 */
-	public Vecteur(Point a, Point b) {
-		this.matrice = new Matrice(new double[][] { { b.getX() - a.getX() }, { b.getY() - a.getY() }, { b.getZ() - a.getZ() }, { 0.0 } });
+	public Vecteur(Point pointA, Point pointB) {
+		this.matrice = new Matrice(new double[][] { { pointB.getX() - pointA.getX() }, { pointB.getY() - pointA.getY() }, { pointB.getZ() - pointA.getZ() }, { 0.0 } });
 	}
 	/**
 	 * Permet de faire un produit vectoriel
-	 * @param p
+	 * @param point
 	 * @return
 	 */
-	public Vecteur produitVectoriel(Point p) {
-		double x = this.getY() * p.getZ() - this.getZ() * p.getY();
-		double y = this.getZ() * p.getX() - this.getX() * p.getZ();
-		double z = this.getX() * p.getY() - this.getY() * p.getX();
-		return new Vecteur(x,y,z);
+	public Vecteur produitVectoriel(Point point) {
+		double pointX = this.getY() * point.getZ() - this.getZ() * point.getY();
+		double pointY = this.getZ() * point.getX() - this.getX() * point.getZ();
+		double pointZ = this.getX() * point.getY() - this.getY() * point.getX();
+		return new Vecteur(pointX,pointY,pointZ);
 	}
 	/**
 	 * Permet de faire un produit scalaire
-	 * @param p
+	 * @param point
 	 * @return
 	 */
-	public double produitScalaire(Point p) {
-		return this.getX() * p.getX() + this.getY() * p.getY() + this.getZ() * p.getZ();
+	public double produitScalaire(Point point) {
+		return this.getX() * point.getX() + this.getY() * point.getY() + this.getZ() * point.getZ();
 	}
 	/**
 	 * 
 	 * @return la norme du vecteur this
 	 */
-	public double normeVectoriel() {
+	public double normeVectorielle() {
 		double ans = Math.pow(this.getX(),2) +  Math.pow(this.getY(),2) +  Math.pow(this.getZ(),2);
 		return Math.sqrt(ans);
-		
+	}
+	/**
+	 * La matrice du vecteur
+	 * @return la matrice du vecteur sous forme de tableau
+	 */
+	public double[][] getTableau(){
+		return matrice.getTableau();
 	}
 	/**
 	 * @return le vecteur sous forme de matrice
@@ -63,13 +69,13 @@ public class Vecteur extends Point {
 	}
 	/**
 	 * Permet de diviser un vecteur
-	 * @param d
+	 * @param diviseur
 	 * @return
 	 */
-	public Vecteur diviser(double d) {
-		double x = this.getX() / d;
-		double y = this.getY() / d;
-		double z = this.getZ() / d;
-		return new Vecteur(x, y, z);
+	public Vecteur diviser(double diviseur) {
+		double pointX = this.getX() / diviseur;
+		double pointY = this.getY() / diviseur;
+		double pointZ = this.getZ() / diviseur;
+		return new Vecteur(pointX, pointY, pointZ);
 	}
 }

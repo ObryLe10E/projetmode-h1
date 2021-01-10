@@ -10,16 +10,16 @@ import utils.Subject;
  * @author H1 : DELOBEL Jeremy, DUHEM Alexis, OBRY Thomas, BONNET Tanguy
  */
 public class Directory extends Subject {
-	private List<File> listOfFiles = new ArrayList<File>();
+	private List<File> listOfFiles = new ArrayList<>();
 	private File path;
 
 	/**
 	 * Constructeur d'un Directory à partir d'un chemin
 	 * 
-	 * @param f Chemin à partir duquel créer le Directory
+	 * @param path Chemin à partir duquel créer le Directory
 	 */
-	public Directory(String f) {
-		this.path = new File(f);
+	public Directory(String path) {
+		this.path = new File(path);
 		for (File fi : this.path.listFiles()) {
 			if (!fi.isDirectory()) {
 				listOfFiles.add(fi);

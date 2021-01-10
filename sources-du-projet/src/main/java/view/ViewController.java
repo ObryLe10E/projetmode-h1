@@ -17,7 +17,7 @@ import utils.Subject;
 
 public class ViewController implements Observer{
 	protected SecondViewController daughter;
-	protected GraphicsContext gc;
+	protected GraphicsContext graphics;
 	protected Repere repere;
 	@FXML
 	protected Canvas affichage;
@@ -116,24 +116,25 @@ public class ViewController implements Observer{
 	}
 	
 	public void renderModel(double lightRatio) {
+		int lightIntensity = 1;
 		this.repere.sortFaces();
 		redraw();
 		if(!shadow)
-			this.renderOmbrage(gc,lightRatio);
+			this.renderOmbrage(graphics,lightRatio);
 		if (!faces)
-			gc.setFill(Color.TRANSPARENT);
+			graphics.setFill(Color.TRANSPARENT);
 		else 
-			gc.setFill(repere.faceColor);
+			graphics.setFill(repere.faceColor);
 		if (!stroke)
-			gc.setStroke(Color.TRANSPARENT);
+			graphics.setStroke(Color.TRANSPARENT);
 		else
-			gc.setStroke(repere.strokeColor);
-		Color c = repere.faceColor;
+			graphics.setStroke(repere.strokeColor);
+		Color color = repere.faceColor;
 	      for (Face face : this.repere.getFacesList()) {
 	            int size = face.size();
 	            double xPoints[];
 	            double yPoints[];
-	            if(size == 3) {
+	            if(size == Face.MINIMAL_SIZE) {
 	                xPoints = new double[] { face.getPoints().get(0).getX(), face.getPoints().get(1).getX(), face.getPoints().get(2).getX()};
 	                yPoints = new double[] { face.getPoints().get(0).getY(), face.getPoints().get(1).getY(), face.getPoints().get(2).getY()};
 	            }else {
@@ -142,10 +143,10 @@ public class ViewController implements Observer{
 	            }
 	            if(!light) {
 	                double coefLight = lightRatio;
-	                if(face.getColor(1, coefLight) <= 0) {
-	                    gc.setFill(Color.BLACK);
+	                if(face.getColor(lightIntensity, coefLight) <= 0) {
+	                    graphics.setFill(Color.BLACK);
 	                }else
-	                    gc.setFill(Color.rgb(face.getColor(c.getRed(), coefLight), face.getColor(c.getGreen(),coefLight), face.getColor(c.getBlue(),coefLight)));
+	                    graphics.setFill(Color.rgb(face.getColor(color.getRed(), coefLight), face.getColor(color.getGreen(),coefLight), face.getColor(color.getBlue(),coefLight)));
 	            }
 	            if(stroke)
 					affichage.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
@@ -154,7 +155,7 @@ public class ViewController implements Observer{
 	        }
 	}
 	
-	public void renderOmbrage(GraphicsContext gc, double grad) {
+	public void renderOmbrage(GraphicsContext graphics, double grad) {
 		Vecteur light = new Vecteur(0, 0, 1.25);
 		light.rotationY(grad);
 		for (Face face : this.repere.getFacesList()) {
@@ -163,15 +164,15 @@ public class ViewController implements Observer{
 			double ombreY [] = new double [face.getPoints().size()];
 			for (int i = 0; i < size ; i++) {
 				Point point = face.get(i);
-				ombreX[i] = (point.getX()  / light.normeVectoriel());
-				ombreY[i]= (point.getY() / light.normeVectoriel());
+				ombreX[i] = (point.getX()  / light.normeVectorielle());
+				ombreY[i]= (point.getY() / light.normeVectorielle());
 			}
 			if(!filsDeFer.isSelected()) {
-				gc.setFill(Color.rgb(100, 100, 100));
+				graphics.setFill(Color.rgb(100, 100, 100));
 				affichage.getGraphicsContext2D().fillPolygon(ombreX, ombreY, size);
 			}
 			if(!fillFaces.isSelected() & filsDeFer.isSelected()) {
-				gc.setFill(Color.rgb(100,100,100));
+				graphics.setFill(Color.rgb(100,100,100));
 				affichage.getGraphicsContext2D().strokePolygon(ombreX, ombreY, size);
 				affichage.getGraphicsContext2D().setStroke(Color.rgb(100,100,100));
 			}

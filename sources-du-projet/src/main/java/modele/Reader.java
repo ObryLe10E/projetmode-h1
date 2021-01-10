@@ -33,26 +33,31 @@ public class Reader {
 	private int nbFaces = 0;
 	/** The author of the PLY file, searched with a "by" prefix in header */
 	private String author;
+	private static final String FORMAT = "ply";
+	private static final String AUTHOR = "by";
+	private static final String ELEMENT = "element";
+	private static final String VERTEX = "vertex";
+	private static final String FACE = "face";
 
 	/**
 	 * Try to read a PLY file,
 	 * 
-	 * @param f : A regular file
+	 * @param fichier : A regular file
 	 * @throws IOException              if the bufferedReader {@link #reader}
 	 *                                  encounters a problem to read a line
 	 * @throws NullPointerException     if the specified file does not exist
 	 * @throws WrongFileFormatException if the specified file isn't a .ply file
 	 */
-	public Reader(File f) throws IOException, WrongFileFormatException {
-		if (f == null)
+	public Reader(File fichier) throws IOException, WrongFileFormatException {
+		if (fichier == null)
 			throw new NullPointerException("Fichier inexistant");
 		this.repere = new Repere();
 		try {
-			reader = new BufferedReader(new FileReader(f));
+			reader = new BufferedReader(new FileReader(fichier));
 			String line = reader.readLine();
 			if (line == null)
 				throw new NullPointerException("Fichier vide");
-			if (!line.equals("ply")) {
+			if (!line.equals(FORMAT)) {
 				throw new WrongFileFormatException("Mauvais format de fichier : non \"ply\"");
 			}
 			this.propertySearch();
@@ -108,18 +113,20 @@ public class Reader {
 	 *         <li>{@link #nbPoints} (vertex)</li>
 	 *         <li>{@link #nbFaces} (face)</li> else returns <b>false</b>
 	 * @throws IOException
-	 */
+	 */ 
 	public boolean headerCheck() throws IOException {
-		for (String line = reader.readLine(); !line.equals("end_header"); line = reader.readLine()) {
-			if (line.contains("by")) {
-				String[] authorTab = line.substring(line.indexOf("by")).split(" ");
+		String end = "end_header";
+		for (String line = reader.readLine(); !line.equals(end); line = reader.readLine()) {
+			if (line.contains(AUTHOR)) {
+				String subLine = line.substring(line.indexOf(AUTHOR));
+				String[] authorTab = subLine.split(" ");
 				this.author = authorTab[1];
 			}
-			if (line.startsWith("element")) {
+			if (line.startsWith(ELEMENT)) {
 				String[] splitted = line.split(" ");
-				if (line.contains("vertex"))
+				if (line.contains(VERTEX))
 					this.nbPoints = Integer.parseInt(splitted[splitted.length - 1]);
-				if (line.contains("face"))
+				if (line.contains(FACE))
 					this.nbFaces = Integer.parseInt(splitted[splitted.length - 1]);
 			}
 		}
@@ -139,20 +146,19 @@ public class Reader {
 	public void propertySearch() throws IOException, WrongFileFormatException {
 		if (!this.headerCheck())
 			return;
-
 		for (int i = 0; i < this.nbPoints; i++) {
 			String line = reader.readLine();
 			String[] splitted = line.split(" ");
-			if (splitted.length < 3)
+			if (splitted.length < Face.MINIMAL_SIZE)
 				throw new WrongFileFormatException("Mauvais format de point donné | Point n°" + (i + 1));
-			Point p;
+			Point point;
 			try {
-				p = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
+				point = new Point(Double.parseDouble(splitted[0]), Double.parseDouble(splitted[1]),
 						Double.parseDouble(splitted[2]));
 			} catch (Exception e) {
 				throw new WrongFileFormatException("Mauvais format de point donné | Point n°" + (i + 1));
 			}
-			this.repere.getPointsList().add(p);
+			this.repere.getPointsList().add(point);
 		}
 
 		for (int i = 0; i < this.nbFaces; i++) {
@@ -160,7 +166,7 @@ public class Reader {
 			String[] splitted = line.split(" ");
 			int nbVertex = Integer.parseInt(splitted[0]);
 			if (splitted.length - 1 == nbVertex) {
-				List<Point> plist = new ArrayList<Point>();
+				List<Point> plist = new ArrayList<>();
 				for (int j = 0; j < nbVertex; j++)
 					try {
 						plist.add(this.repere.getPointsList().get(Integer.parseInt(splitted[j + 1])));
