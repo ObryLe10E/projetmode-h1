@@ -18,12 +18,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Reader;
@@ -64,8 +66,8 @@ public class MainViewController extends ViewController{
 	private Button help;
 	@FXML
 	private Button info;
-	@FXML
-	private Button posInit;
+//	@FXML
+//	private Button posInit;
 	@FXML
 	private Button duplicate;
 	@FXML
@@ -122,27 +124,38 @@ public class MainViewController extends ViewController{
 	 * Initialise les boutons permettant de trier la liste des fichiers de la bibliothèque
 	 */
 	private void setSortButtons() {
-		this.faceButton.setOnAction(e->{								//
-			if(this.faceButton.isSelected()) {							//
-				this.nameButton.setSelected(false);						//
-				this.pointsButton.setSelected(false);					//
-				this.triFaceList();										//
-			}else														//
-				Collections.reverse(this.list.getItems());});			//
-		this.nameButton.setOnAction(e->{								//
-			if(this.nameButton.isSelected()) {							//
-				this.faceButton.setSelected(false);						//  	A FAIRE DANS
-				this.pointsButton.setSelected(false);					//		LE FXML
-				this.triName();											//
-			}else														//
-				Collections.reverse(this.list.getItems());});			//
-		this.pointsButton.setOnAction(e->{								//		
-			if(this.pointsButton.isSelected()) {						//
-				this.faceButton.setSelected(false);						//
-				this.nameButton.setSelected(false);						//
-				this.triPointsList();									//
-			}else														//
-				Collections.reverse(this.list.getItems());});			//
+		this.faceButton.setOnAction(e->{
+			if(this.faceButton.isSelected()) {
+				this.nameButton.setSelected(false);
+				this.pointsButton.setSelected(false);
+				this.triFaceList();
+			}else
+				Collections.reverse(this.list.getItems());});
+		this.nameButton.setOnAction(e->{
+			if(this.nameButton.isSelected()) {
+				this.faceButton.setSelected(false);
+				this.pointsButton.setSelected(false);
+				this.triName();
+			}else
+				Collections.reverse(this.list.getItems());});
+		this.pointsButton.setOnAction(e->{	
+			if(this.pointsButton.isSelected()) {
+				this.faceButton.setSelected(false);
+				this.nameButton.setSelected(false);
+				this.triPointsList();
+			}else
+				Collections.reverse(this.list.getItems());});
+	}
+	
+	@Override
+	public void setButtons() {
+		super.setButtons();
+		duplicate.setTooltip(new Tooltip("Ouvre le modèle dans une nouvelle fenêtre"));
+		duplicate.getTooltip().setShowDelay(new Duration(0));
+		info.setTooltip(new Tooltip("Informations"));
+        info.getTooltip().setShowDelay(new Duration(0));
+        help.setTooltip(new Tooltip("Aide"));
+        help.getTooltip().setShowDelay(new Duration(0));
 	}
 	
 	/**
@@ -169,8 +182,9 @@ public class MainViewController extends ViewController{
 	private void setLightSliders() {
 		sliderLight.setMax(Math.PI/2);
 		sliderLight.setMin(-Math.PI/2);
-		sliderLight.valueProperty().addListener((obs,old,n)->{
-			repere.setLightAngle(sliderLight.getValue());});
+		sliderLight.valueProperty().addListener((obs,old,n)->{ repere.setLightAngle(sliderLight.getValue());});
+		sliderLight.setTooltip(new Tooltip("Varie la lumiére de π à -π "));
+        sliderLight.getTooltip().setShowDelay(new Duration(0));
 	}
 	
 	/**

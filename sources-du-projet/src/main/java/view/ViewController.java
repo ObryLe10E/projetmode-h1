@@ -76,6 +76,7 @@ public class ViewController implements Observer{
 		setShadow.setOnAction(e -> { switchShadow();});
 		setShadow.setTooltip(new Tooltip("Activer la source de lumière"));
 		setShadow.getTooltip().setShowDelay(new Duration(0));
+		
 	}
 	
 	public void switchLight() {
