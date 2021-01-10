@@ -98,7 +98,7 @@ public class MainViewController extends ViewController{
 		graphics = affichage.getGraphicsContext2D();	
 		this.setComponents();
 	}
-	
+
 	/**
 	 * Initialise tous les éléments de la fenêtre
 	 */
@@ -116,7 +116,7 @@ public class MainViewController extends ViewController{
 		this.setMouseTranslate();
 		this.setSortButtons();
 	}
-	
+
 	/**
 	 * Initialise les boutons permettant de trier la liste des fichiers de la bibliothèque
 	 */
@@ -143,18 +143,18 @@ public class MainViewController extends ViewController{
 			}else
 				Collections.reverse(this.list.getItems());});
 	}
-	
+
 	@Override
 	public void setButtons() {
 		super.setButtons();
 		duplicate.setTooltip(new Tooltip("Ouvre le modèle dans une nouvelle fenêtre"));
 		duplicate.getTooltip().setShowDelay(new Duration(0));
 		info.setTooltip(new Tooltip("Informations"));
-        info.getTooltip().setShowDelay(new Duration(0));
-        help.setTooltip(new Tooltip("Aide"));
-        help.getTooltip().setShowDelay(new Duration(0));
+		info.getTooltip().setShowDelay(new Duration(0));
+		help.setTooltip(new Tooltip("Aide"));
+		help.getTooltip().setShowDelay(new Duration(0));
 	}
-	
+
 	/**
 	 * Affiche les infos du fichier choisi dans les zones de texte appropriées
 	 */
@@ -164,7 +164,7 @@ public class MainViewController extends ViewController{
 		info.setOnAction(e->{
 			afficherInfo();});
 	}
-	
+
 	/**
 	 * Initialise le bouton permettant de dupliquer la fenêtre actuelle
 	 */
@@ -181,9 +181,9 @@ public class MainViewController extends ViewController{
 		sliderLight.setMin(-Math.PI/2);
 		sliderLight.valueProperty().addListener((obs,old,n)->{ repere.setLightAngle(sliderLight.getValue());});
 		sliderLight.setTooltip(new Tooltip("Varie la lumiére de π à -π "));
-        sliderLight.getTooltip().setShowDelay(new Duration(0));
+		sliderLight.getTooltip().setShowDelay(new Duration(0));
 	}
-	
+
 	/**
 	 * Initialise les boutons permettant de choisir d'afficer ou non les arêtes
 	 * et/ou de remplir les faces
@@ -218,7 +218,7 @@ public class MainViewController extends ViewController{
 		sliderZ.setMin(-Math.PI);
 		sliderZ.setValue(0);
 	}
-	
+
 	private void setMouseTranslate() {
 		this.affichage.setOnMousePressed(e->{
 			tmpX = e.getX();
@@ -328,9 +328,9 @@ public class MainViewController extends ViewController{
 		sliderZ.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateZ((Double) n - (Double) old);});
 	}
-	
+
 	public void ajuster() {
-		
+
 	}
 
 	@SuppressWarnings("unused")
@@ -388,7 +388,7 @@ public class MainViewController extends ViewController{
 		mapTriee.putAll(map);
 		return mapTriee;
 	}
-	
+
 	private void triName() {
 		Object [] tri = this.list.getItems().toArray();
 		Arrays.sort(tri);
@@ -396,7 +396,7 @@ public class MainViewController extends ViewController{
 		for(Object o : tri)
 			this.list.getItems().add((File) o );
 	}
-	
+
 	private void triPointsList() {
 		HashMap<File, Integer> map = new HashMap<>();
 		for(File f : this.list.getItems()) {
@@ -411,7 +411,7 @@ public class MainViewController extends ViewController{
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
 	}
-	
+
 	private void dupliquer() {
 		Stage secondStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -425,7 +425,7 @@ public class MainViewController extends ViewController{
 			setDaughter(controller);
 			controller.attacher();
 			secondStage.setScene(scene);
-			secondStage.setResizable(true);
+			secondStage.setResizable(false);
 			secondStage.setTitle("Affichage secondaire");
 			secondStage.show();
 		} catch (Exception e) {
@@ -448,14 +448,14 @@ public class MainViewController extends ViewController{
 			}
 		}
 	}
-	
+
 	@Override
 	public void update(Subject subj){
 		fillColor.setValue(repere.faceColor);
 		strokeColor.setValue(repere.strokeColor);
 		renderModel(repere.lightAngle);
 	}
-	
+
 	@Override
 	public void update(Subject subj, Object data){
 		fillColor.setValue(repere.faceColor);

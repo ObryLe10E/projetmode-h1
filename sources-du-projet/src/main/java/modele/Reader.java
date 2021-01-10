@@ -189,9 +189,9 @@ public class Reader {
 						throw new WrongFileFormatException("Mauvais format de face donné | Face n°" + (i + 1) + ", Point n°" + (j + 1));
 					}
 				Face currentFace = new Face(plist);
-				List<Integer> rgb = new ArrayList<>();
+				List<Double> rgb = new ArrayList<>();
 				for(int j = nbVertex;j < nbVertex + colorful; j++) {
-					rgb.add(Integer.parseInt(splitted[j+1]));
+					rgb.add(Double.parseDouble(splitted[j+1]));
 				}
 				currentFace.setRGB(rgb);
 				this.repere.getFacesList().add(currentFace);

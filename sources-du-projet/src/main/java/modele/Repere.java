@@ -59,7 +59,7 @@ public class Repere extends Subject{
 	public String toString() {
 		return "Repere [pointsList=" + this.pointsList + ", facesList=" + this.facesList + "]";
 	}
-	
+
 	/**
 	 * Permet de fixer un angle de lumi�re
 	 * @param angle
@@ -68,7 +68,7 @@ public class Repere extends Subject{
 		lightAngle = angle;
 		notifyObservers();
 	}
-	
+
 	/**
 	 * Permet de fixer une coleur aux faces
 	 * @param color
@@ -86,7 +86,7 @@ public class Repere extends Subject{
 		this.strokeColor = color;
 		notifyObservers();
 	} 
-	
+
 	/**
 	 * Permet de centrer la figure en fonction de la taille de la fenetre
 	 * @param length
@@ -97,7 +97,7 @@ public class Repere extends Subject{
 		double sch = height / (this.getMaxY() - this.getMinY());
 		RepereUtils.scaling(this, ((sch < scl) ? sch : scl));
 	}
-	
+
 	/**
 	 * 
 	 * @return le Y minimum 
@@ -111,7 +111,7 @@ public class Repere extends Subject{
 		}
 		return min;
 	}
-	
+
 	/**
 	 * 
 	 * @return le X minimum
@@ -125,7 +125,7 @@ public class Repere extends Subject{
 		}
 		return min;
 	}
-	
+
 	/**
 	 * 
 	 * @return le X maximum
@@ -139,7 +139,7 @@ public class Repere extends Subject{
 		}
 		return min;
 	}
-	
+
 	/**
 	 * 
 	 * @return le Y maximum

@@ -15,7 +15,7 @@ public class Appli extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("PlyReader");
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 

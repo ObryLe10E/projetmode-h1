@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Face implements Comparable<Face>{
 	private List<Point> points;
-	private int [] colorsRGB = new int [] {-1,-1,-1};
+	private double [] colorsRGB = new double [] {-1,-1,-1};
 	public static final int MINIMAL_SIZE = 3;
-	
+
 	/**
 	 * Constructeur d'une Face à partir d'une liste de points définis
 	 * 
@@ -61,7 +61,7 @@ public class Face implements Comparable<Face>{
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * Permet de r�cup�rer le nombre de points, la taille de la face.
 	 * @return Le nombre d'�l�ments dans la liste points -> Taille de la face
@@ -69,7 +69,7 @@ public class Face implements Comparable<Face>{
 	public int size() {
 		return points.size();
 	}
-	
+
 	/**
 	 * Permet de r�cup�rer un point a un indice donn�
 	 * @param idx -> indice auquel on r�cupere le point dans la liste
@@ -117,7 +117,7 @@ public class Face implements Comparable<Face>{
 			avg += p.getZ();
 		return avg / points.size();
 	}
-	
+
 	/**
 	 * Permet de r�cuperer le vecteur normal
 	 * @return vecteur normal de la face
@@ -130,7 +130,7 @@ public class Face implements Comparable<Face>{
 		}
 		return new Vecteur();
 	}
-	
+
 	/**
 	 * Permet de r�cuperer le vecteur normal unitaire
 	 * @return vnu de la face
@@ -139,7 +139,7 @@ public class Face implements Comparable<Face>{
 		Vecteur vecteur = this.getVecteurNormal();
 		return vecteur.diviser(vecteur.normeVectorielle());
 	}
-	
+
 	/**
 	 * Permet de r�cuperer le coefficient de lumi�re
 	 * @param vecteurLumiere -> vecteur lumière
@@ -148,7 +148,7 @@ public class Face implements Comparable<Face>{
 	private double getEclairage(Vecteur vecteurLumiere) {
 		return this.getVecteurNormalUnitaire().produitScalaire(vecteurLumiere.diviser(vecteurLumiere.normeVectorielle()));
 	}
-	
+
 	/**
 	 * Permet de r�cuperer la couleur de la face en fonction de la lumi�re et de la position du vecteur lumière
 	 * @param rgb couleur initiale
@@ -166,23 +166,23 @@ public class Face implements Comparable<Face>{
 	public int compareTo(Face other) {
 		return this.averageZ().compareTo(other.averageZ());
 	}
-	
+
 	/**
 	 * 
 	 * @return un tableau de 3 cases contenant la teinte des couleurs de 0 à 255 (RGB)
 	 */
-	public int [] getRGB() {
+	public double [] getRGB() {
 		return this.colorsRGB;
 	}
-	
+
 	/** Associe les couleurs RGB de chaque façe a partir d'une liste de 3 entiers (RGB) <br>
 	 *  utilisé dans le Reader 
 	 * @param rgb
 	 */
-	public void setRGB(List<Integer> rgb) {
+	public void setRGB(List<Double> rgb) {
 		if(rgb.size() != 3) return; 
 		for (int i = 0; i < colorsRGB.length; i++) {
-			this.colorsRGB[i] = rgb.get(i);
+			this.colorsRGB[i] = rgb.get(i) / 255;
 		}
 	}
 	/**
