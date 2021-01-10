@@ -1,0 +1,80 @@
+<ruleset 
+xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+name="ProjetMode H1" 
+xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+    <description>
+        Règles à respecter pour le projet de Modélisation, groupe H1
+    </description>
+
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="3"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="15"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions"/>
+
+    <rule ref="category/java/codestyle.xml/FieldNamingConventions"/>
+
+    <rule ref="category/java/codestyle.xml/MethodNamingConventions"/>
+
+    <rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingMethodName"/>
+
+    <rule ref="category/java/design.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="60.0"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/apex/design.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="3.0"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/apex/design.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum" value="200.0" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/LawOfDemeter"/>
+
+    <rule ref="category/apex/design.xml/CognitiveComplexity">
+        <properties>
+            <property name="methodReportLevel" value="5" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/errorprone.xml/AvoidLiteralsInIfCondition">
+        <properties>
+            <property name="ignoreExpressions" value="false" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/UseDiamondOperator"/>
+
+    <rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons"/>
+
+    <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
+
+    <rule ref="category/java/design.xml/GodClass" />
+
+    <rule ref="category/java/bestpractices.xml/UnusedAssignment">
+        <properties>
+            <property name="checkUnusedPrefixIncrement" value="true"/>
+            <property name="reportUnusedVariables" value="false"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod" />
+
+    <rule ref="category/java/bestpractices.xml/UnusedFormalParameter" />
+</ruleset>

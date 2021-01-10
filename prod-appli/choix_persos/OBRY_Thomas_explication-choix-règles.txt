@@ -1,0 +1,40 @@
+RÈGLES UTILISÉES DANS LE .XML :
+
+    - LawOfDemeter :
+        Important pour la compréhension du code par qqun d'autre mais aussi pour le relire soi-même pour potentiellement
+        le modifier ou le mettre à jour au fur et à mesure de l'avancement du projet.
+
+    - AvoidFieldNameMatchingMethodName :
+        Évite de créer des problèmes de conflits entre des méthodes et des  attributs qui pourraient poser problèmes
+        et qui seraient difficiles à débugger.
+
+    - AvoidDeeplyNestedIfStmts :
+        Facilite la compréhension du code et le rend moins rigide, et donc plus facile à modifier ou mettre à jour.
+
+    - AvoidReassigningParameters :
+        Évite de modifier par erreur des paramètres importants, comme par exemple l'ordre des points dans la collection,
+        ce qui serait aussi difficiles à débugger.
+
+    - AvoidLiteralsInIfCondition :
+        Force l'usage de constantes dans le code pour factoriser le code et faciliter une configuration éventuelle,
+        comme par exemple le nombre de sommets maximum d'une face, sans devoir modifier toutes les méthodes qui l'utilisent,
+        et permet aussi d'éviter certaines erreurs ou fautes de frappe.
+
+
+RÈGLES VIOLÉES PAR LE PROJET MAIS PAS PRISES EN COMPTE :
+
+    - NCSS :
+        Peu d'intérêt à mon sens, si le code est clean et bien fait, la longueur d'une classe ne le rend pas plus compliqué.
+
+    - OnlyOneReturn :
+        Trop compliquée à mettre en place car parfois il est indispensable d'utiliser plusieurs Return (comme dans un equals()),
+        pour peu d'intérêt
+
+    - TooManyFields :
+        Présente peu d'intérêt pour moi tant que les attributs sont nommés clairement et sans ambigüité
+
+    - ExcessiveImports :
+        Ne pose pas spécialement de problème pour le code, et assez indispensable pour les classes javafdx par exemple
+
+    - NullAssignment :
+        Seulement utilisés dans les tests, peu d'importance pour le projet en lui-même.
