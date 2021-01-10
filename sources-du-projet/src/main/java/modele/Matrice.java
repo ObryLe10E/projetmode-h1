@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Arrays;
+
 public class Matrice {
 	private double[][] matrice;
 	
@@ -65,9 +67,9 @@ public class Matrice {
 	}
 	
 	public void rotationY(double angle) {
-		Matrice matriceRotation = new Matrice(new double[][] { {  Math.cos(angle), 0, -Math.sin(angle), 0 }, 
+		Matrice matriceRotation = new Matrice(new double[][] { {  Math.cos(angle), 0, Math.sin(angle), 0 }, 
 														   	   { 0, 1, 0, 0 }, 
-														       { Math.sin(angle), 0, Math.cos(angle), 0 },
+														       { -Math.sin(angle), 0, Math.cos(angle), 0 },
 														       { 0, 0, 0, 1 },});
 		this.matrice = matriceRotation.multiply(this).getTableau();
 	}
@@ -79,4 +81,41 @@ public class Matrice {
 														       { 0, 0, 0, 1 },});
 		this.matrice = matriceRotation.multiply(this).getTableau();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.deepHashCode(matrice);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Matrice mat = (Matrice) obj;
+		int ligne = 0;
+		int colone =0;
+		for(double l[] : this.getTableau()) {
+			for(double c : l) {
+				if(c !=  mat.getTableau()[ligne][colone]) {
+					return false;
+				}
+				colone ++;
+			}
+			ligne ++;
+			colone = 0;
+		}
+		return true;
+	}
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(double l[] :this.getTableau()) {
+			sb.append("[ ");
+			for(double c : l) {
+				sb.append(c+" ");
+			}
+			sb.append("]\n");
+		}
+		return sb.toString();
+	}
+	
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -19,11 +18,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #455152 #455152;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
+<VBox fx:id="vb" prefHeight="887.0" prefWidth="1293.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ListViewController">
   <children>
       <BorderPane prefHeight="899.0" prefWidth="1317.0">
          <top>
-            <MenuBar prefHeight="0.0" prefWidth="575.0" style="-fx-background-color: #3e646b;" BorderPane.alignment="CENTER">
+            <MenuBar prefHeight="0.0" prefWidth="575.0" style="-fx-background-color: #171717;" BorderPane.alignment="CENTER">
                <menus>
                <Menu mnemonicParsing="false" text="Fichier">
                   <items>
@@ -34,17 +33,19 @@
             </MenuBar>
          </top>
          <center>
-            <Pane fx:id="center" prefHeight="375.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="center" BorderPane.alignment="CENTER">
                <children>
-                  <Separator layoutX="44.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="663.0" prefWidth="17.0" />
-                  <Group fx:id="affichage" autoSizeChildren="false" translateX="375.0" translateY="275.0" />
-                  <Separator layoutX="884.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="662.0" prefWidth="14.0" />
-                  <Canvas fx:id="affichage2" height="662.0" layoutX="54.0" width="834.0" />
+                  <Separator layoutX="-8.0" orientation="VERTICAL" prefHeight="663.0" prefWidth="17.0" />
+                  <Separator layoutX="807.0" layoutY="1.0" orientation="VERTICAL" prefHeight="662.0" prefWidth="14.0" />
+                  <Canvas fx:id="affichage2" height="660.0" layoutY="1.0" width="833.0" />
                </children>
+               <BorderPane.margin>
+                  <Insets left="50.0" right="50.0" />
+               </BorderPane.margin>
             </Pane>
          </center>
          <left>
-            <Pane prefHeight="478.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="665.0" prefWidth="219.0" BorderPane.alignment="CENTER">
                <children>
                   <Text fill="#787a94" layoutX="31.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bibliothèque" textAlignment="CENTER" wrappingWidth="210.0">
                      <font>
@@ -52,9 +53,9 @@
                      </font>
                   </Text>
                   <ListView fx:id="list" layoutX="5.0" layoutY="103.0" prefHeight="542.0" prefWidth="263.0" style="-fx-background-color: transparent;" />
-                  <ToggleButton fx:id="nameButton" layoutX="31.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Name" />
-                  <ToggleButton fx:id="pointsButton" layoutX="181.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Points" />
-                  <ToggleButton fx:id="faceButton" layoutX="108.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Faces" />
+                  <ToggleButton fx:id="nameButton" layoutX="31.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #46627a;" text="Name" />
+                  <ToggleButton fx:id="pointsButton" layoutX="181.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #46627a;" text="Points" />
+                  <ToggleButton fx:id="faceButton" layoutX="108.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #46627a;" text="Faces" />
                </children>
             </Pane>
          </left>
@@ -69,22 +70,16 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Pane layoutX="11.0" layoutY="75.0" prefHeight="87.0" prefWidth="127.0" style="-fx-background-color: #b6953c; -fx-background-radius: 20px;">
-                     <children>
-                        <Button fx:id="transMinusX" layoutX="2.0" layoutY="23.0" mnemonicParsing="false" onAction="#translationMinusX" prefHeight="40.0" prefWidth="30.0" style="-fx-background-color: #3e646b;" text="←" />
-                        <Button fx:id="transPlusY" layoutX="31.0" layoutY="2.0" mnemonicParsing="false" onAction="#translationMinusY" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #3e646b #3e646b;" text="↑" />
-                        <Button fx:id="transPlusX" layoutX="94.0" layoutY="23.0" mnemonicParsing="false" onAction="#translationPlusX" prefHeight="40.0" prefWidth="30.0" style="-fx-background-color: #3e646b;" text="→" />
-                        <Button fx:id="transMinusY" layoutX="31.0" layoutY="61.0" mnemonicParsing="false" onAction="#translationPlusY" prefHeight="25.0" prefWidth="65.0" rotate="180.0" style="-fx-background-color: #3e646b;" text="↓">
-                         </Button>
-                     </children>
-                  </Pane>
+                  <Button fx:id="transPlusY" layoutX="48.0" layoutY="77.0" mnemonicParsing="false" onAction="#translationMinusY" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: #46627a;" text="↑" />
                   <Slider id="rotationZ" fx:id="sliderZ" layoutX="3.0" layoutY="395.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
                   <Slider id="rotationY" fx:id="sliderY" layoutX="2.0" layoutY="322.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
                   <Slider id="rotationX" fx:id="sliderX" layoutY="248.0" max="360.0" prefHeight="36.0" prefWidth="149.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" value="180.0" />
-                  <Text layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
-                  <Text layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
-                  <Text layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
-                  <Slider fx:id="sliderLight" layoutX="55.0" layoutY="459.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="46.0" />
+                  <Text fill="WHITE" layoutX="46.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation X" />
+                  <Text fill="WHITE" layoutX="50.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Y" />
+                  <Text fill="WHITE" layoutX="46.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation Z" />
+                  <Button fx:id="transMinusY" layoutX="48.0" layoutY="138.0" mnemonicParsing="false" onAction="#translationPlusY" prefHeight="25.0" prefWidth="35.0" rotate="180.0" style="-fx-background-color: #46627a;" text="↑" />
+                  <Button fx:id="transPlusX" layoutX="78.0" layoutY="108.0" mnemonicParsing="false" onAction="#translationPlusX" prefHeight="25.0" prefWidth="35.0" rotate="90.0" style="-fx-background-color: #46627a;" text="↑" />
+                  <Button fx:id="transMinusX" layoutX="20.0" layoutY="108.0" mnemonicParsing="false" onAction="#translationMinusX" prefHeight="25.0" prefWidth="35.0" rotate="-90.0" style="-fx-background-color: #46627a;" text="↑" />
                </children>
             </Pane>
          </right>
@@ -97,16 +92,16 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Text layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des faces :" />
-                  <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des fils :" />
-                  <ColorPicker fx:id="fillColor" layoutX="216.0" layoutY="56.0" />
-                  <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="216.0" layoutY="122.0" />
-                  <ToggleButton fx:id="filDeFer" layoutX="410.0" layoutY="53.0" mnemonicParsing="false" text="¯/">
+                  <Text fill="WHITE" layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des faces :" />
+                  <Text fill="WHITE" layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection de la couleur des fils :" />
+                  <ColorPicker fx:id="fillColor" layoutX="216.0" layoutY="56.0" style="-fx-background-color: #6F6F6F;" />
+                  <ColorPicker fx:id="strokeColor" accessibleRole="IMAGE_VIEW" layoutX="216.0" layoutY="122.0" style="-fx-background-color: #6F6F6F;" />
+                  <ToggleButton fx:id="filDeFer" layoutX="410.0" layoutY="53.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6F6F6F;" text="□" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="afficherFils" layoutX="462.0" layoutY="53.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="28.0" prefWidth="38.0" text="▰">
+                  <ToggleButton fx:id="afficherFils" layoutX="452.0" layoutY="53.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #6F6F6F;" text="▰" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -124,12 +119,13 @@
                         <Label id="nbFacesLabel" fx:id="nbFacesLabel" layoutX="14.0" layoutY="77.0" prefHeight="40.0" prefWidth="140.0" text="Nombre de faces :" textAlignment="JUSTIFY" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <Button fx:id="help" layoutX="647.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Aide" />
-                  <Button fx:id="info" layoutX="647.0" layoutY="122.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="89.0" text="Informations" />
-                  <Button fx:id="posInit" layoutX="413.0" layoutY="122.0" mnemonicParsing="false" onAction="#ajuster" prefHeight="25.0" prefWidth="97.0" text="Position initiale" />
-                  <ToggleButton fx:id="lightButon" layoutX="578.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="55.0" text="Light" />
-                  <ToggleButton fx:id="ombreButon" layoutX="514.0" layoutY="56.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="25.0" prefWidth="57.0" text="Ombre" />
-                  <Button fx:id="duplicate" layoutX="551.0" layoutY="122.0" mnemonicParsing="false" text="Dupliquer" />
+                  <Button fx:id="help" layoutX="608.0" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="39.0" style="-fx-background-color: #6F6F6F;" text="?" textFill="WHITE" />
+                  <Button fx:id="info" layoutX="664.0" layoutY="57.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #6F6F6F;" text="ℹ" textFill="WHITE" />
+                  <ToggleButton fx:id="lightButon" layoutX="546.0" layoutY="53.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="31.0" prefWidth="38.0" style="-fx-background-color: #6F6F6F;" text="💡" textFill="#fff41c" />
+                  <ToggleButton fx:id="ombreButon" layoutX="506.0" layoutY="54.0" mnemonicParsing="false" onAction="#renderModel" prefHeight="29.0" prefWidth="33.0" style="-fx-background-color: #6F6F6F;" text="❑" textFill="WHITE" />
+                  <Button fx:id="duplicate" layoutX="734.0" layoutY="58.0" mnemonicParsing="false" style="-fx-background-color: #6F6F6F;" text="+" textFill="WHITE" />
+                  <Slider fx:id="sliderLight" layoutX="593.0" layoutY="65.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="46.0" rotate="90.0" style="-fx-background-color: #353839; -fx-background-radius: 50px;" />
+                  <Text fill="WHITE" layoutX="393.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rotation de la lumiére" />
                </children>
             </Pane>
          </bottom>

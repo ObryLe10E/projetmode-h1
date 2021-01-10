@@ -215,7 +215,57 @@ public class Repere extends Subject{
 		this.translation2(this.xOffSet, this.yOffSet,0);
 		notifyObservers();
 	}
+	public void frame(double length, double height) {
+        double scl = length / (this.getMaxX() - this.getMinX());
+        double sch = height / (this.getMaxY() - this.getMinY());
+        this.scaling(((sch < scl) ? sch : scl));
+    }
+	private double getMinY() {
+        double min = this.getPointsList().get(0).getY();
+        double tmp;
+        for (int i = 1; i < this.getPointsList().size(); i++) {
+            tmp = this.getPointsList().get(i).getY();
+            if (tmp < min) {
+                min = tmp;
+            }
+        }
+        return min;
+    }
+	private double getMinX() {
+        double min = this.getPointsList().get(0).getX();
+        double tmp;
+        for (int i = 1; i < this.getPointsList().size(); i++) {
+            tmp = this.getPointsList().get(i).getX();
+            if (tmp < min) {
+                min = tmp;
+            }
+        }
+        return min;
+    }
 
+	private double getMaxX() {
+        double min = this.getPointsList().get(0).getX();
+        double tmp;
+        for (int i = 1; i < this.getPointsList().size(); i++) {
+            tmp = this.getPointsList().get(i).getX();
+            if (tmp > min) {
+                min = tmp;
+            }
+        }
+        return min;
+    }
+
+	private double getMaxY() {
+        double min = this.getPointsList().get(0).getY();
+        double tmp;
+        for (int i = 1; i < this.getPointsList().size(); i++) {
+            tmp = this.getPointsList().get(i).getY();
+            if (tmp > min) {
+                min = tmp;
+            }
+        }
+        return min;
+    }
 	/**
 	 * Trie les faces du repère selon leur coordonée Z moyenne
 	 * voir si on peut utiliser list.sort en implémentant comparable/comparator

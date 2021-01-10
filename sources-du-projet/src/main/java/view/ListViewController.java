@@ -2,6 +2,7 @@ package view;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,8 +53,6 @@ public class ListViewController implements Observer{
 	private Pane center;
 	@FXML
 	private ListView<File> list;
-	@FXML
-	private Group affichage;
 	@FXML
 	private Canvas affichage2;
 	@FXML
@@ -123,8 +122,8 @@ public class ListViewController implements Observer{
 	private static final double UNSCALING = 0.9;
 
 	/**
-	 * Initialise la fenêtre de l'application et ses fonctionnalités, à partir d'une
-	 * bibliothèque par défaut
+	 * Initialise la fenÃªtre de l'application et ses fonctionnalitÃ©s, Ã  partir d'une
+	 * bibliothÃ¨que par dÃ©faut
 	 */
 	public void initialize() {
 		affichage2.setManaged(false);
@@ -183,7 +182,7 @@ public class ListViewController implements Observer{
 
 
 	/**
-	 * Initialise les boutons permettant de choisir d'afficer ou non les arêtes
+	 * Initialise les boutons permettant de choisir d'afficer ou non les arÃªtes
 	 * et/ou de remplir les faces
 	 */
 	private void setStrokeButtons() {
@@ -200,10 +199,31 @@ public class ListViewController implements Observer{
 		filDeFer.getTooltip().setShowDelay(new Duration(0));
 		afficherFils.setTooltip(new Tooltip("Afficher les fils"));
 		afficherFils.getTooltip().setShowDelay(new Duration(0));
+
+		sliderLight.setTooltip(new Tooltip("Varie la lumiére de π à -π "));
+		sliderLight.getTooltip().setShowDelay(new Duration(0));
+
+		info.setTooltip(new Tooltip("Informations"));
+		info.getTooltip().setShowDelay(new Duration(0));
+
+		help.setTooltip(new Tooltip("Aide"));
+		help.getTooltip().setShowDelay(new Duration(0));
+		
+		duplicate.setTooltip(new Tooltip("Ouvre le modele dans une nouvelle fenetre"));
+		duplicate.getTooltip().setShowDelay(new Duration(0));
+
+		ombreButon.setTooltip(new Tooltip("Affiche l'ombre"));
+		ombreButon.getTooltip().setShowDelay(new Duration(0));
+		
+		lightButon.setTooltip(new Tooltip("Affiche la lumiére"));
+		lightButon.getTooltip().setShowDelay(new Duration(0));
+		
+		
+		
 	}
 
 	/**
-	 * Initialise les couleurs par défaut des arêtes et des faces du modèle
+	 * Initialise les couleurs par dÃ©faut des arÃªtes et des faces du modÃ¨le
 	 */
 	private void setDefaultsColors() {
 		fillColor.setValue(Color.DARKGRAY);
@@ -211,7 +231,7 @@ public class ListViewController implements Observer{
 	}
 
 	/**
-	 * Initialise les sliders de rotation du modèle
+	 * Initialise les sliders de rotation du modÃ¨le
 	 */
 	private void setSliders() {
 		sliderX.setMax(Math.PI);
@@ -224,14 +244,14 @@ public class ListViewController implements Observer{
 		sliderZ.setMin(-Math.PI);
 		sliderZ.setValue(0);
 	}
-	
+
 	private void attache() {
 		repere.attach(this);
 	}
 
 	/**
 	 * ChangeListener qui ouvre le fichier sur lequel on clique dans la
-	 * bibliothèque, ou une popup d'erreur s'il n'est pas valide
+	 * bibliothÃ¨que, ou une popup d'erreur s'il n'est pas valide
 	 */
 	class FileListChangeListener implements ListChangeListener<File> {
 		@Override
@@ -254,10 +274,11 @@ public class ListViewController implements Observer{
 						attache();
 						repere.center();				
 						repere.translation(affichage2.getWidth()/2, affichage2.getHeight()/2); // centrage de la figure approximatif
-						while (repere.getMax() < affichage2.getWidth()-50)
+						/*while (repere.getMax() < affichage2.getWidth()-50)
 							repere.scaling(SCALING);
 						while (repere.getMax() > affichage2.getWidth()-affichage2.getWidth()/4)
-							repere.scaling(UNSCALING);
+							repere.scaling(UNSCALING);*/
+						repere.frame(affichage2.getWidth(), affichage2.getHeight() / 2);
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
 					}
@@ -285,11 +306,11 @@ public class ListViewController implements Observer{
 			}
 		}
 		/**
-		 * Réinitialise les infos du modèle
+		 * RÃ©initialise les infos du modÃ¨le
 		 * 
 		 * @nbAuthorLabel Afficher le nom de l'auteur
-		 * @nbPointsLabel Afficher le nombre de points du modèle
-		 * @nbFacesLabel Afficher le Nombre de faces du modèle
+		 * @nbPointsLabel Afficher le nombre de points du modÃ¨le
+		 * @nbFacesLabel Afficher le Nombre de faces du modÃ¨le
 		 */
 		private void resetLabel() {
 			authorLabel.setText("Auteur :");
@@ -309,51 +330,86 @@ public class ListViewController implements Observer{
 			tmpZ = e.getZ();
 			drag = true;
 		});
-		this.affichage.setOnMouseReleased(e->{
+		this.affichage2.setOnMouseReleased(e->{
 			drag = false;
 		});
 		this.affichage2.setOnMouseDragged(e->{
 			if(drag) {
+				double x = e.getX();
+				double y = e.getY();
+				double z = e.getZ();
 				if(e.isPrimaryButtonDown()) {
-					repere.translation(e.getX()-tmpX, e.getY()-tmpY);
-					this.renderModel();
-					tmpX=e.getX();
-					tmpY=e.getY();
+					repere.translation(x-tmpX, y-tmpY);
+					tmpX=x;
+					tmpY=y;
 				}else {
-					repere.rotateY((e.getX()-tmpX)/100);
-					repere.rotateX((e.getY()-tmpY)/100);
-					repere.rotateZ((e.getZ()-tmpZ)/100);
-					this.renderModel();
-					tmpX = e.getX();
-					tmpY = e.getY();
-					tmpZ = e.getZ();
+					repere.rotateY((x-tmpX)/100);
+					repere.rotateX((y-tmpY)/100);
+					repere.rotateZ((z-tmpZ)/100);
+					tmpX = x;
+					tmpY = y;
+					tmpZ = z;
 				}
 			}
 		});
 	}
 
 	/**
-	 * Réinitialise l'affichage du modèle précédent Trie les faces du modèle selon Z
-	 * décroissant Crée un Polygon pour chaque face du modèle et l'affiche avec ses
-	 * arêtes
+	 * RÃ©initialise l'affichage du modÃ¨le prÃ©cÃ©dent Trie les faces du modÃ¨le selon Z
+	 * dÃ©croissant CrÃ©e un Polygon pour chaque face du modÃ¨le et l'affiche avec ses
+	 * arÃªtes
 	 */
-	public void renderModel() {
-		this.repere.sortFaces();
-		redraw();	
-		if(!this.ombreButon.isSelected()) {
-			this.renderOmbrage(gc,this.sliderLight.getValue());
-		}
-
-		if (this.filDeFer.isSelected())
+	public void activerFDF() {
+		if(this.filDeFer.isSelected())
 			gc.setFill(Color.TRANSPARENT);
 		else 
 			gc.setFill(fillColor.getValue());
+	}
+	public void activerFace() {
 		if (this.afficherFils.isSelected())
 			gc.setStroke(Color.TRANSPARENT);
 		else
 			gc.setStroke(strokeColor.getValue());
+	}
+	public void renderModel() {
+		//int nbDessins = 0;
+		boolean filSelected = this.filDeFer.isSelected();
+		int comp =0;
+		this.repere.sortFaces();
+		redraw();	
+		comp++;
+		if(!this.ombreButon.isSelected()) {
+			this.renderOmbrage(gc,this.sliderLight.getValue());
+		}
+
 		Color c = fillColor.getValue();
+		double xPoints[];
+		double yPoints[];
+		List<Point> l;
 		for (Face face : this.repere.getFacesList()) {
+
+			int size = face.size();
+			l = face.getPoints();
+			if(size == 3) {
+				xPoints = new double[] { l.get(0).getX(), l.get(1).getX(), l.get(2).getX()};
+				yPoints = new double[] { l.get(0).getY(), l.get(1).getY(), l.get(2).getY()};
+			}else {
+				xPoints = new double[] { l.get(0).getX(), l.get(1).getX(), l.get(2).getX(), l.get(3).getX()};
+				yPoints = new double[] { l.get(0).getY(), l.get(1).getY(), l.get(2).getY(), l.get(3).getY()};
+			}
+			if(!this.lightButon.isSelected()) {
+				double coefLight = sliderLight.getValue();
+				if(face.getColor(1, coefLight) <= 0) {
+					gc.setFill(Color.BLACK);
+				}else
+					gc.setFill(Color.rgb(face.getColor(c.getRed(), coefLight), face.getColor(c.getGreen(),coefLight), face.getColor(c.getBlue(),coefLight)));
+			}
+			if(!this.afficherFils.isSelected())
+				affichage2.getGraphicsContext2D().strokePolygon(xPoints, yPoints, size);
+			if(!this.filDeFer.isSelected())
+				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
+		}
+		/*//System.out.println(nbDessins++);
 			int size = face.size();
 			double[] xPoints = new double[size];
 			double[] yPoints = new double[size];
@@ -373,7 +429,8 @@ public class ListViewController implements Observer{
 			if(!this.filDeFer.isSelected())
 				affichage2.getGraphicsContext2D().fillPolygon(xPoints, yPoints, size);
 			//}
-		}
+		}*/
+
 	}
 
 	public void renderOmbrage(GraphicsContext gc, double grad) {
@@ -406,7 +463,7 @@ public class ListViewController implements Observer{
 	}
 
 	/**
-	 * Cellule de la liste des mod�les
+	 * Cellule de la liste des modï¿½les
 	 */
 	class Cell extends ListCell<File> {
 		HBox hbox = new HBox();
@@ -430,9 +487,9 @@ public class ListViewController implements Observer{
 				this.setStyle("-fx-background-radius : 20px; -fx-border-color:ffffff; -fx-border-radius : 20px; ");
 				try {
 					new Reader(item.getAbsoluteFile());
-					this.setStyle(this.getStyle() + "; -fx-background-color: green");
+					this.setStyle(this.getStyle() + "; -fx-background-color:  #6F6F6F");
 				} catch (Exception e) {
-					this.setStyle(this.getStyle() + "; -fx-background-color: red");
+					this.setStyle(this.getStyle() + "; -fx-background-color:  #9B5D43");
 				}
 				setText(item.getName());
 				setFont(new Font(20.0));
@@ -445,7 +502,7 @@ public class ListViewController implements Observer{
 	}
 
 	/**
-	 * Laisse l'utilisateur choisir le dossier de sa bibliothèque de fichiers à
+	 * Laisse l'utilisateur choisir le dossier de sa bibliothÃ¨que de fichiers Ã 
 	 * ouvrir
 	 */
 	public void openFile() {
@@ -474,39 +531,39 @@ public class ListViewController implements Observer{
 	}
 
 	/**
-	 * Déplace le modèle vers le bas
+	 * DÃ©place le modÃ¨le vers le bas
 	 */
 	public void translationMinusY() {
 		this.repere.translation(0, -RATIOY);
-//		this.renderModel();
+		//		this.renderModel();
 	}
 
 	/**
-	 * Déplace le modèle vers le haut
+	 * DÃ©place le modÃ¨le vers le haut
 	 */
 	public void translationPlusY() {
 		this.repere.translation(0, RATIOY);
-//		this.renderModel();
+		//		this.renderModel();
 	}
 
 	/**
-	 * Déplace le modèle vers la droite
+	 * DÃ©place le modÃ¨le vers la droite
 	 */
 	public void translationPlusX() {
 		this.repere.translation(RATIOX, 0);
-//		this.renderModel();
+		//		this.renderModel();
 	}
 
 	/**
-	 * Déplace le modèle vers la gauche
+	 * DÃ©place le modÃ¨le vers la gauche
 	 */
 	public void translationMinusX() {
 		this.repere.translation(-RATIOX, 0);
-//		this.renderModel();
+		//		this.renderModel();
 	}
 
 	/**
-	 * Initialise le zoom sur le modèle ave la molette
+	 * Initialise le zoom sur le modÃ¨le ave la molette
 	 */
 	public void setZoom() {
 		center.setOnScroll(e -> {
@@ -514,12 +571,12 @@ public class ListViewController implements Observer{
 				this.repere.scaling(ListViewController.SCALING);
 			else
 				this.repere.scaling(ListViewController.UNSCALING);
-//			this.renderModel();
+			//			this.renderModel();
 		});
 	}
 
 	/**
-	 * Initialise la rotation du modèle à partir de sliders ou des touches X, Y et Z
+	 * Initialise la rotation du modÃ¨le Ã  partir de sliders ou des touches X, Y et Z
 	 */
 	public void rotate() {
 		vb.setOnKeyPressed(e-> {
@@ -529,19 +586,19 @@ public class ListViewController implements Observer{
 				this.repere.rotateY(Math.PI / 8);
 			if (e.getCode().equals(KeyCode.X))
 				this.repere.rotateX((Math.PI / 8));
-//			this.renderModel();
+			//			this.renderModel();
 		});
 		sliderX.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateX(((Double) n - (Double) old));
-//			this.renderModel();
+			//			this.renderModel();
 		});
 		sliderY.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateY((Double) n - (Double) old);
-//			this.renderModel();
+			//			this.renderModel();
 		});
 		sliderZ.valueProperty().addListener((obs, old, n) -> {
 			this.repere.rotateZ((Double) n - (Double) old);
-//			this.renderModel();
+			//			this.renderModel();
 		});
 	}
 
@@ -597,7 +654,7 @@ public class ListViewController implements Observer{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("liste tri�e :" + triSurValeur(map));
+		System.out.println("liste triï¿½e :" + triSurValeur(map));
 		TreeMap<File, Integer> map2 =triSurValeur(map);
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
@@ -611,7 +668,7 @@ public class ListViewController implements Observer{
 		mapTriee.putAll(map);
 		return mapTriee;
 	}
-	
+
 	class ValueComparator implements Comparator<File> {
 		Map<File, Integer> base;
 		public ValueComparator(Map<File, Integer> base) {
@@ -626,7 +683,7 @@ public class ListViewController implements Observer{
 			}
 		}
 	}
-	
+
 	private void triName() {
 		Object [] tri = this.list.getItems().toArray();
 		Arrays.sort(tri);
@@ -634,7 +691,7 @@ public class ListViewController implements Observer{
 		for(Object o : tri)
 			this.list.getItems().add((File) o );
 	}
-	
+
 	private void triPointsList() {
 		HashMap<File, Integer> map = new HashMap<File, Integer>();
 		for(File f : this.list.getItems()) {
@@ -646,21 +703,21 @@ public class ListViewController implements Observer{
 			} catch (Exception e) {
 				map.put(f, -1);
 				e.printStackTrace();
-//			} catch (WrongFileFormatException e) {
-//				map.put(f, -1);
-//				e.printStackTrace();
+				//			} catch (WrongFileFormatException e) {
+				//				map.put(f, -1);
+				//				e.printStackTrace();
 			}
 		}
-		System.out.println("liste tri�e :" + triSurValeur(map));
+		System.out.println("liste triï¿½e :" + triSurValeur(map));
 		TreeMap<File, Integer> map2 =triSurValeur(map);
 		this.list.getItems().clear();
 		this.list.getItems().addAll(map2.keySet());
 	}
-	
+
 	private void resetPosition() {
 
 	}
-	
+
 	private void dupliquer() {
 		Stage secondStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
